@@ -26,10 +26,10 @@ import GradeReport from "../pages/registrar/GradeReport";
 import Finance from "../pages/registrar/Finance";
 import RegistrarReports from "../pages/registrar/RegistrarReports";
 
-import TDashboard from "../pages/teacher/TDashboard";
-import MyClass from "../pages/teacher/MyClass";
+import TDashboard from "../pages/Teacher/TDashboard";
+import MyClass from "../pages/Teacher/MyClass";
 import StudentAttendance from "../pages/Teacher/StudentAttendance";
-import GradeEntry from "../pages/teacher/GradeEntry";
+import GradeEntry from "../pages/Teacher/GradeEntry";
 
 export default function AppRoutes() {
   return (
