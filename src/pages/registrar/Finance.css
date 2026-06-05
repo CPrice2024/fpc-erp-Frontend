@@ -1,0 +1,89 @@
+.finance-page {
+  padding: 24px;
+}
+
+.finance-cards {
+  display: grid;
+  grid-template-columns:
+    repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.finance-card {
+  background: white;
+  padding: 20px;
+      color: #666666;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+      margin-top: 7px;
+  grid-template-columns:
+    repeat(3, 1fr);
+  gap: 15px;
+}
+thead{
+    background: #7abafb;
+    color: white;
+}
+
+.form-grid input,
+.form-grid select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #535353;
+}
+
+.upload-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.save-btn {
+  margin-top: 20px;
+  background: #2d69eb;
+  width: auto;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.paid {
+  background: #dcfce7;
+  color: green;
+}
+
+.funded {
+  background: #dbeafe;
+  color: blue;
+}

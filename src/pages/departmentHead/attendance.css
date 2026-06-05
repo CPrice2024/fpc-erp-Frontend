@@ -1,0 +1,423 @@
+/* attendance.css - Department Attendance Page Styles */
+
+/* Dashboard Container */
+.attendance-dashboard {
+  width: 100%;
+      padding: 10px 20px;
+}
+
+/* Header Styles */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.dashboard-header h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #2882d7;
+  margin: 0;
+}
+
+.dashboard-header p {
+  color: #5a6e7c;
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+/* Register / Action Button */
+.register-btn {
+background: #2782d6;
+    color: white;
+    border: none;
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.register-btn:hover {
+  background: #0f5a34;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 111, 63, 0.3);
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  border: 1px solid #edf2f7;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Department Info Row */
+.dept-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dept-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #2c6e9e;
+}
+
+.dept-icon {
+  color: #2c6e9e;
+}
+
+/* Badge Types */
+.badge-type {
+  background: #eef2ff;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1e4a76;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Filter Buttons */
+.filter-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.filter-chip {
+  background: #edf2f7;
+  padding: 6px 18px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+      color: #3a7eff;
+    width: auto;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.filter-chip:hover {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.filter-chip.active {
+  background: #177bcd;
+  width: auto;
+  color: white;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #1f3b4c;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 4px 18px;
+    width: auto;
+    max-width: 400px;
+    margin-bottom: 20px;
+    transition: all 0.2s ea
+}
+
+.input-group:focus-within {
+  border-color: #1e4a6e;
+  box-shadow: 0 0 0 3px rgba(30, 74, 110, 0.1);
+}
+
+.input-group input {
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.input-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 16px;
+}
+
+/* Attendance Table */
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-table th {
+  text-align: center;
+  padding: 14px 8px 14px 0;
+  font-weight: 600;
+  color: #2c4c6e;
+  border-bottom: 2px solid #eef2f8;
+  font-size: 0.85rem;
+}
+
+.attendance-table td {
+  padding: 16px 8px 16px 0;
+    text-align: center;
+  border-bottom: 1px solid #ecf3f9;
+  color: #1f2f3e;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.attendance-table tr:last-child td {
+  border-bottom: none;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 40px !important;
+  color: #94a3b8;
+}
+
+/* Attendance Control Buttons */
+.attendance-control {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.attn-btn {
+    background: #f1f5f9;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 34px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: auto;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+}
+
+.attn-btn.present {
+  background: #dff9e6;
+  color: #1f7840;
+}
+
+.attn-btn.absent {
+  background: #ffe6e5;
+  color: #bc3f2e;
+}
+
+.attn-btn.late {
+  background: #fff0db;
+  color: #c97e00;
+}
+
+.attn-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.97);
+}
+
+.attn-btn:active {
+  transform: translateY(0);
+}
+
+.attn-btn.active-status {
+  box-shadow: 0 0 0 2px currentColor;
+  opacity: 0.9;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 40px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+}
+
+.status-present {
+  background: #e0f7e8;
+  color: #1e6f3f;
+}
+
+.status-absent {
+  background: #ffe2de;
+  color: #bc3f2e;
+}
+
+.status-late {
+  background: #feefce;
+  color: #b16100;
+}
+
+/* Toast Notification */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1f3b4c;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-weight: 500;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideInUp 0.3s ease;
+  font-size: 0.85rem;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Horizontal Rule */
+hr {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid #eef2f8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .dept-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-group {
+    max-width: 100%;
+  }
+
+  .attendance-control {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .attn-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .attendance-table th,
+  .attendance-table td {
+    padding: 12px 6px 12px 0;
+    font-size: 0.8rem;
+  }
+
+  .filter-btns {
+    gap: 8px;
+  }
+
+  .filter-chip {
+    padding: 4px 14px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 16px;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .attendance-table th:nth-child(3),
+  .attendance-table td:nth-child(3) {
+    display: none;
+  }
+
+  .status-badge {
+    padding: 2px 8px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Scrollbar Styling */
+.table-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

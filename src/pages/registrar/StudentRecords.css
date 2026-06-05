@@ -1,0 +1,117 @@
+.records-page {
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.refresh-btn,
+.add-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.refresh-btn {
+      background: #f1f5f9;
+    width: auto;
+    border-style: solid;
+    border-width: thin;
+    color: #3278f3;
+}
+
+.add-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.filters select {
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.table-card {
+  background: white;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #f8fafc;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.active {
+  color: green;
+  font-weight: 600;
+}
+
+.view,
+.edit,
+.delete {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.view {
+  color: #2563eb;
+}
+
+.edit {
+  color: #f59e0b;
+}
+
+.delete {
+  color: #ef4444;
+}

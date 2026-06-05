@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-page {
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-family: serif;
+    font-size: small;
+}
+.quick-access {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.quick-access h4 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.quick-account {
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+  color: #2563eb;
+
+  padding: 10px;
+
+  border-radius: 10px;
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+.quick-account:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.login-container {
+    width: fit-content;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0);
+}
+
+/* LEFT SIDE */
+
+.login-info {
+  background: linear-gradient(rgba(10, 25, 47, 0.8), rgb(0 32 150 / 80%)), url(https://images.unsplash.com/photo-1562774053-701939374585);
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 70px;
+      border-bottom-right-radius: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.college-logo {
+    width: 120px;
+    height: 120px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    margin-bottom: 25px;
+    background: #ffffff00;
+    border-radius: 50%;
+
+}
+
+.login-info h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.login-info p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.erp-features {
+  margin-top: 40px;
+}
+
+.erp-features div {
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  padding-left: 10px;
+  border-left: 4px solid #fbbf24;
+}
+
+/* RIGHT SIDE */
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  background: white;
+}
+
+.card-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.card-header svg {
+  color: #305ace;
+  margin-bottom: 15px;
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+    color: #3667d9;
+    font-family: math;
+    margin-bottom: 10px;
+}
+
+.card-header p {
+  color: #64748b;
+}
+
+.input-group {
+  margin-bottom: 22px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c69bf;
+    font-weight: 500;
+}
+.input-group input {
+    width: 100%;
+    color: #4869d4;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.input-box {
+display: flex;
+    align-items: center;
+    border-radius: 6px;
+    padding: 0 15px;
+    transition: 0.3s;
+}
+
+.input-box:focus-within {
+  border-color: #1e40af;
+}
+
+.input-box svg {
+  color: #64748b;
+}
+
+.input-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 16px;
+  font-size: 15px;
+  background: transparent;
+}
+
+.toggle-password {
+  border: none;
+  width: auto;
+  background: transparent;
+  cursor: pointer;
+}
+
+.login-links {
+  text-align: right;
+  margin-bottom: 25px;
+}
+
+.login-links a {
+    text-decoration: none;
+    color: #3967ff;
+    font-weight: 500;
+}
+
+
+.login-btn {
+    width: 100%;
+    border: none;
+    background: #2c63ff;
+        margin-top: 15px;
+    color: white;
+    padding: 16px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #2452e7;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1000px) {
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+
+  .login-info {
+    display: none;
+  }
+
+  .login-card {
+    padding: 40px 25px;
+  }
+}

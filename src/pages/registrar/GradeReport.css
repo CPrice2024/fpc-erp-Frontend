@@ -1,0 +1,169 @@
+.grade-report-page {
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.page-header p {
+  color: #666;
+}
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #2677c9;
+
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.print-btn,
+.export-btn {
+  border: none;
+      background: #2563eb00;
+    border-style: solid;
+    border-width: thin;
+    border-color: #4ea2fd;
+    color: #4999ff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.print-btn {
+      background: #2563eb00;
+    border-style: solid;
+    border-width: thin;
+    border-color: #4ea2fd;
+    color: #4999ff;
+}
+
+.export-btn {
+   background: #2563eb00;
+    border-style: solid;
+    border-width: thin;
+    border-color: #4ea2fd;
+    color: #4999ff;
+}
+
+.filters-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.filters-card select {
+  padding: 10px;
+  border-radius: 8px;
+      color: #585858;
+  border: 1px solid #ddd;
+}
+
+.table-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f8fafc;
+}
+
+th {
+  padding: 14px;
+  color: #3278f3;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+td {
+  padding: 12px;
+      font-size: small;
+  text-align: left;
+  color: #454545;
+  border-bottom: 1px solid #eee;
+}
+h3 {
+    display: block;
+    color: #2677c9;
+    font-size: 1.17em;
+}
+p {
+    display: block;
+    color: #565656;
+    font-size: 1em;
+}
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.passed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.warning {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.summary-card {
+  margin-top: 20px;
+
+  background: white;
+  padding: 20px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
