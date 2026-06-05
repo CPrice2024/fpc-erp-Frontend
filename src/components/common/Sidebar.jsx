@@ -122,13 +122,13 @@ const menuByRole = {
         icon: <LayoutDashboard size={18} />,
       },
       {
-        label: "My Classes",
+        label: "My Class",
         path: "/teacher/classes",
         icon: <BookOpen size={18} />,
       },
       {
-        label: "Attendance",
-        path: "/teacher/attendance",
+        label: "Student Attendance",
+        path: "/teacher/student-attendance",
         icon: <ClipboardCheck size={18} />,
       },
       {

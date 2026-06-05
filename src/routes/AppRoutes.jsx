@@ -26,6 +26,11 @@ import GradeReport from "../pages/registrar/GradeReport";
 import Finance from "../pages/registrar/Finance";
 import RegistrarReports from "../pages/registrar/RegistrarReports";
 
+import TDashboard from "../pages/teacher/TDashboard";
+import MyClass from "../pages/teacher/MyClass";
+import StudentAttendance from "../pages/Teacher/StudentAttendance";
+import GradeEntry from "../pages/teacher/GradeEntry";
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -81,6 +86,40 @@ export default function AppRoutes() {
           <Route path="finance" element={<Finance />} />
         </Route>
       </Route>
+
+      {/* PROTECTED TEACHER */}
+      <Route
+        path="/teacher"
+        element={<ProtectedRoute allowedRoles={["teacher"]} />} 
+      >
+        <Route element={<MainLayout />}>
+          <Route index element={<TDashboard />} />
+          {/* Teacher-specific routes can be added here */}
+        </Route>
+        <Route
+  path="/teacher"
+  element={<ProtectedRoute allowedRoles={["teacher"]} />}
+>
+  <Route element={<MainLayout />}>
+    <Route index element={<TDashboard />} />
+
+    <Route
+      path="classes"
+      element={<MyClass />}
+    />
+
+    <Route
+      path="student-attendance"
+      element={< StudentAttendance/>}
+    />
+
+    <Route
+      path="grades"
+      element={<GradeEntry />}
+    />
+  </Route>
+</Route>
+      </Route>    
     </Routes>
   );
 }
