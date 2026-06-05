@@ -77,7 +77,7 @@ export default function AppRoutes() {
           <Route path="records" element={<StudentRecords />} />  {/* Added this line */}
           <Route path="student-records" element={<StudentRecords />} />  {/* Also add kebab-case */}
           <Route path="reports" element={<RegistrarReports />} />
-          <Route path="gradeReport" element={<GradeReport />} />
+          <Route path="grade-report" element={<GradeReport />} />
           <Route path="finance" element={<Finance />} />
         </Route>
       </Route>

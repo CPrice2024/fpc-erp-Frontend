@@ -83,7 +83,7 @@ color: #267dff;
 
 .step.active .step-indicator {
      background: #2a70b000;
-    color: white;
+    color: rgb(51, 125, 214);
     border-style: solid;
     border-width: thin;
     border-color: #2b72ff;
@@ -144,7 +144,7 @@ color: #267dff;
   border-radius: 50%;
   overflow: hidden;
   background: #f8fafc;
-  border: 2px dashed #cbd5e1;
+  border: 2px dashed #318eff;
   display: flex;
   align-items: center;
   justify-content: center;
