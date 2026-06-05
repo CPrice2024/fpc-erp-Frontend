@@ -15,7 +15,7 @@ import DHDashboard from "../pages/departmentHead/DHDashboard";
 import Teachers from "../pages/departmentHead/Teachers";
 import Students from "../pages/departmentHead/Students";
 import Courses from "../pages/departmentHead/Courses";
-import Attendance from "../pages/departmentHead/AttendanceTemp";
+import Attendance from "../pages/departmentHead/Attendance";
 import Report from "../pages/departmentHead/Report";
 import CreateTeacher from "../pages/departmentHead/CreateTeacher";
 
