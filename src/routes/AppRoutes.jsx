@@ -33,10 +33,10 @@ import GradeReport from "../pages/registrar/GradeReport";
 import Finance from "../pages/registrar/Finance";
 import RegistrarReports from "../pages/registrar/RegistrarReports";
 
-import TDashboard from "../pages/Teacher/TDashboard";
-import MyClass from "../pages/Teacher/MyClass";
-import StudentAttendance from "../pages/Teacher/StudentAttendance";
-import GradeEntry from "../pages/Teacher/GradeEntry";
+import TDashboard from "../pages/teacher/TDashboard";
+import MyClass from "../pages/teacher/MyClass";
+import StudentAttendance from "../pages/teacher/StudentAttendance";
+import GradeEntry from "../pages/teacher/GradeEntry";
 
 
 export default function AppRoutes() {
