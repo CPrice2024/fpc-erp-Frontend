@@ -28,6 +28,14 @@
   padding: 20px;
   border-radius: 12px;
   text-align: center;
+      background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s ease;
 }
 
 .stat-card h2 {

@@ -192,12 +192,7 @@ const fillCredentials = (account) => {
                 : "Sign In"}
               <ArrowRight size={18} />
             </button>
-            <button
-  type="submit"
-  className="login-btn"
-  disabled={isLoading}
->
-  <div className="quick-access">
+           <div className="quick-access">
   <h4>Quick Access</h4>
 
   <div className="quick-grid">
@@ -215,7 +210,6 @@ const fillCredentials = (account) => {
     ))}
   </div>
 </div>
-</button>
           </form>
         </div>
       </div>

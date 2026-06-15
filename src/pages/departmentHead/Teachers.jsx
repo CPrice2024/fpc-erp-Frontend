@@ -192,13 +192,16 @@ export default function Teachers() {
     <table>
 
       <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Department</th>
-          <th>Action</th>
-        </tr>
-      </thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>Course</th>
+    <th>Department</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+</thead>
 
       <tbody>
 
@@ -207,46 +210,59 @@ export default function Teachers() {
           filteredTeachers.map(
             (teacher) => (
               <tr key={teacher._id}>
-                <td>
-                  {teacher.name}
-                </td>
+  <td>{teacher.name}</td>
 
-                <td>
-                  {teacher.email}
-                </td>
+  <td>{teacher.email}</td>
 
-                <td>
-                  <span className="dept-badge">
-                    {teacher.department
-                      ?.name || "N/A"}
-                  </span>
-                </td>
+  <td>
+    <span className="gender-badge">
+      {teacher.gender || "N/A"}
+    </span>
+  </td>
 
-                <td>
+  <td>
+    {teacher.course?.courseName ||
+      "Not Assigned"}
+  </td>
 
-                  <button
-                    className="delete-btn"
-                    onClick={() =>
-                      deleteTeacher(
-                        teacher._id
-                      )
-                    }
-                  >
-                    <Trash2 size={18} />
-                  </button>
+  <td>
+    <span className="dept-badge">
+      {teacher.department?.name ||
+        "N/A"}
+    </span>
+  </td>
 
-                </td>
-              </tr>
+  <td>
+    <span
+      className={`status-badge ${
+        teacher.status || "active"
+      }`}
+    >
+      {teacher.status || "active"}
+    </span>
+  </td>
+
+  <td>
+    <button
+      className="delete-btn"
+      onClick={() =>
+        deleteTeacher(teacher._id)
+      }
+    >
+      <Trash2 size={18} />
+    </button>
+  </td>
+</tr>
             )
           )
 
         ) : (
 
           <tr>
-            <td
-              colSpan="4"
-              className="empty-row"
-            >
+           <td
+  colSpan="7"
+  className="empty-row"
+>
               No teachers found
             </td>
           </tr>

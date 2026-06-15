@@ -37,7 +37,36 @@
 .add-btn:hover {
   background: #1d4ed8;
 }
+.gender-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
 
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.active {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-badge.inactive {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.status-badge.blocked {
+  background: #fef3c7;
+  color: #b45309;
+}
 .stats-grid {
   display: grid;
   grid-template-columns:

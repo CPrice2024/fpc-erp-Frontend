@@ -29,7 +29,7 @@
 .app-layout {
   display: flex;
   min-height: 100vh;
-  background: #f7fafc;
+  background: #f7f7f7;
 }
 
 .dark-mode .app-layout {
@@ -78,7 +78,7 @@
   right: 0;
   left: var(--sidebar-width);
   height: var(--topbar-height);
-  background: white;
+   background: #ffffffc7;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -101,6 +101,7 @@
 /* Topbar Left */
 .topbar-left {
   display: flex;
+      padding: inherit;
   align-items: center;
   gap: 1rem;
 }
@@ -436,7 +437,7 @@
 
 /* Sidebar Header */
 .sidebar-header {
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
@@ -484,44 +485,7 @@
 }
 
 /* Navigation */
-.sidebar-nav {
-  flex: 1;
-  padding: 1rem 0;
-}
 
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  color: var(--text-light);
-  text-decoration: none;
-  transition: all 0.2s;
-  cursor: pointer;
-  border: none;
-  background: none;
-  width: 100%;
-  font-size: 0.875rem;
-  position: relative;
-}
-
-.nav-link:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-}
-
-.nav-link.active {
-  background: linear-gradient(90deg, rgba(102, 126, 234, 0.2) 0%, transparent 100%);
-  color: white;
-  border-left: 3px solid var(--primary-color);
-}
-
-/* Submenu */
-.submenu {
-  padding-left: 2.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.2s ease;
-}
 
 .submenu-link {
   display: block;

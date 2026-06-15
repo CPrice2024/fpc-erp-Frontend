@@ -1,36 +1,22 @@
 import { useState, useEffect } from "react";
+import { getDashboard } from "../../api/collegeHeadApi";
+import { useNavigate } from "react-router-dom";
+
+import "./CHDashboard.css";
 import {
-  Building2,
-  Users,
+  BookOpen,
   GraduationCap,
-  MessageCircle,
-  TrendingUp,
-  TrendingDown,
+  Users,
+  Building2,
   Download,
   RefreshCw,
-  Eye,
-  Calendar,
-  Bell,
-  Search,
-  Filter,
-  CheckCircle,
-  Mail,
-  Phone,
-  ChevronDown,
-  Settings,
-  HelpCircle,
-  LogOut,
-  Sun,
-  Moon,
-  Edit2,
-  ChevronRight,
-  ChevronLeft,
   PieChart,
-  BarChart3,
-  X
+  Filter,
+  Eye,
+  Edit2,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
-import { getDashboard } from "../../api/collegeHeadApi";
-import "./CHDashboard.css";
 
 const CollegeHeadDashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -44,82 +30,62 @@ const CollegeHeadDashboard = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   
   const [dashboardData, setDashboardData] = useState({
-    stats: [],
-    departments: [],
-    departmentData: [],
-    enrollmentData: []
-  });
+  stats: {},
+  departmentSummary: [],
+  levelStats: [],
+  recentStudents: [],
+});
 
-  const [user, setUser] = useState({ 
-    name: "Dr. John Smith", 
-    role: "College Head", 
-    email: "head@test.com",
-    avatar: "JS"
-  });
 
-  const [notifications, setNotifications] = useState([
-    { id: 1, title: "New Department Request", message: "Computer Science department has requested additional funding", time: "5 min ago", read: false, type: "info" },
-    { id: 2, title: "Faculty Meeting", message: "Annual faculty meeting scheduled for tomorrow at 10 AM", time: "1 hour ago", read: false, type: "event" },
-    { id: 3, title: "Budget Approval", message: "Q4 budget has been approved by the finance committee", time: "3 hours ago", read: true, type: "success" }
-  ]);
+const fetchDashboardData = async () => {
+  setLoading(true);
 
-  useEffect(() => {
-    fetchDashboardData();
-    
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
-      document.body.classList.add("dark-mode");
-    }
-  }, []);
+  try {
+    const response = await getDashboard();
 
-  const fetchDashboardData = async () => {
-    setLoading(true);
-    try {
-      const response = await getDashboard();
-      const data = response.data;
-      
-      setDashboardData({
-        stats: [
-          { title: "Total Departments", value: data.departments || 12, icon: <Building2 size={24} />, change: "+2", trend: "up", color: "#6366f1", bgColor: "#6366f110" },
-          { title: "Total Students", value: data.students || 3450, icon: <GraduationCap size={24} />, change: "+12%", trend: "up", color: "#10b981", bgColor: "#10b98110" },
-          { title: "Unread Messages", value: data.unreadMessages || 8, icon: <MessageCircle size={24} />, change: "-3", trend: "down", color: "#f59e0b", bgColor: "#f59e0b10" },
-          { title: "Faculty Members", value: data.facultyMembers || 156, icon: <Users size={24} />, change: "+5", trend: "up", color: "#ef4444", bgColor: "#ef444410" }
-        ],
-        departments: [
-          { id: 1, name: "Computer Science", code: "CS101", email: "cs@college.edu", phone: "+1 234 567 890", established: "2010", students: 450, faculty: 25, status: "active" },
-          { id: 2, name: "Electrical Engineering", code: "ENG102", email: "eng@college.edu", phone: "+1 234 567 891", established: "1995", students: 580, faculty: 32, status: "active" },
-          { id: 3, name: "Business Administration", code: "BUS103", email: "bus@college.edu", phone: "+1 234 567 892", established: "2005", students: 420, faculty: 20, status: "active" },
-          { id: 4, name: "Medicine", code: "MED104", email: "med@college.edu", phone: "+1 234 567 893", established: "1980", students: 380, faculty: 45, status: "active" },
-          { id: 5, name: "Arts & Humanities", code: "ART105", email: "art@college.edu", phone: "+1 234 567 894", established: "2000", students: 290, faculty: 18, status: "inactive" },
-          { id: 6, name: "Law", code: "LAW106", email: "law@college.edu", phone: "+1 234 567 895", established: "2015", students: 310, faculty: 22, status: "active" }
-        ],
-        departmentData: [
-          { name: "Computer Science", students: 450 },
-          { name: "Engineering", students: 580 },
-          { name: "Business", students: 420 },
-          { name: "Medicine", students: 380 },
-          { name: "Arts", students: 290 },
-          { name: "Law", students: 310 }
-        ],
-        enrollmentData: [
-          { year: "2020", students: 2800 },
-          { year: "2021", students: 3050 },
-          { year: "2022", students: 3250 },
-          { year: "2023", students: 3400 },
-          { year: "2024", students: 3450 }
-        ]
-      });
-    } catch (error) {
-      console.error("Dashboard fetch error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+   console.log("API URL:", import.meta.env.VITE_API_URL);
+console.log("REQUEST URL:", `${import.meta.env.VITE_API_URL}/college-head/dashboard`);
+console.log("DASHBOARD RESPONSE:", response);
+    console.log(
+  "FULL DASHBOARD DATA:",
+  JSON.stringify(response.data, null, 2)
+);
 
+console.log(
+  "departmentSummary:",
+  response.data.departmentSummary
+);
+
+console.log(
+  "levelStats:",
+  response.data.levelStats
+);
+
+console.log(
+  "recentStudents:",
+  response.data.recentStudents
+);
+
+    setDashboardData({
+      stats: response.data?.stats || {},
+      departmentSummary:
+        response.data?.departmentSummary || [],
+      levelStats:
+        response.data?.levelStats || [],
+      recentStudents:
+        response.data?.recentStudents || [],
+    });
+
+  } catch (error) {
+    console.error("DASHBOARD ERROR:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+const navigate = useNavigate();
   const handleExport = () => {
     const exportData = {
-      departments: dashboardData.departments,
+      departments: dashboardData.departmentSummary,
       stats: dashboardData.stats,
       exportedAt: new Date().toISOString()
     };
@@ -146,8 +112,12 @@ const CollegeHeadDashboard = () => {
     document.body.classList.toggle("dark-mode");
     localStorage.setItem("theme", !isDarkMode ? "dark" : "light");
   };
+  const totalStudents =
+  dashboardData.stats?.totalStudents || 1;
+  console.log("CURRENT STATE:", dashboardData);
 
-  const filteredDepartments = dashboardData.departments.filter(dept => {
+  const filteredDepartments =
+  (dashboardData?.departmentSummary || []).filter((dept) => {
     const matchesSearch = dept.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          dept.code.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDept = selectedDepartment === "all" || dept.name === selectedDepartment;
@@ -159,11 +129,16 @@ const CollegeHeadDashboard = () => {
   const currentDepartments = filteredDepartments.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredDepartments.length / itemsPerPage);
 
-  const totalStudents = dashboardData.departments.reduce((sum, dept) => sum + (dept.students || 0), 0);
-  const totalFaculty = dashboardData.departments.reduce((sum, dept) => sum + (dept.faculty || 0), 0);
-  const maxStudents = Math.max(...dashboardData.enrollmentData.map(d => d.students || 0));
+    useEffect(() => {
+    fetchDashboardData();
+    
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.body.classList.add("dark-mode");
+    }
+  }, []);
 
-  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
     <div className="college-head-dashboard">
@@ -171,23 +146,49 @@ const CollegeHeadDashboard = () => {
      
 
       {/* Stats Cards */}
-      <div className="stats-grid">
-        {dashboardData.stats.map((stat, index) => (
-          <div key={index} className="stat-card" style={{ borderTopColor: stat.color }}>
-            <div className="stat-header">
-              <div className="stat-icon" style={{ background: stat.bgColor, color: stat.color }}>
-                {stat.icon}
-              </div>
-              <div className={`stat-trend ${stat.trend}`}>
-                {stat.trend === "up" ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                {stat.change}
-              </div>
-            </div>
-            <div className="stat-value">{stat.value.toLocaleString()}</div>
-            <div className="stat-title">{stat.title}</div>
-          </div>
-        ))}
-      </div>
+   <div className="stats-grid">
+
+  <div className="stat-card">
+    <GraduationCap size={24} />
+    <div className="stat-value">
+      {dashboardData.stats?.totalStudents || 0}
+    </div>
+    <div className="stat-title">
+      Students
+    </div>
+  </div>
+
+  <div className="stat-card">
+    <Users size={24} />
+    <div className="stat-value">
+      {dashboardData.stats?.totalTeachers || 0}
+    </div>
+    <div className="stat-title">
+      Teachers
+    </div>
+  </div>
+
+  <div className="stat-card">
+    <BookOpen size={24} />
+    <div className="stat-value">
+      {dashboardData.stats?.totalCourses || 0}
+    </div>
+    <div className="stat-title">
+      Courses
+    </div>
+  </div>
+
+  <div className="stat-card">
+    <Building2 size={24} />
+    <div className="stat-value">
+      {dashboardData.stats?.totalDepartments || 0}
+    </div>
+    <div className="stat-title">
+      Departments
+    </div>
+  </div>
+
+</div>
 
       {/* Visualization Section */}
       <div className="visualization-section">
@@ -213,7 +214,7 @@ const CollegeHeadDashboard = () => {
               <PieChart size={18} />
             </div>
             <div className="department-distribution">
-              {dashboardData.departmentData.map((dept, idx) => (
+              {dashboardData.departmentSummary.map((dept, idx) => (
                 <div key={idx} className="distribution-item">
                   <div className="distribution-info">
                     <span className="dept-name">{dept.name}</span>
@@ -235,34 +236,61 @@ const CollegeHeadDashboard = () => {
               ))}
             </div>
           </div>
-
-          {/* Enrollment Trends */}
-          <div className="chart-card">
-            <div className="chart-header">
-              <h3>Enrollment Trends</h3>
-              <BarChart3 size={18} />
-            </div>
-            <div className="enrollment-trends">
-              {dashboardData.enrollmentData.map((data, idx) => (
-                <div key={idx} className="trend-item">
-                  <div className="trend-label">{data.year}</div>
-                  <div className="trend-bar-container">
-                    <div 
-                      className="trend-bar"
-                      style={{ 
-                        width: `${(data.students / maxStudents) * 100}%`,
-                        background: "linear-gradient(90deg, #6366f1, #8b5cf6)"
-                      }}
-                    >
-                      <span className="trend-value">{data.students}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
+      <div className="analytics-card">
+  <h3>Students By Level</h3>
+
+  {dashboardData.levelStats.map((level) => (
+    <div
+      key={level._id}
+      className="level-row"
+    >
+      <span>
+        {level._id || "Not Set"}
+      </span>
+
+      <span>
+        {level.count}
+      </span>
+    </div>
+  ))}
+</div>
+
+      <div className="department-grid">
+  {(dashboardData?.departmentSummary || []).map((dept) => (
+    <div
+      key={dept._id}
+      className="department-card"
+    >
+      <h3>{dept.name}</h3>
+
+      <div className="dept-metrics">
+  <div>
+    <strong>{dept.students}</strong>
+    <span>Students</span>
+  </div>
+
+  <div>
+    <strong>{dept.teachers}</strong>
+    <span>Teachers</span>
+  </div>
+
+  <div>
+    <strong>{dept.courses}</strong>
+    <span>Courses</span>
+  </div>
+</div>
+
+      <p>
+        Head:
+        {" "}
+        {dept.departmentHead?.name ||
+          "Not Assigned"}
+      </p>
+    </div>
+  ))}
+</div>
 
       {/* Departments Table */}
       <div className="table-section">
@@ -283,9 +311,14 @@ const CollegeHeadDashboard = () => {
               <label>Department</label>
               <select value={selectedDepartment} onChange={(e) => setSelectedDepartment(e.target.value)}>
                 <option value="all">All Departments</option>
-                {dashboardData.departments.map(dept => (
-                  <option key={dept.id} value={dept.name}>{dept.name}</option>
-                ))}
+                {(dashboardData?.departmentSummary || []).map((dept) => (
+  <option
+    key={dept._id}
+    value={dept.name}
+  >
+    {dept.name}
+  </option>
+))}
               </select>
             </div>
             <button 
@@ -323,8 +356,10 @@ const CollegeHeadDashboard = () => {
                 </thead>
                 <tbody>
                   {currentDepartments.map((dept) => (
-                    <tr key={dept.id}>
-                      <td className="id-cell">#{dept.id}</td>
+                    <tr key={dept._id}>
+                      <td className="id-cell">
+  #{dept._id.slice(-6)}
+</td>
                       <td className="dept-name-cell">
                         <div className="dept-name-wrapper">
                           <div className="dept-icon">
@@ -332,30 +367,42 @@ const CollegeHeadDashboard = () => {
                           </div>
                           <div>
                             <div className="dept-name">{dept.name}</div>
-                            <div className={`dept-status ${dept.status}`}>
-                              {dept.status}
-                            </div>
+                            <div className="dept-status active">
+  Active
+</div>
                           </div>
                         </div>
                       </td>
                       <td className="code-cell">{dept.code}</td>
-                      <td>
-                        <div className="contact-info">
-                          <div><Mail size={12} /> {dept.email}</div>
-                          <div><Phone size={12} /> {dept.phone}</div>
-                        </div>
-                      </td>
-                      <td>{dept.established}</td>
+                        <td></td>
+                      <td></td>
                       <td className="student-count">{dept.students.toLocaleString()}</td>
-                      <td>{dept.faculty}</td>
+                      <td>{dept.teachers}</td>
                       <td className="actions-cell">
-                        <button className="action-btn view" title="View">
-                          <Eye size={16} />
-                        </button>
-                        <button className="action-btn edit" title="Edit">
-                          <Edit2 size={16} />
-                        </button>
-                      </td>
+  <button
+    className="action-btn view"
+    title="View"
+    onClick={() =>
+      navigate(
+        `/college-head/departments/view/${dept._id}`
+      )
+    }
+  >
+    <Eye size={16} />
+  </button>
+
+  <button
+    className="action-btn edit"
+    title="Edit"
+    onClick={() =>
+      navigate(
+        `/college-head/departments/edit/${dept._id}`
+      )
+    }
+  >
+    <Edit2 size={16} />
+  </button>
+</td>
                     </tr>
                   ))}
                 </tbody>
@@ -411,19 +458,25 @@ const CollegeHeadDashboard = () => {
         <div className="stat-summary">
           <div className="summary-item">
             <span className="summary-label">Total Departments:</span>
-            <span className="summary-value">{dashboardData.departments.length}</span>
+            <span className="summary-value">{dashboardData.departmentSummary.length}</span>
           </div>
           <div className="summary-item">
             <span className="summary-label">Total Students:</span>
-            <span className="summary-value">{totalStudents.toLocaleString()}</span>
+            <span className="summary-value">{dashboardData.stats?.totalStudents || 0}</span>
           </div>
           <div className="summary-item">
             <span className="summary-label">Total Faculty:</span>
-            <span className="summary-value">{totalFaculty}</span>
+            <span className="summary-value">{dashboardData.stats?.totalTeachers || 0}</span>
           </div>
           <div className="summary-item">
             <span className="summary-label">Student-Faculty Ratio:</span>
-            <span className="summary-value">{(totalStudents / totalFaculty).toFixed(1)}:1</span>
+            <span className="summary-value">{(
+ (dashboardData.stats?.totalStudents || 0) /
+ Math.max(
+   dashboardData.stats?.totalTeachers || 1,
+   1
+ )
+).toFixed(1)}:1</span>
           </div>
         </div>
       </div>

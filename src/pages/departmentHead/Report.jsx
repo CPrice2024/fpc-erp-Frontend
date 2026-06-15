@@ -9,8 +9,6 @@ import {
   GraduationCap,
   BookOpen,
   TrendingUp,
-  PieChart,
-  BarChart3,
   Activity,
   Printer,
   Mail,
@@ -21,7 +19,6 @@ import {
   CheckCircle,
   XCircle,
   AlertCircle,
-  Eye,
 } from "lucide-react";
 import "./Report.css";
 

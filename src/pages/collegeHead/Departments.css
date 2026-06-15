@@ -42,16 +42,17 @@
 
 /* Buttons */
 .btn-primary, .btn-secondary {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none;
+display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
 }
 
 .btn-primary {
@@ -185,31 +186,41 @@ background: #fdfdfd;
 
 .stat-item {
   background: white;
+  padding: 20px;
   border-radius: 12px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-align: center;
+      background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s ease;
 }
 
 .dark-mode .stat-item {
   background: #1a202c;
 }
 
-.stat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.stat-item {
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    transition: all 0.2s ease;
 }
 
 .stat-value {
-font-size: 15px;
-    font-weight: 600;
-    color: #2961d8;
+font-size: 22px;
+  font-weight: 600;
+  color: #3a63eb;
+  line-height: 1.2;
+  margin-bottom: 4px;
 }
 
 .dark-mode .stat-value {

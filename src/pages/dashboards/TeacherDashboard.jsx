@@ -344,13 +344,18 @@ export default function TeacherDashboard() {
         }
 
         .stat-icon {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.2s ease;
+          width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+    height: 32px;
+    color: #3b82f6;
+    background: #eff6ff;
+    padding: 8px;
+    border-radius: 14px;
         }
 
         .stat-card:hover .stat-icon {
@@ -373,11 +378,11 @@ export default function TeacherDashboard() {
         }
 
         .stat-value {
-  font-size: 22px;
-    font-weight: 600;
-    color: #2961d8;
-          margin-bottom: 0.5rem;
-          line-height: 1;
+ font-size: 22px;
+  font-weight: 600;
+  color: #3a63eb;
+  line-height: 1.2;
+  margin-bottom: 4px;
         }
 
         .stat-title {

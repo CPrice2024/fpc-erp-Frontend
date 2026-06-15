@@ -10,14 +10,21 @@ import Departments from "../pages/collegeHead/Departments";
 import Reports from "../pages/collegeHead/Reports";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
+import CreateDepartment from "../pages/collegeHead/CreateDepartment";
+import EditDepartment from "../pages/collegeHead/EditDepartment";
+import ViewDepartment from "../pages/collegeHead/ViewDepartment";
+import DepartmentMessages from "../pages/collegeHead/DepartmentMessages";
 
 import DHDashboard from "../pages/departmentHead/DHDashboard";
 import Teachers from "../pages/departmentHead/Teachers";
 import Students from "../pages/departmentHead/Students";
-import Courses from "../pages/departmentHead/Courses";
 import Attendance from "../pages/departmentHead/Attendance";
 import Report from "../pages/departmentHead/Report";
 import CreateTeacher from "../pages/departmentHead/CreateTeacher";
+import Courses from "../pages/departmentHead/Courses";
+import CreateCourse from "../pages/departmentHead/CreateCourse";
+import EditCourse from "../pages/departmentHead/EditCourse";
+import ViewCourse from "../pages/departmentHead/ViewCourse";
 
 import RDashboard from "../pages/registrar/RDashboard";
 import Enrollment from "../pages/registrar/Enrollment";
@@ -31,6 +38,7 @@ import MyClass from "../pages/Teacher/MyClass";
 import StudentAttendance from "../pages/Teacher/StudentAttendance";
 import GradeEntry from "../pages/Teacher/GradeEntry";
 
+
 export default function AppRoutes() {
   return (
     <Routes>
@@ -41,16 +49,45 @@ export default function AppRoutes() {
       <Route path="/reset-password/:token" element={<ResetPassword />} />
 
       {/* PROTECTED COLLEGE HEAD */}
-      <Route
-        path="/college-head"
-        element={<ProtectedRoute allowedRoles={["college_head"]} />}
-      >
-        <Route element={<MainLayout />}>
-          <Route index element={<CHDashboard />} />
-          <Route path="departments" element={<Departments />} />
-          <Route path="reports" element={<Reports />} />
-        </Route>
-      </Route>
+<Route
+  path="/college-head"
+  element={<ProtectedRoute allowedRoles={["college_head"]} />}
+>
+  <Route element={<MainLayout />}>
+    <Route index element={<CHDashboard />} />
+
+    {/* Departments */}
+    <Route
+      path="departments"
+      element={<Departments />}
+    />
+
+    <Route
+      path="departments/create"
+      element={<CreateDepartment />}
+    />
+
+    <Route
+      path="departments/edit/:id"
+      element={<EditDepartment />}
+    />
+
+    <Route
+      path="departments/view/:id"
+      element={<ViewDepartment />}
+    />
+
+    <Route
+      path="departments/messages/:id"
+      element={<DepartmentMessages />}
+    />
+
+    <Route
+      path="reports"
+      element={<Reports />}
+    />
+  </Route>
+</Route>
 
       {/* PROTECTED DEPARTMENT HEAD */}
       <Route
@@ -61,7 +98,20 @@ export default function AppRoutes() {
           <Route index element={<DHDashboard />} />
           <Route path="teachers" element={<Teachers />} />
           <Route path="students" element={<Students />} />
-          <Route path="courses" element={<Courses />} />
+          <Route path="courses" element={<Courses />} /><Route
+  path="courses/create"
+  element={<CreateCourse />}
+/>
+
+<Route
+  path="courses/edit/:id"
+  element={<EditCourse />}
+/>
+
+<Route
+  path="courses/view/:id"
+  element={<ViewCourse />}
+/>
           <Route path="attendance" element={<Attendance />} />
           <Route path="report" element={<Report />} />
           <Route path="create-teacher" element={<CreateTeacher />} />

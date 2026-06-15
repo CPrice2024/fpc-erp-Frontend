@@ -1,6 +1,6 @@
 .topbar {
   height: 70px;
-  background: white;
+      background: #ffffffc7;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,12 +18,13 @@
 
 .topbar-left {
   display: flex;
+      padding: inherit;
   align-items: center;
   gap: 15px;
 }
 
 .topbar-greeting h2 {
-  color: #1e293b;
+  color: #2a6cd7;
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 2px;
@@ -32,6 +33,7 @@
 
 .topbar-greeting p {
   font-size: 0.8rem;
+      font-family: monospace;
   color: #64748b;
   margin: 0;
 }

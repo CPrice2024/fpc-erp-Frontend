@@ -76,18 +76,18 @@
 ========================================== */
 
 .primary-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  width: auto;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 3px 15px;
+    width: auto;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .primary-btn:hover {
-  background: #1d4ed8;
+  background: #d81d1d;
 }
 
 .success-btn {
@@ -187,15 +187,7 @@
   gap: 15px;
 }
 
-.stat-icon {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .stat-icon.students {
   background: #dbeafe;
