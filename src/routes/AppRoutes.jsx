@@ -14,6 +14,10 @@ import CreateDepartment from "../pages/collegeHead/CreateDepartment";
 import EditDepartment from "../pages/collegeHead/EditDepartment";
 import ViewDepartment from "../pages/collegeHead/ViewDepartment";
 import DepartmentMessages from "../pages/collegeHead/DepartmentMessages";
+import Registrars from "../pages/collegeHead/Registrars";
+import CreateRegistrar from "../pages/collegeHead/CreateRegistrar";
+import EditRegistrar from "../pages/collegeHead/EditRegistrar";
+import ViewRegistrar from "../pages/collegeHead/ViewRegistrar";
 
 import DHDashboard from "../pages/departmentHead/DHDashboard";
 import Teachers from "../pages/departmentHead/Teachers";
@@ -32,6 +36,8 @@ import StudentRecords from "../pages/registrar/StudentRecords";
 import GradeReport from "../pages/registrar/GradeReport";
 import Finance from "../pages/registrar/Finance";
 import RegistrarReports from "../pages/registrar/RegistrarReports";
+import ViewStudent from "../pages/registrar/ViewStudent";
+import EditStudent from "../pages/registrar/EditStudent";
 
 import TDashboard from "../pages/teacher/TDashboard";
 import MyClass from "../pages/teacher/MyClass";
@@ -86,6 +92,25 @@ export default function AppRoutes() {
       path="reports"
       element={<Reports />}
     />
+    <Route
+  path="registrars"
+  element={<Registrars />}
+/>
+
+<Route
+  path="registrars/create"
+  element={<CreateRegistrar />}
+/>
+
+<Route
+  path="registrars/edit/:id"
+  element={<EditRegistrar />}
+/>
+
+<Route
+  path="registrars/view/:id"
+  element={<ViewRegistrar />}
+/>
   </Route>
 </Route>
 
@@ -125,13 +150,20 @@ export default function AppRoutes() {
       >
         <Route element={<MainLayout />}>
           <Route index element={<RDashboard />} />
-          <Route path="enrollment" element={<Enrollment />} />
+          <Route path="enrollment" element={<Enrollment />}/>
+
+<Route
+  path="enrollment/:id"
+  element={<Enrollment />}
+/>
           
           {/* Add both route variations for flexibility */}
           <Route path="studentRecords" element={<StudentRecords />} />
-          <Route path="records" element={<StudentRecords />} />  {/* Added this line */}
-          <Route path="student-records" element={<StudentRecords />} />  {/* Also add kebab-case */}
+          <Route path="records" element={<StudentRecords />} />  
+          <Route path="student-records" element={<StudentRecords />} />  
           <Route path="reports" element={<RegistrarReports />} />
+          <Route path="students/view/:id" element={<ViewStudent />}/>
+          <Route path="students/Edit/:id" element={<EditStudent />}/>
           <Route path="grade-report" element={<GradeReport />} />
           <Route path="finance" element={<Finance />} />
         </Route>

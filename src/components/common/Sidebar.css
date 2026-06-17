@@ -1,7 +1,7 @@
 .sidebar {
   width: auto;
   height: 100vh;
-background: linear-gradient(180deg, #1077f4 0%, #002077 100%);
+  background: linear-gradient(180deg, #1063f4 0%, #001e77 100%);
   color: white;
   display: flex;
   flex-direction: column;
@@ -30,6 +30,7 @@ background: linear-gradient(180deg, #1077f4 0%, #002077 100%);
 
 .college-logo {
     width: 50px;
+    margin-top: 10px;
     height: 50px;
     border-radius: 50%;
     display: block;
@@ -65,16 +66,16 @@ background: linear-gradient(180deg, #1077f4 0%, #002077 100%);
 }
 
 .nav-link {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: #cbd5e1;
-  text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-  transition: 0.25s;
-  position: relative;
+display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    transition: 0.25s;
+    position: relative;
 }
 
 .nav-link:hover {
@@ -83,19 +84,20 @@ background: linear-gradient(180deg, #1077f4 0%, #002077 100%);
 }
 
 .nav-link.active {
-  background: #2563eb;
+  background: linear-gradient(269deg, #1063f400 0%, #5c85ff 100%);
   color: white;
 }
 
 .nav-link.active::before {
-  content: "";
-  position: absolute;
-  left: -12px;
-  top: 10%;
-  width: 4px;
-  height: 80%;
-  border-radius: 10px;
-  background: #60a5fa;
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 0%;
+    width: 5px;
+    height: 100%;
+    border-radius: 0px;
+    background: #3e84ff;
+
 }
 
 .nav-icon {
@@ -122,10 +124,60 @@ background: linear-gradient(180deg, #1077f4 0%, #002077 100%);
   margin-top: 5px;
 }
 
-.submenu-link:hover,
-.submenu-link.active {
+.submenu-link:hover {
   background: rgba(255,255,255,0.06);
   color: white;
+}
+.nav-link.has-submenu {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 8px 16px;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.nav-link.has-submenu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  padding: 8px 16px;
+  margin-bottom: 6px;
+
+  background: transparent;
+  border: none;
+
+  color: #cbd5e1;
+  text-decoration: none;
+
+  border-radius: 4px;
+  cursor: pointer;
+
+  transition: 0.25s;
+  position: relative;
+
+  font: inherit;
+  text-align: left;
+}
+.nav-link.has-submenu:hover {
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+.submenu-link.active {
+  color: #fff;
+  font-weight: 600;
+}
+.nav-link.has-submenu {
+  width: auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
 }
 
 .sidebar-footer {

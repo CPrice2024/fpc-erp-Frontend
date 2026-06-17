@@ -59,7 +59,7 @@ export default function RegistrarDashboard() {
           <div className="dashboard-header">
             <div>
               <h1>
-                Registrar Dashboard
+                Dashboard
               </h1>
 
               <p>
@@ -180,7 +180,7 @@ export default function RegistrarDashboard() {
                 className="action-card"
                 onClick={() =>
                   navigate(
-                    "/registrar/students"
+                    "/registrar/records"
                   )
                 }
               >

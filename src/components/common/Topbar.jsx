@@ -14,6 +14,7 @@ import {
   CheckCircle
 } from "lucide-react";
 import "../styles/Topbar.css";
+import avatar from "../../assets/avatar.png";
 
 function Topbar({ setIsOpen }) {
   const navigate = useNavigate();
@@ -167,12 +168,19 @@ function Topbar({ setIsOpen }) {
         {/* PROFILE */}
         <div className="topbar-dropdown-wrapper">
           <div
-            className="topbar-avatar"
-            onClick={() => setShowProfile(!showProfile)}
-          >
-            {user?.name?.charAt(0) || "A"}
-            <ChevronDown size={14} className="avatar-chevron" />
-          </div>
+  className="topbar-avatar"
+  onClick={() => setShowProfile(!showProfile)}
+>
+  <img
+    src={avatar}
+    alt="Profile"
+    className="topbar-avatar-img"
+  />
+  <ChevronDown
+    size={14}
+    className="avatar-chevron"
+  />
+</div>
 
           {showProfile && (
             <div className="dropdown profile-dropdown">

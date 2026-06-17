@@ -18,6 +18,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
 import "./Sidebar.css";
 import logo from "../../assets/FPClogo.png";
+import defaultAvatar from "../../assets/avatar.png";
 
 const menuByRole = {
   college_head: {
@@ -29,11 +30,37 @@ const menuByRole = {
         icon: <LayoutDashboard size={18} />,
       },
       {
-        label: "Departments",
-        path: "/college-head/departments",
-        icon: <Building2 size={18} />,
-      },
+  label: "Departments",
+  path: "/college-head/departments",
+  icon: <Building2 size={18} />,
+  subItems: [
+    {
+      label: "All Departments",
+      path: "/college-head/departments",
+    },
+    {
+      label: "Create Department",
+      path: "/college-head/departments/create",
+    },
+  ],
+},
+      
       {
+  label: "Registrars",
+  path: "/college-head/registrars",
+  icon: <Users size={18} />,
+  subItems: [
+    {
+      label: "All Registrars",
+      path: "/college-head/registrars",
+    },
+    {
+      label: "Create Registrar",
+      path: "/college-head/registrars/create",
+    },
+  ],
+},
+{
         label: "Reports",
         path: "/college-head/reports",
         icon: <ClipboardCheck size={18} />,
@@ -142,11 +169,22 @@ const menuByRole = {
 
 export default function Sidebar() {
   const { user, logout } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [openSubMenus, setOpenSubMenus] = useState({});
+
+const location = useLocation();
+const navigate = useNavigate();
+
+const [isCollapsed] = useState(false);
+
+const [isMobileOpen, setIsMobileOpen] =
+  useState(false);
+
+const [openSubMenus, setOpenSubMenus] =
+  useState({});
+
+  useEffect(() => {
+  setIsMobileOpen(false);
+}, [location.pathname]);
+
 
   if (!user) return null;
 
@@ -159,21 +197,32 @@ export default function Sidebar() {
   };
 
   const toggleSubMenu = (label) => {
-    setOpenSubMenus(prev => ({ ...prev, [label]: !prev[label] }));
-  };
+  setOpenSubMenus((prev) => ({
+    [label]: !prev[label],
+  }));
+};
+const isActive = (path) => {
 
-  const isActive = (path) => {
-    if (path === location.pathname) return true;
-    if (path !== "/" && location.pathname.startsWith(path)) return true;
-    return false;
-  };
+  // Dashboard routes
+  if (
+    path === "/college-head" ||
+    path === "/department-head" ||
+    path === "/registrar" ||
+    path === "/teacher"
+  ) {
+    return location.pathname === path;
+  }
+
+  // Other pages
+  return (
+    location.pathname === path ||
+    location.pathname.startsWith(path + "/")
+  );
+};
 
   const closeMobileMenu = () => setIsMobileOpen(false);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    closeMobileMenu();
-  }, [location.pathname]);
+ 
 
   const SidebarContent = () => (
     <>
@@ -215,30 +264,55 @@ export default function Sidebar() {
       {/* Navigation Menu */}
       <nav className="sidebar-nav">
         {menuItems.map((item, idx) => {
-          const active = isActive(item.path);
-          const hasSubItems = item.subItems && item.subItems.length > 0;
-          const isOpen = openSubMenus[item.label];
+          
+          const active =
+  !item.subItems &&
+  isActive(item.path);
+          const hasSubItems =
+  item.subItems &&
+  item.subItems.length > 0;
+  console.log(
+  "ACTIVE:",
+  item.label,
+  active
+);
+
+const isOpen =
+  openSubMenus[item.label];
+
+const shouldOpen =
+  isOpen ||
+  item.subItems?.some(
+    (subItem) =>
+      location.pathname === subItem.path
+  );
 
           return (
             <div key={idx} className="nav-item-wrapper">
               {hasSubItems ? (
                 <>
                   <button
-                    onClick={() => toggleSubMenu(item.label)}
-                    className={`nav-link has-submenu ${active ? 'active' : ''}`}
-                    title={isCollapsed ? item.label : undefined}
-                  >
+  type="button"
+  onClick={() => toggleSubMenu(item.label)}
+  className={`nav-link has-submenu ${
+    shouldOpen ? "active" : ""
+  }`}
+  title={isCollapsed ? item.label : undefined}
+>
                     <span className="nav-icon">{item.icon}</span>
                     {!isCollapsed && (
                       <>
                         <span className="nav-label">{item.label}</span>
                         <span className="submenu-icon">
-                          {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                          {shouldOpen
+                          ? <ChevronDown size={14} />
+                          : <ChevronRight size={14} />
+                          }
                         </span>
                       </>
                     )}
                   </button>
-                  {!isCollapsed && isOpen && (
+                  {!isCollapsed && shouldOpen && (
                     <div className="submenu">
                       {item.subItems.map((subItem, subIdx) => (
                         <Link
@@ -273,9 +347,13 @@ export default function Sidebar() {
       <div className="sidebar-footer">
         {!isCollapsed && (
           <div className="user-info">
-            <div className="user-avatar">
-              {user.name?.charAt(0).toUpperCase() || "U"}
-            </div>
+           <div className="user-avatar">
+  <img
+    src={defaultAvatar}
+    alt="User"
+    className="avatar-img"
+  />
+</div>
             <div className="user-details">
               <span className="user-name">{user.name || user.email}</span>
               <span className="user-email">{user.email}</span>

@@ -119,15 +119,17 @@ display: inline-flex;
 }
 
 .filter-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
+cursor: pointer;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    align-items: center;
+    color: #3e83ff;
+    width: auto;
+    gap: .5rem;
+    padding: .5rem 1rem;
+    transition: all .2s;
+    display: flex;
 }
 
 .filter-toggle.active {

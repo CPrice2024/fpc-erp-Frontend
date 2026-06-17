@@ -11,7 +11,8 @@
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 20px;
+  color: #2563eb;
 }
 
 .dashboard-header p {
@@ -64,15 +65,15 @@
 }
 
 .students {
-  background: #dbeafe;
+  background: #e2e2e2;
 }
 
 .departments {
-  background: #dcfce7;
+  background: #e2e2e2;
 }
 
 .teachers {
-  background: #fef3c7;
+  background: #e2e2e2;
 }
 
 .stat-card h2 {

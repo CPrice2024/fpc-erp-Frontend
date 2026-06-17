@@ -1,48 +1,41 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
-
 import {
   Search,
   Eye,
-  Edit,
+  Edit2,
   Trash2,
   RefreshCw,
   UserPlus,
+  Users,
+  User,
+  Building2,
+  FileText,
+  Printer,
+  Download,
+  CheckCircle,
+  XCircle,
+  Filter,
+  MoreVertical,
+  X
 } from "lucide-react";
-
 import "./StudentRecords.css";
 
 export default function StudentRecords() {
   const navigate = useNavigate();
 
-  const [students, setStudents] =
-    useState([]);
+  const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [search, setSearch] = useState("");
+  const [departmentFilter, setDepartmentFilter] = useState("");
+  const [levelFilter, setLevelFilter] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
 
-  const [filteredStudents,
-    setFilteredStudents] =
-    useState([]);
-
-  const [departments,
-    setDepartments] =
-    useState([]);
-
-  const [search,
-    setSearch] =
-    useState("");
-
-  const [departmentFilter,
-    setDepartmentFilter] =
-    useState("");
-
-  const [levelFilter,
-    setLevelFilter] =
-    useState("");
-
-  const [loading,
-    setLoading] =
-    useState(true);
+  const levels = ["Level I", "Level II", "Level III", "Level IV", "Level V"];
 
   useEffect(() => {
     fetchStudents();
@@ -51,387 +44,341 @@ export default function StudentRecords() {
 
   useEffect(() => {
     filterStudents();
-  }, [
-    students,
-    search,
-    departmentFilter,
-    levelFilter,
-  ]);
+  }, [students, search, departmentFilter, levelFilter]);
 
-  const fetchStudents =
-    async () => {
-      try {
-        setLoading(true);
-
-        const res =
-          await api.get(
-            "/registrars/students"
-          );
-
-        setStudents(res.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (activeMenu && !e.target.closest('.action-menu-container')) {
+        setActiveMenu(null);
       }
     };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [activeMenu]);
 
-  const fetchDepartments =
-    async () => {
-      try {
-        const res =
-          await api.get(
-            "/registrars/departments"
-          );
+  const fetchStudents = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get("/registrars/students");
+      setStudents(res.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setDepartments(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchDepartments = async () => {
+    try {
+      const res = await api.get("/registrars/departments");
+      setDepartments(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const filterStudents =
-    () => {
-      let data = [...students];
+  const filterStudents = () => {
+    let data = [...students];
 
-      if (search) {
-        data = data.filter(
-          (student) =>
-            student.firstName
-              ?.toLowerCase()
-              .includes(
-                search.toLowerCase()
-              ) ||
-            student.studentId
-              ?.toLowerCase()
-              .includes(
-                search.toLowerCase()
-              )
-        );
-      }
+    if (search) {
+      data = data.filter(
+        (student) =>
+          student.firstName?.toLowerCase().includes(search.toLowerCase()) ||
+          student.studentId?.toLowerCase().includes(search.toLowerCase()) ||
+          student.fatherName?.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
-      if (departmentFilter) {
-        data = data.filter(
-          (student) =>
-            student.department?._id ===
-            departmentFilter
-        );
-      }
+    if (departmentFilter) {
+      data = data.filter((student) => student.department?._id === departmentFilter);
+    }
 
-      if (levelFilter) {
-        data = data.filter(
-          (student) =>
-            student.level ===
-            levelFilter
-        );
-      }
+    if (levelFilter) {
+      data = data.filter((student) => student.level === levelFilter);
+    }
 
-      setFilteredStudents(data);
-    };
+    setFilteredStudents(data);
+  };
 
-  const deleteStudent =
-    async (id) => {
-      const confirmDelete =
-        window.confirm(
-          "Delete this student?"
-        );
+  const deleteStudent = async (id) => {
+    if (!window.confirm("Delete this student?")) return;
+    try {
+      await api.delete(`/students/${id}`);
+      fetchStudents();
+      setActiveMenu(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      if (!confirmDelete) return;
+  const toggleMenu = (studentId, e) => {
+    e.stopPropagation();
+    setActiveMenu(activeMenu === studentId ? null : studentId);
+  };
 
-      try {
-        await api.delete(
-          `/students/${id}`
-        );
+  const getStatusBadge = (status) => {
+    if (status === "active") {
+      return (
+        <span className="status-badge active">
+          <span className="status-dot"></span>
+          Active
+        </span>
+      );
+    }
+    return (
+      <span className="status-badge inactive">
+        <span className="status-dot"></span>
+        Inactive
+      </span>
+    );
+  };
 
-        fetchStudents();
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const exportExcel = () => {
+    const headers = ["ID", "Name", "Gender", "Department", "Level", "Academic Year", "Batch", "Phone", "Status"];
+    const data = filteredStudents.map(s => [
+      s.studentId,
+      `${s.firstName} ${s.fatherName}`,
+      s.gender,
+      s.department?.name || "",
+      s.level,
+      s.academicYear,
+      s.batch,
+      s.phone,
+      s.status
+    ]);
+    
+    const csvContent = [headers, ...data].map(row => row.join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `students_${new Date().toISOString()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
-        <div className="records-page">
-
-          {/* Header */}
-          <div className="page-header">
-
-            <div>
-              <h1>
-                Student Records
-              </h1>
-
-              <p>
-                Manage all
-                registered students
-              </p>
-            </div>
-
-            <div className="header-actions">
-
-              <button
-                className="refresh-btn"
-                onClick={
-                  fetchStudents
-                }
-              >
-                <RefreshCw
-                  size={18}
-                />
-                Refresh
-              </button>
-
-              <button
-                className="add-btn"
-                onClick={() =>
-                  navigate(
-                    "/registrar/admission"
-                  )
-                }
-              >
-                <UserPlus
-                  size={18}
-                />
-                Add Student
-              </button>
-
-            </div>
-
-          </div>
-
-          {/* Filters */}
-
-          <div className="filters">
-
-            <div className="search-box">
-              <Search size={18} />
-
-              <input
-                placeholder="Search Student..."
-                value={search}
-                onChange={(e) =>
-                  setSearch(
-                    e.target.value
-                  )
-                }
-              />
-            </div>
-
-            <select
-              value={
-                departmentFilter
-              }
-              onChange={(e) =>
-                setDepartmentFilter(
-                  e.target.value
-                )
-              }
-            >
-              <option value="">
-                All Departments
-              </option>
-
-              {departments.map(
-                (dept) => (
-                  <option
-                    key={dept._id}
-                    value={
-                      dept._id
-                    }
-                  >
-                    {dept.name}
-                  </option>
-                )
-              )}
-            </select>
-
-            <select
-              value={levelFilter}
-              onChange={(e) =>
-                setLevelFilter(
-                  e.target.value
-                )
-              }
-            >
-              <option value="">
-                All Levels
-              </option>
-
-              <option>
-                Level I
-              </option>
-
-              <option>
-                Level II
-              </option>
-
-              <option>
-                Level III
-              </option>
-
-              <option>
-                Level IV
-              </option>
-
-              <option>
-                Level V
-              </option>
-            </select>
-
-          </div>
-
-          {/* Table */}
-
-          <div className="table-card">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Gender</th>
-                  <th>Department</th>
-                  <th>Level</th>
-                  <th>Phone</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-
-                {loading ? (
-                  <tr>
-                    <td
-                      colSpan="8"
-                    >
-                      Loading...
-                    </td>
-                  </tr>
-                ) : filteredStudents.length ===
-                  0 ? (
-                  <tr>
-                    <td
-                      colSpan="8"
-                    >
-                      No Students
-                    </td>
-                  </tr>
-                ) : (
-                  filteredStudents.map(
-                    (student) => (
-                      <tr
-                        key={
-                          student._id
-                        }
-                      >
-                        <td>
-                          {
-                            student.studentId
-                          }
-                        </td>
-
-                        <td>
-                          {
-                            student.firstName
-                          }{" "}
-                          {
-                            student.fatherName
-                          }
-                        </td>
-
-                        <td>
-                          {
-                            student.gender
-                          }
-                        </td>
-
-                        <td>
-                          {student
-                            .department
-                            ?.name ||
-                            "-"}
-                        </td>
-
-                        <td>
-                          {
-                            student.level
-                          }
-                        </td>
-
-                        <td>
-                          {
-                            student.phone
-                          }
-                        </td>
-
-                        <td>
-                          <span className="active">
-                            {
-                              student.status
-                            }
-                          </span>
-                        </td>
-
-                        <td>
-
-                          <button
-                            className="view"
-                            onClick={() =>
-                              navigate(
-                                `/registrar/student/${student._id}`
-                              )
-                            }
-                          >
-                            <Eye
-                              size={
-                                16
-                              }
-                            />
-                          </button>
-
-                          <button
-                            className="edit"
-                            onClick={() =>
-                              navigate(
-                                `/registrar/student/edit/${student._id}`
-                              )
-                            }
-                          >
-                            <Edit
-                              size={
-                                16
-                              }
-                            />
-                          </button>
-
-                          <button
-                            className="delete"
-                            onClick={() =>
-                              deleteStudent(
-                                student._id
-                              )
-                            }
-                          >
-                            <Trash2
-                              size={
-                                16
-                              }
-                            />
-                          </button>
-
-                        </td>
-                      </tr>
-                    )
-                  )
-                )}
-
-              </tbody>
-
-            </table>
-
-          </div>
-
+    <div className="enrollment-container">
+      {/* Header */}
+      <div className="enrollment-container">
+        <div>
+          <h1>
+            Student Records
+          </h1>
+          <p>Manage all registered students across departments</p>
         </div>
+
+        <div className="header-actions">
+          <button className="refresh-btn" onClick={fetchStudents}>
+            <RefreshCw size={18} className={loading ? "spinning" : ""} />
+            Refresh
+          </button>
+          <button onClick={exportExcel}>
+            <Download size={18} />
+            Export Excel
+          </button>
+          <button onClick={() => window.print()}>
+            <Printer size={18} />
+            Print
+          </button>
+          <button
+            className="add-btn"
+            onClick={() => navigate("/registrar/Enrollment")}
+          >
+            <UserPlus size={18} />
+            Add Student
+          </button>
+          <button>
+            <FileText size={18} />
+            ID Card
+          </button>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="filters">
+        <div className="search-box">
+          <Search size={18} />
+          <input
+            placeholder="Search by name or ID..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <select
+        className="header-actions button"
+          value={departmentFilter}
+          onChange={(e) => setDepartmentFilter(e.target.value)}
+        >
+          <option value="">All Departments</option>
+          {departments.map((dept) => (
+            <option key={dept._id} value={dept._id}>
+              {dept.name}
+            </option>
+          ))}
+        </select>
+
+        <select
+        className="header-actions button"
+          value={levelFilter}
+          onChange={(e) => setLevelFilter(e.target.value)}
+        >
+          <option value="">All Levels</option>
+          {levels.map((level) => (
+            <option key={level} value={level}>
+              {level}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Summary Cards */}
+      <div className="summary-grid">
+        <div className="summary-card">
+          <h2>{students.length}</h2>
+          <p>Total Students</p>
+        </div>
+
+        <div className="summary-card">
+          <h2>{students.filter(s => s.gender === "Male").length}</h2>
+          <p>Male</p>
+        </div>
+
+        <div className="summary-card">
+          <h2>{students.filter(s => s.gender === "Female").length}</h2>
+          <p>Female</p>
+        </div>
+
+        <div className="summary-card">
+          <h2>{departments.length}</h2>
+          <p>Departments</p>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Department</th>
+              <th>Level</th>
+              <th>Academic Year</th>
+              <th>Batch</th>
+              <th>Phone</th>
+              <th>Registered</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr>
+                <td colSpan="12">
+                  <div className="loading-state">
+                    <div className="spinner"></div>
+                    <p>Loading students...</p>
+                  </div>
+                </td>
+              </tr>
+            ) : filteredStudents.length === 0 ? (
+              <tr>
+                <td colSpan="12">
+                  <div className="empty-state">
+                    <Users size={48} />
+                    <h3>No Students Found</h3>
+                    <p>Try adjusting your search or filters</p>
+                  </div>
+                </td>
+              </tr>
+            ) : (
+              filteredStudents.map((student) => (
+                <tr key={student._id}>
+                  <td data-label="Photo">
+                    <img
+                      src={
+                        student.photo
+                          ? `http://localhost:5000${student.photo}`
+                          : "https://ui-avatars.com/api/?name=" + encodeURIComponent(student.firstName || "S")
+                      }
+                      alt={student.firstName}
+                    />
+                  </td>
+                  <td data-label="ID">{student.studentId}</td>
+                  <td data-label="Name">
+                    {student.firstName} {student.fatherName}
+                  </td>
+                  <td data-label="Gender">{student.gender}</td>
+                  <td data-label="Department">
+                    <span className="dept-badge">
+                      {student.department?.name || "-"}
+                    </span>
+                  </td>
+                  <td data-label="Level">
+                    <span className="level-badge">{student.level}</span>
+                  </td>
+                  <td data-label="Academic Year">{student.academicYear}</td>
+                  <td data-label="Batch">{student.batch}</td>
+                  <td data-label="Phone">{student.phone}</td>
+                  <td data-label="Registered">
+                    {new Date(student.createdAt).toLocaleDateString()}
+                  </td>
+                  <td data-label="Status">{getStatusBadge(student.status)}</td>
+                  <td data-label="Actions">
+                    <div className="action-menu-container">
+                      <button
+                        className="action-menu-btn"
+                        onClick={(e) => toggleMenu(student._id, e)}
+                        title="Actions"
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+                      
+                      {activeMenu === student._id && (
+                        <div className="action-popup">
+                          <div className="popup-arrow"></div>
+                          <button
+                            className="popup-action view"
+                            onClick={() => {
+                              navigate(`/registrar/students/view/${student._id}`);
+                              setActiveMenu(null);
+                            }}
+                          >
+                            <Eye size={16} />
+                            <span>View</span>
+                          </button>
+                          <button
+                            className="popup-action edit"
+                            onClick={() => {
+                              navigate(`/registrar/enrollment/${student._id}`);
+                              setActiveMenu(null);
+                            }}
+                          >
+                            <Edit2 size={16} />
+                            <span>Edit</span>
+                          </button>
+                          <button
+                            className="popup-action delete"
+                            onClick={() => deleteStudent(student._id)}
+                          >
+                            <Trash2 size={16} />
+                            <span>Delete</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

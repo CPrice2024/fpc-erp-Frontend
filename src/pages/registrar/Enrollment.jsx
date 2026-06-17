@@ -1,7 +1,7 @@
 // src/pages/registrar/Enrollment.jsx
 
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { 
   User, 
   BookOpen, 
@@ -16,8 +16,6 @@ import {
   ChevronLeft
 } from "lucide-react";
 
-import Sidebar from "../../components/common/Sidebar";
-import Topbar from "../../components/common/Topbar";
 import api from "../../api/axios";
 import "./Enrollment.css";
 
@@ -26,8 +24,11 @@ export default function Enrollment() {
   const location = useLocation();
 
   const pathname = location.pathname;
+  const { id } = useParams();
 
-  const isEdit = pathname.includes("/edit/");
+const isEditMode = !!id;
+
+  const isEdit = !!id;  
   const isView = pathname.includes("/view/");
 
   const pageTitle = isView
@@ -124,30 +125,123 @@ export default function Enrollment() {
     }
   };
 
-  const handleSubmit = async () => {
-    try {
-      if (isView) {
-        navigate("/registrar/students");
-        return;
-      }
+const fetchStudent = async () => {
 
-      setLoading(true);
+  try {
 
-      if (isEdit) {
-        alert("Update API will be connected next");
-      } else {
-        await api.post("/registrars/students", formData);
-        alert("Student registered successfully!");
-      }
+    const { data } =
+      await api.get(
+        `/registrars/students/${id}`
+      );
 
-      navigate("/registrar/students");
-    } catch (error) {
-      console.error(error);
-      alert(error.response?.data?.message || "Operation failed");
-    } finally {
-      setLoading(false);
+    setFormData({
+      ...data,
+
+      department:
+        data.department?._id ||
+        data.department,
+
+      dob: data.dob
+        ? data.dob.split("T")[0]
+        : "",
+    });
+
+    if (data.photo) {
+      setPhotoPreview(
+        `http://localhost:5000${data.photo}`
+      );
     }
-  };
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const handleSubmit = async () => {
+  try {
+
+    setLoading(true);
+
+    const submitData =
+      new FormData();
+
+    Object.keys(formData).forEach(
+      (key) => {
+        submitData.append(
+          key,
+          formData[key]
+        );
+      }
+    );
+
+    if (photoFile) {
+      submitData.append(
+        "photo",
+        photoFile
+      );
+    }
+
+    if (isEditMode) {
+
+      await api.put(
+        `/registrars/students/${id}`,
+        submitData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data",
+          },
+        }
+      );
+
+      alert(
+        "Student updated successfully"
+      );
+
+    } else {
+
+      await api.post(
+        "/registrars/students",
+        submitData,
+        {
+          headers: {
+            "Content-Type":
+              "multipart/form-data",
+          },
+        }
+      );
+
+      alert(
+        "Student registered successfully"
+      );
+
+    }
+
+    navigate(
+      "/registrar/records"
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      error.response?.data?.message ||
+      "Operation failed"
+    );
+
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+
+  if (id) {
+    fetchStudent();
+  }
+
+}, [id]);
 
   const renderPersonalInfo = () => (
     <div className="step-content">
@@ -420,9 +514,13 @@ export default function Enrollment() {
   return (
           <div className="enrollment-container">
             {/* Header */}
-            <div className="enrollment-header">
+            <div className="enrollment-container">
               <div>
-                <h1>{pageTitle}</h1>
+                <h1>
+  {isEditMode
+    ? "Edit Student"
+    : "Student Enrollment"}
+</h1>
                 <p>Fill in the information below to register a new student</p>
               </div>
             </div>
@@ -487,7 +585,7 @@ export default function Enrollment() {
                 {activeStep > 0 && (
                   <button
                     type="button"
-                    className="nav-btn prev-btn"
+                    className="refresh-btn"
                     onClick={handlePrevious}
                   >
                     <ChevronLeft size={18} />
@@ -498,7 +596,7 @@ export default function Enrollment() {
                 {activeStep < steps.length - 1 ? (
                   <button
                     type="button"
-                    className="nav-btn next-btn"
+                    className="refresh-btn"
                     onClick={handleNext}
                   >
                     Next
@@ -507,7 +605,7 @@ export default function Enrollment() {
                 ) : (
                   <button
                     type="button"
-                    className="nav-btn submit-btn"
+                    className="add-btn"
                     onClick={handleSubmit}
                     disabled={loading}
                   >
@@ -518,7 +616,7 @@ export default function Enrollment() {
                 
                 <button
                   type="button"
-                  className="nav-btn cancel-btn"
+                  className="refresh-btn"
                   onClick={() => navigate("/registrar/students")}
                 >
                   <X size={18} />
