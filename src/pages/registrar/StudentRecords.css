@@ -70,12 +70,16 @@
 .refresh-btn {
   background: #ffffff;
   color: #475569;
-  border: 1px solid #e2e8f0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #0f172a;
+  border: 1px solid #124588;
 }
 
 .refresh-btn:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: #ececec;
+  border-color: #012f67;
+  color: #0f172a;
 }
 
 .refresh-btn .spinning {
@@ -93,7 +97,6 @@
 
 .add-btn:hover {
   background: #2563eb;
-  transform: translateY(-1px);
 }
 
 .header-actions button:not(.refresh-btn):not(.add-btn) {
@@ -190,14 +193,13 @@
 .summary-card {
   background: #ffffff;
   border: 1px solid #eef2f6;
-  border-radius: 20px;
+  border-radius: 6px;
   padding: 20px;
   text-align: center;
   transition: all 0.2s ease;
 }
 
 .summary-card:hover {
-  transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   border-color: #e2e8f0;
 }
@@ -224,13 +226,13 @@
 .table-card {
   background: #ffffff;
   border: 1px solid #eef2f6;
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: scroll;
 }
 
 .table-card table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: initial;
 }
 
 .table-card thead th {
@@ -247,7 +249,7 @@
 }
 
 .table-card tbody td {
-  padding: 5px 10px;
+  padding: 5px 5px;
   font-size: 12px;
   color: #323d5e;
   border-bottom: 1px solid #f1f5f9;
@@ -407,7 +409,6 @@
   border-top-color: #3b82f6;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
 }
 
 .loading-state p,

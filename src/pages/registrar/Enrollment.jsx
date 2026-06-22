@@ -1,6 +1,5 @@
-// src/pages/registrar/Enrollment.jsx
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef  } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { 
   User, 
@@ -48,6 +47,91 @@ const isEditMode = !!id;
   const [loading, setLoading] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
   const [photoFile, setPhotoFile] = useState(null);
+  const [showCamera, setShowCamera] = useState(false);
+
+const videoRef = useRef(null);
+const canvasRef = useRef(null);
+const streamRef = useRef(null);
+
+const startCamera = async () => {
+  try {
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+        video: true,
+      });
+
+    streamRef.current = stream;
+
+    setShowCamera(true);
+
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    }, 100);
+
+  } catch (error) {
+    console.error(error);
+    alert("Camera access denied");
+  }
+};
+
+const stopCamera = () => {
+  if (streamRef.current) {
+    streamRef.current
+      .getTracks()
+      .forEach(track => track.stop());
+  }
+
+  setShowCamera(false);
+};
+
+const capturePhoto = () => {
+  const canvas = canvasRef.current;
+  const video = videoRef.current;
+
+  const context = canvas.getContext("2d");
+
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  context.drawImage(
+    video,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  canvas.toBlob((blob) => {
+
+    const file = new File(
+      [blob],
+      `student-${Date.now()}.jpg`,
+      {
+        type: "image/jpeg",
+      }
+    );
+
+    setPhotoFile(file);
+    setPhotoPreview(
+      URL.createObjectURL(blob)
+    );
+
+    stopCamera();
+
+  }, "image/jpeg");
+};
+const handlePhotoChange = (e) => {
+  const file = e.target.files[0];
+
+  if (file) {
+    setPhotoFile(file);
+    setPhotoPreview(
+      URL.createObjectURL(file)
+    );
+  }
+};
 
   const [formData, setFormData] = useState({
     // Personal Information
@@ -98,13 +182,7 @@ const isEditMode = !!id;
     }
   };
 
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPhotoFile(file);
-      setPhotoPreview(URL.createObjectURL(file));
-    }
-  };
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -521,7 +599,6 @@ useEffect(() => {
     ? "Edit Student"
     : "Student Enrollment"}
 </h1>
-                <p>Fill in the information below to register a new student</p>
               </div>
             </div>
 
@@ -548,33 +625,134 @@ useEffect(() => {
               })}
             </div>
 
-            {/* Photo Upload Section */}
-            <div className="photo-upload-section">
-              <div className="photo-upload-card">
-                <div className="photo-preview">
-                  {photoPreview ? (
-                    <img src={photoPreview} alt="Student" />
-                  ) : (
-                    <div className="photo-placeholder">
-                      <Camera size={40} />
-                      <span>Student Photo</span>
-                    </div>
-                  )}
-                </div>
-                {!isView && (
-                  <label className="upload-btn">
-                    <Upload size={16} />
-                    Upload Photo
-                    <input
-                      type="file"
-                      hidden
-                      accept="image/*"
-                      onChange={handlePhotoChange}
-                    />
-                  </label>
-                )}
-              </div>
-            </div>
+           {/* Photo Upload Section */}
+<div className="photo-upload-section">
+
+  <div className="photo-upload-card">
+
+    <div className="photo-preview">
+
+      {photoPreview ? (
+
+        <img
+          src={photoPreview}
+          alt="Student"
+        />
+
+      ) : (
+
+        <div className="photo-placeholder">
+          <Camera size={40} />
+          <span>Student Photo</span>
+        </div>
+
+      )}
+
+    </div>
+
+    {!isView && (
+
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+
+        {/* Upload Photo */}
+        <div class="form-navigation">
+
+        <label className="upload-btn">
+
+          <Upload size={16} />
+          Upload
+
+          <input
+            type="file"
+            hidden
+            accept="image/*"
+            onChange={handlePhotoChange}
+          />
+
+        </label>
+        <button
+          type="button"
+          className="upload-btn"
+          onClick={startCamera}
+        >
+          <Camera size={16} />
+          Take Photo
+        </button>
+        </div>
+
+        {/* Take Photo */}
+
+        
+
+      </div>
+
+    )}
+
+  </div>
+
+  {/* Camera Modal */}
+
+  {showCamera && (
+
+    <div className="camera-modal">
+
+      <div className="camera-card">
+
+        <h3>
+          Capture Student Photo
+        </h3>
+
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          className="camera-video"
+        />
+
+        <canvas
+          ref={canvasRef}
+          style={{
+            display: "none",
+          }}
+        />
+
+        <div className="camera-actions">
+
+          <button
+            type="button"
+            className="add-btn"
+            onClick={capturePhoto}
+          >
+            <Camera size={18} />
+            Capture
+          </button>
+
+          <button
+            type="button"
+            className="refresh-btn"
+            onClick={stopCamera}
+          >
+            <X size={18} />
+            Cancel
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  )}
+
+</div>
+            
 
             {/* Form Card */}
             <div className="form-card">
@@ -617,7 +795,7 @@ useEffect(() => {
                 <button
                   type="button"
                   className="refresh-btn"
-                  onClick={() => navigate("/registrar/students")}
+                  onClick={() => navigate("/registrar/records")}
                 >
                   <X size={18} />
                   Cancel

@@ -34,10 +34,13 @@ import RDashboard from "../pages/registrar/RDashboard";
 import Enrollment from "../pages/registrar/Enrollment";
 import StudentRecords from "../pages/registrar/StudentRecords";
 import GradeReport from "../pages/registrar/GradeReport";
+import ViewStudentPage from "../pages/registrar/ViewStudentPage";
 import Finance from "../pages/registrar/Finance";
 import RegistrarReports from "../pages/registrar/RegistrarReports";
 import ViewStudent from "../pages/registrar/ViewStudent";
 import EditStudent from "../pages/registrar/EditStudent";
+import CreatePayment from "../pages/registrar/CreatePayment";
+
 
 import TDashboard from "../pages/teacher/TDashboard";
 import MyClass from "../pages/teacher/MyClass";
@@ -162,9 +165,11 @@ export default function AppRoutes() {
           <Route path="records" element={<StudentRecords />} />  
           <Route path="student-records" element={<StudentRecords />} />  
           <Route path="reports" element={<RegistrarReports />} />
-          <Route path="students/view/:id" element={<ViewStudent />}/>
           <Route path="students/Edit/:id" element={<EditStudent />}/>
+          <Route path="createPayment" element={<CreatePayment />}/>
+          <Route path="create-teacher" element={<CreateTeacher />} />
           <Route path="grade-report" element={<GradeReport />} />
+          <Route path="students/view/:id" element={<ViewStudentPage />} />
           <Route path="finance" element={<Finance />} />
         </Route>
       </Route>

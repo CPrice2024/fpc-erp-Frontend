@@ -20,12 +20,12 @@
 }
 
 .add-btn {
-  background: #2563eb;
+  background: #2d6efa;
   color: white;
   border: none;
   width: auto;
   padding: 12px 18px;
-  border-radius: 10px;
+  border-radius: 6px;
 
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
 }
 
 .add-btn:hover {
-  background: #1d4ed8;
+  background: #075bd1;
 }
 .gender-badge {
   background: #e0f2fe;

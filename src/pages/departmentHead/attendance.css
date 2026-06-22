@@ -47,7 +47,6 @@ background: #2782d6;
 
 .register-btn:hover {
   background: #0f5a34;
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(30, 111, 63, 0.3);
 }
 

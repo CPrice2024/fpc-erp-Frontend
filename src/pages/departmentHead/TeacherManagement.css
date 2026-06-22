@@ -62,7 +62,6 @@
 
 .primary-btn:hover {
   background: #0040b8;
-  transform: translateY(-1px);
 }
 
 .export-btn {
@@ -106,7 +105,6 @@
 }
 
 .stat-card-teacher:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 

@@ -18,8 +18,12 @@
 h1 {
   font-size: 20px;
   font-weight: 700;
+      display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
 color: #267dff;
-  margin: 0;
 }
 
 .enrollment-header h1 {
@@ -47,7 +51,6 @@ color: #267dff;
 
 .logout-btn:hover {
   background: #dc2626;
-  transform: translateY(-1px);
 }
 
 /* Progress Steps */
@@ -86,9 +89,9 @@ color: #267dff;
 }
 
 .step.active .step-indicator {
-     background: #2a70b000;
-    color: rgb(51, 125, 214);
-    border-style: solid;
+     background: #0a7eea;
+    color: rgb(255, 255, 255);
+    border-style: dotted;
     border-width: thin;
     border-color: #2b72ff;
 }
@@ -106,7 +109,7 @@ color: #267dff;
 }
 
 .step.active .step-label {
-  color: #1e4a6e;
+  color: #276ba3;
   font-weight: 600;
 }
 
@@ -147,7 +150,7 @@ color: #267dff;
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  background: #f8fafc;
+  background: #ffffff;
   border: 2px dashed #318eff;
   display: flex;
   align-items: center;
@@ -173,23 +176,22 @@ color: #267dff;
 }
 
 .upload-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #1e4a6e;
-  cursor: pointer;
-  transition: all 0.2s;
+     display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #ffffff;
+    border: 1px solid #308aff;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #5099ff;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .upload-btn:hover {
-  background: #e2e8f0;
-  transform: translateY(-1px);
+  background: #f9f9f9;
 }
 
 /* Form Card */
@@ -238,7 +240,7 @@ color: #267dff;
 .form-group label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #2c4c6e;
+  color: #0671e2;
 }
 
 .form-group input,
@@ -274,7 +276,6 @@ color: #267dff;
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: 32px;
   padding-top: 24px;
   border-top: 1px solid #eef2f8;
 }
@@ -388,4 +389,33 @@ color: #267dff;
   .cancel-btn {
     flex: 1;
   }
+}
+.camera-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.camera-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.camera-video {
+  width: 500px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
 }

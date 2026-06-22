@@ -76,7 +76,6 @@ display: inline-flex;
 .btn-primary-registrar:hover {
   background: #2563eb;
   color: rgb(255, 255, 255);
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 

@@ -9,16 +9,10 @@ import {
   RefreshCw,
   UserPlus,
   Users,
-  User,
-  Building2,
   FileText,
   Printer,
   Download,
-  CheckCircle,
-  XCircle,
-  Filter,
   MoreVertical,
-  X
 } from "lucide-react";
 import "./StudentRecords.css";
 
@@ -162,11 +156,10 @@ export default function StudentRecords() {
     <div className="enrollment-container">
       {/* Header */}
       <div className="enrollment-container">
-        <div>
+        <div className="filters">
           <h1>
             Student Records
           </h1>
-          <p>Manage all registered students across departments</p>
         </div>
 
         <div className="header-actions">
@@ -280,10 +273,6 @@ export default function StudentRecords() {
             {loading ? (
               <tr>
                 <td colSpan="12">
-                  <div className="loading-state">
-                    <div className="spinner"></div>
-                    <p>Loading students...</p>
-                  </div>
                 </td>
               </tr>
             ) : filteredStudents.length === 0 ? (

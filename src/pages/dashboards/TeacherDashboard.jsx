@@ -332,7 +332,6 @@ export default function TeacherDashboard() {
         }
 
         .stat-card:hover {
-          transform: translateY(-4px);
           box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.2);
         }
 

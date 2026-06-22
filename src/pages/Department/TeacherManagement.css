@@ -59,7 +59,6 @@
 
 .primary-btn:hover {
   background: #004ecb;
-  transform: translateY(-1px);
 }
 
 .export-btn {

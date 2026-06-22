@@ -186,7 +186,6 @@
 }
 
 .search-wrapper::before {
-  content: "🔍";
   position: absolute;
   left: 0.5rem;
   top: 50%;
