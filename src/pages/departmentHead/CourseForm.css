@@ -257,10 +257,12 @@
 
 .save-btn,
 .submit-btn {
-  background: #3b82f6;
-  color: white;
-  flex: 1;
-  justify-content: center;
+     flex: 1;
+    justify-content: center;
+    background: #fbfbfb00;
+    color: #0064d4;
+    border: 1px solid #004cff;
+    border-radius: 6px;
 }
 
 .save-btn:hover,

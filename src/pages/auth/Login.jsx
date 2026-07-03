@@ -95,29 +95,53 @@ const fillCredentials = (account) => {
       <div className="login-container">
         {/* Left Side */}
         <div className="login-info">
-          <img src={logo} alt="College Logo" className="college-logo" />
 
-          <h1>FPC College</h1>
+  {/* Quick Links */}
 
-          <p>
-            Streamline your college operations with our
-            comprehensive ERP system. Manage students,
-            academics, and departments all in one place.
-          </p>
+  <div className="info-top-links">
 
-          <div className="erp-features">
-            <div> Student Management</div>
-            <div> Academic Records</div>
-            <div> Teacher Portal</div>
-            <div> Department Management</div>
-          </div>
-        </div>
+    <Link to="/admissions">
+      Admissions
+    </Link>
+
+    <Link to="/academics">
+      Academics
+    </Link>
+
+    <Link to="/news">
+      News
+    </Link>
+
+    <Link to="/contact">
+      Contact
+    </Link>
+
+  </div>
+
+  <img
+    src={logo}
+    alt="College Logo"
+    className="college-logoo"
+  />
+
+  <h1>Federal Prison Commission Educational System</h1>
+
+  <p className="description">Our College Management System streamlines administrative tasks, enhances communication, and provides a centralized platform for managing student records, faculty information, and academic processes.
+  </p>
+
+  <div className="erp-features">
+    <div>Student Management</div>
+    <div>Academic Records</div>
+    <div>Teacher Portal</div>
+    <div>Department Management</div>
+  </div>
+
+</div>
 
         {/* Right Side */}
         <div className="login-card">
-          <div className="card-header">
-            <GraduationCap size={40} />
-            <h2>Welcome Back</h2>
+          <div className="card-headerr">
+            <h2>Welcome Back, please sign in</h2>
           </div>
 
           <form onSubmit={submit}>
@@ -125,7 +149,7 @@ const fillCredentials = (account) => {
               <div className="error-message">{error}</div>
             )}
 
-            <div className="input-group">
+            <div className="input-groupp">
               <label>Email</label>
 
               <div className="input-box">
@@ -142,7 +166,7 @@ const fillCredentials = (account) => {
               </div>
             </div>
 
-            <div className="input-group">
+            <div className="input-groupp">
               <label>Password</label>
 
               <div className="input-box">
@@ -210,9 +234,13 @@ const fillCredentials = (account) => {
     ))}
   </div>
 </div>
+
           </form>
+          <h3 className="footer-text">© 2026 Federal Prison College. All rights reserved.</h3>
+      
+          
         </div>
-      </div>
+        </div>
     </div>
   );
 }

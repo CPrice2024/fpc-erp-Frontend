@@ -2,7 +2,7 @@
 
 /* Container */
 .enrollment-container {
-  max-width: 1070px;
+  max-width:none;
   margin: 0 auto;
 }
 
@@ -20,11 +20,33 @@ h1 {
   font-weight: 700;
       display: flex;
     gap: 16px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+color: #375581;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+      display: flex;
+    gap: 16px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+color: #375581;
+}
+h3{
+  font-size: 14px;
+  font-weight: 500;
+      display: flex;
+    gap: 16px;
     margin-bottom: 24px;
     flex-wrap: wrap;
     align-items: center;
 color: #267dff;
 }
+
 
 .enrollment-header h1 {
   font-size: 20px;
@@ -43,7 +65,7 @@ color: #267dff;
     padding: 8px 20px;
     background: #ffffff00;
     color: #ff4646;
-    border-radius: 8px;
+    border-radius: 4px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
@@ -247,8 +269,8 @@ color: #267dff;
 .form-group select,
 .form-group textarea {
   padding: 12px 14px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
+  border: 1px solid #2e4564;
+  border-radius: 6px;
   font-size: 0.85rem;
   font-family: inherit;
   transition: all 0.2s;
@@ -324,12 +346,14 @@ color: #267dff;
 }
 
 .cancel-btn {
-  background: #ef4444;
-  color: white;
+      background: #fbfbfb00;
+    color: #ec0000;
+    border: 1px solid #ff0000;
+    border-radius: 6px;
 }
 
 .cancel-btn:hover {
-  background: #dc2626;
+  background: #fcfcfc;
 }
 
 .submit-btn:disabled {

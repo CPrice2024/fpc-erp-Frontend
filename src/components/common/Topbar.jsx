@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
-  Menu, 
   Sun, 
   Moon, 
   Bell, 
@@ -13,6 +12,7 @@ import {
   Users,
   CheckCircle
 } from "lucide-react";
+
 import "../styles/Topbar.css";
 import avatar from "../../assets/avatar.png";
 
@@ -23,9 +23,14 @@ function Topbar({ setIsOpen }) {
     localStorage.getItem("user") || "{}"
   );
 
+  const profilePhoto = user?.photo
+  ? `${import.meta.env.VITE_API_URL.replace("/api", "")}${user.photo}`
+  : avatar;
+
   const [showProfile, setShowProfile] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
   const [notifications, setNotifications] = useState([
     { id: 1, title: "New student registered", type: "success", time: "2 mins ago", read: false },
     { id: 2, title: "Attendance submitted for Grade 10", type: "info", time: "1 hour ago", read: false },
@@ -41,6 +46,17 @@ function Topbar({ setIsOpen }) {
       document.body.classList.remove("dark-mode");
     }
   }, [darkMode]);
+  useEffect(() => {
+
+  const timer = setInterval(() => {
+
+    setCurrentTime(new Date());
+
+  }, 1000);
+
+  return () => clearInterval(timer);
+
+}, []);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -96,10 +112,38 @@ function Topbar({ setIsOpen }) {
       {/* LEFT */}
       <div className="topbar-left">
 
-        <div className="topbar-greeting">
-          <p>Welcome back, {user?.name || "Admin"} 👋</p>
-        </div>
-      </div>
+  <div className="topbar-greeting">
+
+    <h3>
+
+      {currentTime.getHours() < 12
+        ? "Good Morning"
+        : currentTime.getHours() < 18
+        ? "Good Afternoon"
+        : "Good Evening"}
+
+      , {user?.name || "Admin"} 👋
+
+    </h3>
+
+    <p>
+
+      {currentTime.toLocaleDateString("en-US", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })}
+
+      {" • "}
+
+      {currentTime.toLocaleTimeString()}
+
+    </p>
+
+  </div>
+
+</div>
 
       {/* RIGHT */}
       <div className="topbar-right">
@@ -172,10 +216,14 @@ function Topbar({ setIsOpen }) {
   onClick={() => setShowProfile(!showProfile)}
 >
   <img
-    src={avatar}
-    alt="Profile"
-    className="topbar-avatar-img"
-  />
+  src={profilePhoto}
+  alt="Profile"
+  className="topbar-avatar-img"
+  onError={(e) => {
+    e.target.src = avatar;
+  }}
+/>
+
   <ChevronDown
     size={14}
     className="avatar-chevron"

@@ -12,29 +12,32 @@ import {
   CheckCircle,
   XCircle,
   Download,
-  Printer,
   GraduationCap,
   MapPin,
   Hash,
   Building,
   Clock,
-  FileText,
   TrendingUp,
   TrendingDown,
-  ExternalLink,
   Edit,
-  Save,
-  X,
   BarChart3,
-  PieChart,
   AlertTriangle,
-  Info,
   ChevronDown,
   ChevronUp,
-  Filter,
   Search,
 } from "lucide-react";
 import "./ViewStudentPage.css";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+
+import RegistrationSlipPDF
+from "../../components/pdf/RegistrationSlipPDF";
+
+import StudentProfilePDF
+from "../../components/pdf/StudentProfilePDF";
+
+import TranscriptPDF
+from "../../components/pdf/TranscriptPDF";
 
 export default function ViewStudentPage() {
   const { id } = useParams();
@@ -50,6 +53,10 @@ export default function ViewStudentPage() {
   const [courseFilter, setCourseFilter] = useState("all"); // all, passed, failed, in-progress
   const [courseSearch, setCourseSearch] = useState("");
   const [expandedCourse, setExpandedCourse] = useState(null);
+
+  const transcriptRef = useRef(null);
+  const profileRef = useRef(null);
+  const slipRef = useRef(null);
   const [courseStats, setCourseStats] = useState({
     total: 0,
     passed: 0,
@@ -83,16 +90,13 @@ export default function ViewStudentPage() {
 
 setStudent(studentRes.data);
 
-const coursesRes =
-  await api.get(
-    `/registrars/students/${id}/courses`
-  );
-
-setCourses(coursesRes.data || []);
-
-calculateCourseStats(
-  coursesRes.data || []
+const { data } = await api.get(
+  `/registrars/students/${id}/courses`
 );
+
+setCourses(data);
+console.log(data);
+
 try {
   const enrollRes =
     await api.get(
@@ -136,6 +140,22 @@ try {
       fetchStudentData();
     }
   }, [id]);
+
+  const printProfile = useReactToPrint({
+  contentRef: profileRef,
+  documentTitle: `${student?.studentId || "Student"}-Profile`,
+});
+
+const printTranscript = useReactToPrint({
+  contentRef: transcriptRef,
+  documentTitle: `${student?.studentId || "Student"}-Transcript`,
+});
+
+const printSlip = useReactToPrint({
+  contentRef: slipRef,
+  documentTitle: `${student?.studentId}-RegistrationSlip`,
+});
+
 
   // ===== CALCULATE COURSE STATISTICS =====
   const calculateCourseStats = (courseData) => {
@@ -354,57 +374,7 @@ try {
 
   const filteredCourses = getFilteredCourses();
 
-  // ===== EXPORT FUNCTIONS =====
-  const exportStudentReport = () => {
-    if (!student) return;
-    
-    const headers = ["Field", "Value"];
-    const rows = [
-      ["Student ID", student.studentId],
-      ["Full Name", `${student.firstName} ${student.fatherName}`],
-      ["Department", student.department?.name || "N/A"],
-      ["Level", student.level || "N/A"],
-      ["Section", student.section || "N/A"],
-      ["Email", student.email || "N/A"],
-      ["Phone", student.phone || "N/A"],
-      ["Address", student.address || "N/A"],
-      ["Status", student.status === "active" ? "Active" : "Inactive"],
-      ["GPA", courseStats.gpa.toFixed(2)],
-      ["Total Credits", courseStats.totalCredits],
-      ["Courses Passed", courseStats.passed],
-      ["Courses Failed", courseStats.failed],
-      ["Courses In Progress", courseStats.inProgress],
-      ["Attendance Rate", `${attendanceStats.rate.toFixed(1)}%`],
-      ["", ""],
-      ["Course Details", ""],
-      ["Course Code", "Course Name", "Credits", "Grade", "Grade Point", "Status"],
-    ];
 
-    courses.forEach(c => {
-      const status = getCourseStatus(c);
-      rows.push([
-        c.code || "N/A",
-        c.name || "N/A",
-        c.credits || 3,
-        c.grade || "N/A",
-        getGradePoint(c.grade).toFixed(1),
-        status.label,
-      ]);
-    });
-
-    const csv = rows.map(row => row.join(",")).join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `student-report-${student.studentId}-${new Date().toISOString().split("T")[0]}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
 
   // ===== LOADING STATE =====
   if (loading) {
@@ -412,7 +382,7 @@ try {
       <div className="view-student-page">
         <div className="loading-container">
           <div className="spinner"></div>
-          <p>Loading student data...</p>
+          <p>Please Wait...</p>
         </div>
       </div>
     );
@@ -459,18 +429,33 @@ try {
           </div>
         </div>
         <div className="header-right">
-          <button className="btn-edit" onClick={() => navigate(`/registrar/students/edit/${student._id}`)}>
+          <button className="btn-edit" onClick={() => navigate(`/registrar/enrollment/${student._id}`)}>
             <Edit size={18} />
             Edit
           </button>
-          <button className="btn-export" onClick={exportStudentReport}>
-            <Download size={18} />
-            Export
-          </button>
-          <button className="btn-export" onClick={handlePrint}>
-            <Printer size={18} />
-            Print
-          </button>
+          <button
+            
+          
+  className="btn-export"
+  onClick={printProfile}
+>
+  <Download size={18} />
+  Profile
+</button>
+<button
+    className="btn-export"
+    onClick={printSlip}
+>
+    <Download size={18} />
+    Slip
+</button>
+
+<button
+  className="btn-export"
+  onClick={printTranscript}>
+  <Download size={18} />
+  Transcript
+</button>
         </div>
       </header>
 
@@ -612,36 +597,212 @@ try {
                 </div>
               </div>
 
-              {/* Academic Information */}
               <div className="info-card">
-                <h3>Academic Information</h3>
-                <div className="info-grid">
-                  <div className="info-item">
-                    <span className="info-label">Department</span>
-                    <span className="info-value">{student.department?.name || "N/A"}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-label">Level</span>
-                    <span className="info-value">Level {student.level || "N/A"}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-label">Section</span>
-                    <span className="info-value">{student.section || "N/A"}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-label">Academic Year</span>
-                    <span className="info-value">{student.academicYear || "N/A"}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-label">Semester</span>
-                    <span className="info-value">{getSemesterName(student.semester)}</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-label">Admission Date</span>
-                    <span className="info-value">{formatDate(student.createdAt)}</span>
-                  </div>
-                </div>
-              </div>
+  <h3>Contact Information</h3>
+
+  <div className="info-grid">
+
+    <div className="info-item">
+      <span className="info-label">Phone</span>
+      <span className="info-value">
+        {student.phone || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Email</span>
+      <span className="info-value">
+        {student.email || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Region</span>
+      <span className="info-value">
+        {student.region || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">City</span>
+      <span className="info-value">
+        {student.city || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Woreda</span>
+      <span className="info-value">
+        {student.Woreda || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Specific Place</span>
+      <span className="info-value">
+        {student.SpecificPlace || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Address</span>
+      <span className="info-value">
+        {student.address || "N/A"}
+      </span>
+    </div>
+
+  </div>
+</div>
+
+              <div className="info-card">
+  <h3>Education Details</h3>
+
+  <div className="info-grid">
+
+    <div className="info-item">
+      <span className="info-label">Institution</span>
+      <span className="info-value">
+        {student.institutionName || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Education Type</span>
+      <span className="info-value">
+        {student.educationType || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Highest Qualification</span>
+      <span className="info-value">
+        {student.highestQualification || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Previous Institution</span>
+      <span className="info-value">
+        {student.previousInstitution || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Previous Education</span>
+      <span className="info-value">
+        {student.previousEducation || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Department</span>
+      <span className="info-value">
+        {student.department?.name || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Program</span>
+      <span className="info-value">
+        {student.program || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Major</span>
+      <span className="info-value">
+        {student.major || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Level</span>
+      <span className="info-value">
+        {student.level || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Semester</span>
+      <span className="info-value">
+        {student.semester || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Batch</span>
+      <span className="info-value">
+        {student.batch || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Academic Year</span>
+      <span className="info-value">
+        {student.academicYear || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Study Mode</span>
+      <span className="info-value">
+        {student.studyMode || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Enrollment Status</span>
+      <span className="info-value">
+        {student.enrollmentStatus || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Sponsor</span>
+      <span className="info-value">
+        {student.educationSponsor || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Language</span>
+      <span className="info-value">
+        {student.educationLanguage || "N/A"}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Registration Date</span>
+      <span className="info-value">
+        {formatDate(student.registrationDate)}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Education Start</span>
+      <span className="info-value">
+        {formatDate(student.educationStartDate)}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Education End</span>
+      <span className="info-value">
+        {formatDate(student.educationEndDate)}
+      </span>
+    </div>
+
+    <div className="info-item">
+      <span className="info-label">Duration</span>
+      <span className="info-value">
+        {student.durationMonths
+          ? `${student.durationMonths} Months`
+          : "N/A"}
+      </span>
+    </div>
+
+  </div>
+</div>
 
               {/* Academic Summary */}
               <div className="info-card summary-card">
@@ -1127,6 +1288,40 @@ try {
           </div>
         )}
       </div>
+      {/* Temporary PDF Preview */}
+      <div
+  style={{
+    position: "absolute",
+    left: "-9999px",
+    top: 0,
+  }}
+>
+
+  <div ref={profileRef}>
+    <StudentProfilePDF
+      student={student}
+      courses={courses}
+      attendance={attendance}
+    />
+  </div>
+
+  <div ref={transcriptRef}>
+    <TranscriptPDF
+      student={student}
+      courses={courses}
+      attendance={attendance}
+    />
+  </div>
+
+  <div ref={slipRef}>
+    <RegistrationSlipPDF
+        student={student}
+        courses={courses}
+    />
+</div>
+
+</div>
+
     </div>
   );
 }

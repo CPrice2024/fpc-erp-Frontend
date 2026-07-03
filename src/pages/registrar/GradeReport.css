@@ -228,8 +228,8 @@
 .filter-group select,
 .filter-group input {
   padding: 10px 14px;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border: 1px solid #737373;
+  border-radius: 6px;
   font-size: 14px;
   font-family: inherit;
   background: #fafbfc;
@@ -252,8 +252,8 @@
   gap: 10px;
   padding: 0 14px;
   background: #fafbfc;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 10px;
+  border: 1px solid #375a87;
+  border-radius: 6px;
   transition: all 0.2s ease;
 }
 

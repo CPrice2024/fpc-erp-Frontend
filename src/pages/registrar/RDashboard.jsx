@@ -341,7 +341,6 @@ export default function RDashboard() {
       <header className="dashboard-header">
         <div className="header-left">
           <div className="header-title">
-            <LayoutDashboard size={24} className="header-icon" />
             <div>
               <h1>Dashboard</h1>
             </div>

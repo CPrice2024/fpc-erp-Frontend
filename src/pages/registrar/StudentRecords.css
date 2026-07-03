@@ -23,13 +23,14 @@
 }
 
 .page-header h1 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #3077d4;
-  margin: 0 0 8px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    color: #146ef4;
 }
 
 .page-header h1 svg {
@@ -43,28 +44,22 @@
   line-height: 1.5;
 }
 
-.header-actions {
-     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 6px;
-    margin-bottom: 10px;
-}
+
 
 .header-actions button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  font-family: inherit;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-family: inherit;
     background: #ffffff;
-    color: #475569;
-    border: 1px solid #e2e8f0;
+    color: #0043a2;
+    border: 1px solid #0351ba;
 }
 
 .refresh-btn {
@@ -77,7 +72,7 @@
 }
 
 .refresh-btn:hover {
-  background: #ececec;
+  background: #ececec00;
   border-color: #012f67;
   color: #0f172a;
 }
@@ -102,7 +97,8 @@
 .header-actions button:not(.refresh-btn):not(.add-btn) {
   background: #ffffff;
   color: #475569;
-  border: 1px solid #e2e8f0;
+  width: fit-content;
+  border: 1px solid #00439b;
 }
 
 .header-actions button:not(.refresh-btn):not(.add-btn):hover {
@@ -130,7 +126,8 @@
   gap: 12px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  width: auto;
+  border-radius: 5px;
   padding: 10px 16px;
   transition: all 0.2s ease;
 }
@@ -252,7 +249,7 @@
   padding: 5px 5px;
   font-size: 12px;
   color: #323d5e;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #cccccc;
   vertical-align: middle;
 }
 
@@ -339,9 +336,9 @@
   display: inline-block;
   padding: 2px 10px;
   background: #eff6ff;
-  color: #3b82f6;
-  border-radius: 12px;
-  font-size: 12px;
+  color: #2171f2;
+  border-radius: 5px;
+  font-size: 10px;
   font-weight: 500;
 }
 
@@ -350,7 +347,6 @@
    ============================================ */
 
 .table-card tbody td:last-child {
-  display: flex;
   gap: 4px;
   flex-wrap: wrap;
   align-items: center;

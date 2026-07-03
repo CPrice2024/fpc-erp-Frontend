@@ -1,5 +1,5 @@
 .sidebar {
-  width: auto;
+  width: 250px;
   height: 100vh;
   background: linear-gradient(180deg, #1063f4 0%, #001e77 100%);
   color: white;
@@ -37,10 +37,15 @@
     align-items: center;
 
 }
+.submenu-icon {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
 
 .college-brand h2 {
   font-size: 1.2rem;
   font-weight: 700;
+  color: white;
 }
 
 .college-brand span {
@@ -49,14 +54,14 @@
 }
 
 .role-badge {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 7px 14px;
-  border-radius: 20px;
-  background: rgb(0, 16, 49);
-  color: #dfdfdf;
-  font-size: 12px;
-  font-weight: 600;
+font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    color: #dfdfdf;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-block;
 }
 
 .sidebar-nav {
@@ -128,16 +133,6 @@ display: flex;
   background: rgba(255,255,255,0.06);
   color: white;
 }
-.nav-link.has-submenu {
-  all: unset;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  padding: 8px 16px;
-  color: #cbd5e1;
-  cursor: pointer;
-}
 
 .nav-link.has-submenu {
   display: flex;
@@ -172,7 +167,6 @@ display: flex;
   font-weight: 600;
 }
 .nav-link.has-submenu {
-  width: auto;
   border: none;
   background: transparent;
   cursor: pointer;

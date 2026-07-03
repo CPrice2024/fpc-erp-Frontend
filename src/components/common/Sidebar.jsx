@@ -237,7 +237,6 @@ const isActive = (path) => {
 
         <div>
           <h2>FPC</h2>
-          <span>My College</span>
         </div>
       </div>
 

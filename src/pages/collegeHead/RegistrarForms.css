@@ -234,11 +234,10 @@ display: inline-flex;
 }
 
 .registrars-table tbody td {
-  padding: 16px 20px;
-  font-size: 14px;
-  color: #1a1f2e;
-  border-bottom: 1px solid #f1f5f9;
-  vertical-align: middle;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #1a1f2e;
+    border-bottom: 1px solid #f1f5f9;
 }
 
 .registrars-table tbody tr:hover {

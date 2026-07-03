@@ -46,8 +46,8 @@
 }
 
 .topbar-avatar-img {
-  width: 42px;
-  height: 42px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -67,23 +67,22 @@
 ========================================= */
 
 .topbar-icon-btn {
-  width: 38px;
-  height: 38px;
+  width: 35px;
+  height: 35px;
   border: none;
-  background: #f3f3f3;
+  background: #f5f5f5;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  color: #475569;
+  color: #000000;
   position: relative;
 }
 
 .topbar-icon-btn:hover {
-  background: #e2e8f0;
-  transform: translateY(-1px);
+  background: #dadada;
 }
 
 /* Notification Button */
@@ -110,10 +109,10 @@
 ========================================= */
 
 .topbar-avatar {
-    width: 38px;
-    height: 38px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea, #00498d);
+    background: linear-gradient(135deg, #667eea00, #00498d00);
     color: white;
     display: flex;
     align-items: center;
@@ -174,7 +173,7 @@
   right: 0;
   width: 320px;
   background: white;
-  border-radius: 16px;
+  border-radius: 5px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   padding: 16px;
   z-index: 1000;
@@ -326,7 +325,7 @@
 .profile-avatar-large {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #667eea, #003eb9);
+  background:#cccccc;
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -340,7 +339,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   margin: 0 0 2px 0;
-  color: #1e293b;
+  color: #494949;
 }
 
 .profile-info p {
@@ -366,12 +365,12 @@
   width: 100%;
   padding: 10px 12px;
   border: none;
-  border-radius: 10px;
+  border-radius: 3px;
   margin-bottom: 8px;
   cursor: pointer;
-  background: #f8fafc;
-  color: #475569;
-  font-size: 0.85rem;
+  background: #fafafa;
+  color: #3a4f6c;
+  font-size: 12px;
   font-weight: 500;
   transition: all 0.3s ease;
   display: flex;
@@ -590,4 +589,17 @@
 
 .dropdown {
   animation: fadeIn 0.2s ease;
+}
+
+.topbar-greeting h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #3c5a89;
+}
+
+.topbar-greeting p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #64748b;
 }

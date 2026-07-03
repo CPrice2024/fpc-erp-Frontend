@@ -283,11 +283,12 @@ display: flex;
 }
 
 .stat-mini-label {
-  font-size: 12px;
-  color: #94a3b8;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+font-size: 12px;
+    color: #6b6b6b;
+    font-family: math;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .stat-mini-value {
@@ -360,6 +361,7 @@ display: flex;
 
 .info-card h3 {
   font-size: 15px;
+  font-family: serif;
   font-weight: 500;
   color: #316fff;
   margin: 0 0 16px 0;
@@ -384,11 +386,12 @@ display: flex;
 }
 
 .info-label {
-  font-size: 12px;
-  color: #94a3b8;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+     font-size: 12px;
+    color: #4a4a4a;
+    font-weight: 600;
+    font-family: serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .info-value {
@@ -1080,13 +1083,12 @@ display: flex;
 }
 
 .distribution-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+ display: flex;
+  align-items: center;
+  gap: 0.75rem;}
 
 .distribution-bar {
-  height: 8px;
+  height: 4px;
   background: #e2e8f0;
   border-radius: 4px;
   overflow: hidden;

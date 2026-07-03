@@ -157,7 +157,7 @@ const filteredDepartments = departments.filter((dept) => {
   }
 >
             <Plus size={18} />
-            Add Department
+            Add
           </button>
         </div>
       </div>

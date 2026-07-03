@@ -141,19 +141,56 @@ const handlePhotoChange = (e) => {
     gender: "",
     dob: "",
     nationality: "",
+
+
+    // Inmate Information
+isInmate: false,
+prisonId: "",
+crimeType: "",
+sentenceDuration: "",
+securityLevel: "",
+prisonFacility: "",
+cellNumber: "",
+imprisonmentStartDate: "",
+expectedReleaseDate: "",
+paroleDate: "",
+currentStatus: "",
+assignedOfficer: "",
+officerPhone: "",
     
     // Education Details
     department: "",
     level: "",
     batch: "",
     academicYear: "",
+    institutionName: "",
+educationType: "",
+educationLanguage: "",
+
+registrationDate: "",
+educationStartDate: "",
+educationEndDate: "",
+durationMonths: "",
     studentId: "",
+    highestQualification: "",
+previousInstitution: "",
+previousEducation: "",
+
+program: "",
+major: "",
+semester: "",
+
+studyMode: "",
+enrollmentStatus: "",
+educationSponsor: "",
     
     // Contact Information
     phone: "",
     email: "",
     region: "",
+    Woreda: "",
     city: "",
+    SpecificPlace: "",
     address: "",
     
     // Guardian Details
@@ -162,12 +199,41 @@ const handlePhotoChange = (e) => {
     relationship: "",
   });
 
-  const steps = [
-    { id: "personal", title: "Personal Information", icon: User },
-    { id: "education", title: "Education Details", icon: BookOpen },
-    { id: "contact", title: "Contact Information", icon: Phone },
-    { id: "guardian", title: "Guardian Details", icon: Users },
-  ];
+const steps = [
+  {
+    id: "personal",
+    title: "Personal Information",
+    icon: User,
+  },
+
+  {
+    id: "education",
+    title: "Education Details",
+    icon: BookOpen,
+  },
+
+  ...(formData.isInmate
+    ? [
+        {
+          id: "inmate",
+          title: "Inmate Details",
+          icon: Users,
+        },
+      ]
+    : []),
+
+  {
+    id: "contact",
+    title: "Contact Information",
+    icon: Phone,
+  },
+
+  {
+    id: "guardian",
+    title: "Guardian Details",
+    icon: Users,
+  },
+];
 
   useEffect(() => {
     fetchDepartments();
@@ -185,11 +251,16 @@ const handlePhotoChange = (e) => {
   
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const { name, value, type, checked } = e.target;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]:
+      type === "checkbox"
+        ? checked
+        : value,
+  }));
+};
 
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
@@ -212,17 +283,39 @@ const fetchStudent = async () => {
         `/registrars/students/${id}`
       );
 
-    setFormData({
-      ...data,
+      setFormData((prev) => ({
+  ...prev,
+  ...data,
 
-      department:
-        data.department?._id ||
-        data.department,
+  department:
+    data.department?._id ||
+    data.department ||
+    "",
 
-      dob: data.dob
-        ? data.dob.split("T")[0]
-        : "",
-    });
+  dob:
+    data.dob?.split("T")[0] || "",
+
+  registrationDate:
+    data.registrationDate?.split("T")[0] || "",
+
+  educationStartDate:
+    data.educationStartDate?.split("T")[0] || "",
+
+  educationEndDate:
+    data.educationEndDate?.split("T")[0] || "",
+
+  imprisonmentStartDate:
+    data.imprisonmentStartDate?.split("T")[0] || "",
+
+  expectedReleaseDate:
+    data.expectedReleaseDate?.split("T")[0] || "",
+
+  paroleDate:
+    data.paroleDate?.split("T")[0] || "",
+
+  isInmate:
+    data.isInmate || false,
+}));
 
     if (data.photo) {
       setPhotoPreview(
@@ -243,14 +336,13 @@ const handleSubmit = async () => {
     const submitData =
       new FormData();
 
-    Object.keys(formData).forEach(
-      (key) => {
-        submitData.append(
-          key,
-          formData[key]
-        );
-      }
-    );
+      Object.entries(formData).forEach(([key, value]) => {
+  submitData.append(
+    key,
+    value ?? ""
+  );
+});
+
 
     if (photoFile) {
       submitData.append(
@@ -391,12 +483,281 @@ useEffect(() => {
           />
         </div>
       </div>
+      <div className="form-row">
+
+  <label className="checkbox-label">
+
+    <input
+      type="checkbox"
+      name="isInmate"
+      checked={formData.isInmate}
+      onChange={handleChange}
+      disabled={isView}
+      
+    />
+     <h3>Inmate Student</h3>
+
+  </label>
+ 
+
+</div>
     </div>
   );
+
+  const renderInmateDetails = () => (
+  <div className="step-content">
+
+    <h3 className="section-title">
+      Inmate Information
+    </h3>
+
+    <div className="form-row">
+
+      <div className="form-group">
+        <label>Prison ID</label>
+        <input
+          name="prisonId"
+          value={formData.prisonId}
+          onChange={handleChange}
+          disabled={isView}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Crime Type</label>
+        <input
+          name="crimeType"
+          value={formData.crimeType}
+          onChange={handleChange}
+          disabled={isView}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Sentence Duration (Years)</label>
+        <input
+          type="number"
+          name="sentenceDuration"
+          value={formData.sentenceDuration}
+          onChange={handleChange}
+          disabled={isView}
+        />
+      </div>
+
+    </div>
+
+    <div className="form-row">
+
+      <div className="form-group">
+        <label>Security Level</label>
+
+        <select
+          name="securityLevel"
+          value={formData.securityLevel}
+          onChange={handleChange}
+          disabled={isView}
+        >
+          <option value="">Select</option>
+          <option>Minimum</option>
+          <option>Medium</option>
+          <option>Maximum</option>
+          <option>Special</option>
+        </select>
+
+      </div>
+
+      <div className="form-group">
+        <label>Prison Facility</label>
+
+        <input
+          name="prisonFacility"
+          value={formData.prisonFacility}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+      <div className="form-group">
+        <label>Cell Number</label>
+
+        <input
+          name="cellNumber"
+          value={formData.cellNumber}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+    </div>
+
+    <div className="form-row">
+
+      <div className="form-group">
+        <label>Imprisonment Start Date</label>
+
+        <input
+          type="date"
+          name="imprisonmentStartDate"
+          value={formData.imprisonmentStartDate}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+      <div className="form-group">
+        <label>Expected Release Date</label>
+
+        <input
+          type="date"
+          name="expectedReleaseDate"
+          value={formData.expectedReleaseDate}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+      <div className="form-group">
+        <label>Parole Date</label>
+
+        <input
+          type="date"
+          name="paroleDate"
+          value={formData.paroleDate}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+    </div>
+
+    <div className="form-row">
+
+      <div className="form-group">
+
+        <label>Current Status</label>
+
+        <select
+          name="currentStatus"
+          value={formData.currentStatus}
+          onChange={handleChange}
+          disabled={isView}
+        >
+          <option value="">Select</option>
+          <option>In Custody</option>
+          <option>Released</option>
+          <option>Transferred</option>
+          <option>Parole</option>
+        </select>
+
+      </div>
+
+      <div className="form-group">
+
+        <label>Assigned Officer</label>
+
+        <input
+          name="assignedOfficer"
+          value={formData.assignedOfficer}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+      <div className="form-group">
+
+        <label>Officer Phone</label>
+
+        <input
+          name="officerPhone"
+          value={formData.officerPhone}
+          onChange={handleChange}
+          disabled={isView}
+        />
+
+      </div>
+
+    </div>
+
+  </div>
+);
 
   const renderEducationDetails = () => (
     <div className="step-content">
       <div className="form-row">
+        {/* Previous Education */}
+        <div className="form-group">
+  <label>Institution Name</label>
+  <input
+    name="institutionName"
+    value={formData.institutionName}
+    onChange={handleChange}
+    disabled={isView}
+  />
+</div>
+
+<div className="form-group">
+  <label>Education Type</label>
+  <select
+    name="educationType"
+    value={formData.educationType}
+    onChange={handleChange}
+    disabled={isView}
+  >
+    <option value="">Select</option>
+    <option>Primary</option>
+    <option>Secondary</option>
+    <option>TVET</option>
+    <option>Diploma</option>
+    <option>Bachelor</option>
+    <option>Master</option>
+  </select>
+</div>
+
+<div className="form-group">
+  <label>Highest Qualification</label>
+
+  <input
+    type="text"
+    name="highestQualification"
+    value={formData.highestQualification}
+    onChange={handleChange}
+  />
+</div>
+
+<div className="form-group">
+  <label>Previous Institution</label>
+
+  <input
+    type="text"
+    name="previousInstitution"
+    value={formData.previousInstitution}
+    onChange={handleChange}
+  />
+</div>
+
+<div className="form-group">
+  <label>Previous Education</label>
+
+  <select
+    name="previousEducation"
+    value={formData.previousEducation}
+    onChange={handleChange}
+  >
+    <option value="">Select</option>
+    <option>Primary</option>
+    <option>Secondary</option>
+    <option>TVET</option>
+    <option>Diploma</option>
+    <option>Bachelor</option>
+    <option>Master</option>
+  </select>
+</div>
         <div className="form-group">
           <label>Department *</label>
           <select
@@ -413,6 +774,85 @@ useEffect(() => {
             ))}
           </select>
         </div>
+        <div className="form-group">
+  <label>Program</label>
+
+  <input
+    type="text"
+    name="program"
+    value={formData.program}
+    onChange={handleChange}
+  />
+</div>
+
+<div className="form-group">
+  <label>Major / Specialization</label>
+
+  <input
+    type="text"
+    name="major"
+    value={formData.major}
+    onChange={handleChange}
+  />
+</div>
+
+<div className="form-group">
+  <label>Semester</label>
+
+  <select
+    name="semester"
+    value={formData.semester}
+    onChange={handleChange}
+  >
+    <option value="">Select</option>
+    <option>Semester I</option>
+    <option>Semester II</option>
+    <option>Semester III</option>
+  </select>
+</div>
+<div className="form-group">
+  <label>Study Mode</label>
+
+  <select
+    name="studyMode"
+    value={formData.studyMode}
+    onChange={handleChange}
+  >
+    <option value="">Select</option>
+    <option>Full Time</option>
+    <option>Part Time</option>
+    <option>Weekend</option>
+    <option>Distance</option>
+  </select>
+</div>
+
+<div className="form-group">
+  <label>Enrollment Status</label>
+
+  <select
+    name="enrollmentStatus"
+    value={formData.enrollmentStatus}
+    onChange={handleChange}
+  >
+    <option value="">Select</option>
+    <option>Enrolled</option>
+    <option>Deferred</option>
+    <option>Graduated</option>
+    <option>Suspended</option>
+    <option>Withdrawn</option>
+  </select>
+</div>
+
+<div className="form-group">
+  <label>Education Sponsor</label>
+
+  <input
+    type="text"
+    name="educationSponsor"
+    value={formData.educationSponsor}
+    onChange={handleChange}
+  />
+</div>
         <div className="form-group">
           <label>Level *</label>
           <select
@@ -442,6 +882,53 @@ useEffect(() => {
       </div>
 
       <div className="form-row">
+        <div className="form-group">
+  <label>Registration Date</label>
+
+  <input
+    type="date"
+    name="registrationDate"
+    value={formData.registrationDate}
+    onChange={handleChange}
+    disabled={isView}
+  />
+</div>
+
+<div className="form-group">
+  <label>Education Start Date</label>
+
+  <input
+    type="date"
+    name="educationStartDate"
+    value={formData.educationStartDate}
+    onChange={handleChange}
+    disabled={isView}
+  />
+</div>
+
+<div className="form-group">
+  <label>Education End Date</label>
+
+  <input
+    type="date"
+    name="educationEndDate"
+    value={formData.educationEndDate}
+    onChange={handleChange}
+    disabled={isView}
+  />
+</div>
+
+<div className="form-group">
+  <label>Duration (Months)</label>
+
+  <input
+    type="number"
+    name="durationMonths"
+    value={formData.durationMonths}
+    onChange={handleChange}
+    disabled={isView}
+  />
+</div>
         <div className="form-group">
           <label>Academic Year *</label>
           <input
@@ -504,11 +991,31 @@ useEffect(() => {
           />
         </div>
         <div className="form-group">
+          <label>Woreda *</label>
+          <input
+            name="Woreda"
+            placeholder="Enter Woreda"
+            value={formData.Woreda}
+            onChange={handleChange}
+            disabled={isView}
+          />
+        </div>
+        <div className="form-group">
           <label>City *</label>
           <input
             name="city"
             placeholder="Enter city"
             value={formData.city}
+            onChange={handleChange}
+            disabled={isView}
+          />
+        </div>
+        <div className="form-group">
+          <label>Specific Place *</label>
+          <input
+            name="SpecificPlace"
+            placeholder="Enter Specific Place"
+            value={formData.SpecificPlace}
             onChange={handleChange}
             disabled={isView}
           />
@@ -574,20 +1081,38 @@ useEffect(() => {
     </div>
   );
 
-  const renderStepContent = () => {
-    switch (activeStep) {
-      case 0:
-        return renderPersonalInfo();
-      case 1:
-        return renderEducationDetails();
-      case 2:
-        return renderContactInfo();
-      case 3:
-        return renderGuardianDetails();
-      default:
-        return null;
-    }
-  };
+const renderStepContent = () => {
+
+  let index = 0;
+
+  if (activeStep === index)
+    return renderPersonalInfo();
+
+  index++;
+
+  if (activeStep === index)
+    return renderEducationDetails();
+
+  index++;
+
+  if (formData.isInmate) {
+
+    if (activeStep === index)
+      return renderInmateDetails();
+
+    index++;
+  }
+
+  if (activeStep === index)
+    return renderContactInfo();
+
+  index++;
+
+  if (activeStep === index)
+    return renderGuardianDetails();
+
+  return null;
+};
 
   return (
           <div className="enrollment-container">
@@ -662,7 +1187,7 @@ useEffect(() => {
       >
 
         {/* Upload Photo */}
-        <div class="form-navigation">
+        <div className="form-navigation">
 
         <label className="upload-btn">
 

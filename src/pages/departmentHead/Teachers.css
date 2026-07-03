@@ -35,7 +35,8 @@
 }
 
 .add-btn:hover {
-  background: #075bd1;
+  background: #003e94;
+  color: white;
 }
 .gender-badge {
   background: #e0f2fe;

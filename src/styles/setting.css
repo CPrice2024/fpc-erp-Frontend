@@ -1,0 +1,382 @@
+/* Account.css - Minimalist White Modern Settings */
+
+/* ============================================
+   PAGE CONTAINER
+   ============================================ */
+
+.settings-page {
+  padding: 2px 40px;
+  background: #f8fafc00;
+  min-height: calc(100vh - 70px);
+}
+
+/* ============================================
+   SETTINGS HEADER
+   ============================================ */
+
+.settings-header {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.settings-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1f2e;
+  margin: 0 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-header h1 svg {
+  color: #1a1f2e;
+}
+
+.settings-header p {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   SETTINGS GRID
+   ============================================ */
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  max-width: 1200px;
+}
+
+/* ============================================
+   SETTINGS CARD
+   ============================================ */
+
+.settings-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  gap: 16px;
+}
+
+.settings-card:hover {
+  background: #fafcff;
+  border-color: #e2e8f0;
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.settings-card:active {
+  transform: scale(0.99);
+}
+
+.settings-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+/* ============================================
+   SETTINGS ICON
+   ============================================ */
+
+.settings-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: #f8fafc;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1f2e;
+  transition: all 0.25s ease;
+}
+
+.settings-card:hover .settings-icon {
+  background: #eef2f6;
+}
+
+/* ============================================
+   SETTINGS CONTENT
+   ============================================ */
+
+.settings-left h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1f2e;
+  margin: 0 0 4px 0;
+}
+
+.settings-left p {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ============================================
+   CHEVRON ICON
+   ============================================ */
+
+.settings-card > svg {
+  color: #cbd5e1;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.settings-card:hover > svg {
+  color: #1a1f2e;
+  transform: translateX(2px);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 24px 20px;
+  }
+
+  .settings-header h1 {
+    font-size: 24px;
+  }
+
+  .settings-header p {
+    font-size: 14px;
+  }
+
+  .settings-card {
+    padding: 16px 18px;
+    border-radius: 14px;
+  }
+
+  .settings-left {
+    gap: 14px;
+  }
+
+  .settings-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .settings-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .settings-left h3 {
+    font-size: 14px;
+  }
+
+  .settings-left p {
+    font-size: 12px;
+  }
+
+  .settings-card:hover {
+    transform: translateX(2px);
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-page {
+    padding: 16px;
+  }
+
+  .settings-header h1 {
+    font-size: 22px;
+  }
+
+  .settings-card {
+    padding: 14px 16px;
+    border-radius: 12px;
+  }
+
+  .settings-left {
+    gap: 12px;
+  }
+
+  .settings-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 10px;
+  }
+
+  .settings-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .settings-left h3 {
+    font-size: 13px;
+  }
+
+  .settings-left p {
+    font-size: 11px;
+  }
+
+  .settings-grid {
+    gap: 10px;
+  }
+
+  .settings-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+.settings-card {
+  animation: fadeSlideIn 0.4s ease;
+}
+
+.settings-card:nth-child(1) { animation-delay: 0.05s; }
+.settings-card:nth-child(2) { animation-delay: 0.10s; }
+.settings-card:nth-child(3) { animation-delay: 0.15s; }
+.settings-card:nth-child(4) { animation-delay: 0.20s; }
+.settings-card:nth-child(5) { animation-delay: 0.25s; }
+.settings-card:nth-child(6) { animation-delay: 0.30s; }
+.settings-card:nth-child(7) { animation-delay: 0.35s; }
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+body.dark-mode .settings-page {
+  background: #0f172a;
+}
+
+body.dark-mode .settings-header h1 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .settings-header p {
+  color: #94a3b8;
+}
+
+body.dark-mode .settings-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .settings-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .settings-card:hover {
+  background: #263348;
+  border-color: #475569;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .settings-icon {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark-mode .settings-card:hover .settings-icon {
+  background: #263348;
+}
+
+body.dark-mode .settings-left h3 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .settings-left p {
+  color: #94a3b8;
+}
+
+body.dark-mode .settings-card > svg {
+  color: #475569;
+}
+
+body.dark-mode .settings-card:hover > svg {
+  color: #e2e8f0;
+}
+
+body.dark-mode .settings-header h1 svg {
+  color: #f1f5f9;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.settings-card:focus-visible {
+  outline: 2px solid #1a1f2e;
+  outline-offset: 2px;
+}
+
+body.dark-mode .settings-card:focus-visible {
+  outline-color: #e2e8f0;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-card {
+    animation: none;
+  }
+  
+  .settings-card:hover {
+    transform: none;
+  }
+  
+  .settings-card:hover > svg {
+    transform: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .settings-page {
+    background: white;
+    padding: 20px;
+  }
+  
+  .settings-card {
+    border: 1px solid #e2e8f0;
+    break-inside: avoid;
+  }
+  
+  .settings-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .settings-card > svg {
+    display: none;
+  }
+}
