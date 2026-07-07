@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getStudents,
   getStudentStats,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   Search,

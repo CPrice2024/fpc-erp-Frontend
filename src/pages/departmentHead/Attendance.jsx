@@ -11,9 +11,9 @@ import {
   getTeacherAttendance,
   getTeacherAttendanceStats,
   saveTeacherAttendance,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
-import "./Attendance.css";
+import "./attendance.css";
 
 export default function Attendance() {
 

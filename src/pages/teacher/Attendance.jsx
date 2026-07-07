@@ -17,7 +17,8 @@ import {
   saveAttendance,
   getMyCourse,
   getTodayAttendance,
-} from "../../api/teacherAPI";
+} from "../../api/teacherApi";
+
 import "./Attendance.css";
 
 export default function Attendance() {
