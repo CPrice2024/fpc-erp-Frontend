@@ -1,274 +1,482 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { getDepartmentDashboard } from "../../api/departmentAPI";
 
 import {
   Users,
   GraduationCap,
-  Award,
-  ClipboardCheck,
-  UserPlus,
   BookOpen,
+  ClipboardCheck,
   TrendingUp,
+  UserPlus,
   Activity,
 } from "lucide-react";
-
 
 import "./DHDashboard.css";
 
 export default function DHDashboard() {
-  const dashboardData = {
-    department: "Computer Science",
-    totalStudents: 425,
-    totalTeachers: 18,
-    averageGPA: 3.34,
-    attendanceRate: 89,
+  const navigate = useNavigate();
+
+  const [dashboard, setDashboard] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
+  const fetchDashboard = async () => {
+    try {
+      const { data } =
+        await getDepartmentDashboard();
+
+      setDashboard(data);
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Failed to load dashboard.");
+
+    } finally {
+
+      setLoading(false);
+
+    }
   };
 
-  const teachers = [
-    {
-      name: "Dr. Abebe",
-      courses: 4,
-      students: 132,
-      score: 96,
-    },
-    {
-      name: "Tigist Alemu",
-      courses: 3,
-      students: 94,
-      score: 91,
-    },
-    {
-      name: "Kebede Tadesse",
-      courses: 5,
-      students: 168,
-      score: 89,
-    },
-    {
-      name: "Meron Bekele",
-      courses: 2,
-      students: 72,
-      score: 87,
-    },
-  ];
-
-  const recentStudents = [
-    {
-      id: "ST0054",
-      name: "Abebe Kebede",
-      level: "Level I",
-    },
-    {
-      id: "ST0055",
-      name: "Tigist Alemu",
-      level: "Level II",
-    },
-    {
-      id: "ST0056",
-      name: "Samuel Tadesse",
-      level: "Level I",
-    },
-  ];
-
-  const activities = [
-    "5 new students registered today",
-    "2 teachers submitted grades",
-    "Level III attendance updated",
-    "Semester report generated",
-  ];
+  if (loading) {
+    return (
+      <div className="dashboard-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading dashboard...</p>
+      </div>
+    );
+  }
 
   return (
+    <div className="dh-dashboard">
 
-        <div className="dh-dashboard">
+      {/* Header */}
 
-          {/* Header */}
+      <div className="dashboard-header">
 
-          <div className="dashboard-header">
-            <div>
-              <h1>
-                {dashboardData.department}
-              </h1>
+        <div>
 
-              <p>
-                Department Performance Overview
-              </p>
-            </div>
-          </div>
+          <h1>
+            Department Dashboard
+          </h1>
 
-          {/* Stats Cards */}
+          <p>
+            Overview of your department
+          </p>
 
-          <div className="stats-grid">
+        </div>
 
-            <div className="stat-card">
-              <Users size={34} />
+      </div>
 
-              <div>
-                <h2>
-                  {dashboardData.totalStudents}
-                </h2>
+      {/* Statistics */}
 
-                <p>Total Students</p>
-              </div>
-            </div>
+      <div className="stats-grid">
 
-            <div className="stat-card">
-              <GraduationCap size={34} />
+        <div className="stat-card">
 
-              <div>
-                <h2>
-                  {dashboardData.totalTeachers}
-                </h2>
+          <Users size={34} />
 
-                <p>Total Teachers</p>
-              </div>
-            </div>
+          <div>
 
-            <div className="stat-card">
-              <Award size={34} />
+            <h2>
+              {dashboard.stats.totalStudents}
+            </h2>
 
-              <div>
-                <h2>
-                  {dashboardData.averageGPA}
-                </h2>
-
-                <p>Average GPA</p>
-              </div>
-            </div>
-
-            <div className="stat-card">
-              <ClipboardCheck size={34} />
-
-              <div>
-                <h2>
-                  {dashboardData.attendanceRate}%
-                </h2>
-
-                <p>Attendance Rate</p>
-              </div>
-            </div>
+            <p>Total Students</p>
 
           </div>
 
-          {/* Middle Section */}
+        </div>
 
-          <div className="dashboard-row">
+        <div className="stat-card">
 
-            {/* Teacher Performance */}
+          <GraduationCap size={34} />
 
-            <div className="card teacher-card">
-              <div className="card-header">
-                <TrendingUp size={20} />
-                <h3>Teacher Performance</h3>
-              </div>
+          <div>
 
-              <table>
-                <thead>
-                  <tr>
-                    <th>Teacher</th>
-                    <th>Courses</th>
-                    <th>Students</th>
-                    <th>Score</th>
+            <h2>
+              {dashboard.stats.totalTeachers}
+            </h2>
+
+            <p>Total Teachers</p>
+
+          </div>
+
+        </div>
+
+        <div className="stat-card">
+
+          <BookOpen size={34} />
+
+          <div>
+
+            <h2>
+              {dashboard.stats.totalCourses}
+            </h2>
+
+            <p>Total Courses</p>
+
+          </div>
+
+        </div>
+
+        <div className="stat-card">
+
+          <ClipboardCheck size={34} />
+
+          <div>
+
+            <h2>
+              {dashboard.stats.attendanceRate}%
+            </h2>
+
+            <p>Today's Attendance</p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Teacher Workload */}
+
+      <div className="dashboard-row">
+
+        <div className="card teacher-card">
+
+          <div className="card-header">
+
+            <TrendingUp size={20} />
+
+            <h3>Teacher Workload</h3>
+
+          </div>
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>Teacher</th>
+
+                <th>Course</th>
+
+                <th>Students</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              {dashboard.teacherWorkload.length > 0 ? (
+
+                dashboard.teacherWorkload.map((teacher) => (
+
+                  <tr key={teacher._id}>
+
+                    <td>{teacher.name}</td>
+
+                    <td>
+
+                      {teacher.course
+                        ? teacher.course.courseCode
+                        : "Not Assigned"}
+
+                    </td>
+
+                    <td>
+
+                      {teacher.students}
+
+                    </td>
+
                   </tr>
-                </thead>
 
-                <tbody>
-                  {teachers.map((teacher, index) => (
-                    <tr key={index}>
-                      <td>{teacher.name}</td>
-                      <td>{teacher.courses}</td>
-                      <td>{teacher.students}</td>
-                      <td>
-                        <span className="score">
-                          {teacher.score}%
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))
 
-            {/* Recent Students */}
+              ) : (
 
-            <div className="card">
-              <div className="card-header">
-                <UserPlus size={20} />
-                <h3>Recent Students</h3>
-              </div>
+                <tr>
 
-              {recentStudents.map((student) => (
-                <div
-                  key={student.id}
-                  className="student-item"
-                >
-                  <div>
-                    <strong>
-                      {student.name}
-                    </strong>
+                  <td
+                    colSpan="3"
+                    className="empty-row"
+                  >
 
-                    <p>{student.id}</p>
-                  </div>
+                    No teachers found
 
-                  <span className="level-badge">
-                    {student.level}
-                  </span>
-                </div>
-              ))}
-            </div>
+                  </td>
+
+                </tr>
+
+              )}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        {/* Recent Students */}
+
+        <div className="card">
+
+          <div className="card-header">
+
+            <UserPlus size={20} />
+
+            <h3>
+
+              Recently Registered
+
+            </h3>
 
           </div>
 
-          {/* Bottom Section */}
+          {dashboard.recentStudents.length > 0 ? (
 
-          <div className="dashboard-row">
+            dashboard.recentStudents.map((student) => (
 
-            {/* Activities */}
+              <div
+                key={student._id}
+                className="student-item"
+              >
 
-            <div className="card">
-              <div className="card-header">
-                <Activity size={20} />
-                <h3>Recent Activities</h3>
+                <div>
+
+                  <strong>
+
+                    {student.firstName}{" "}
+                    {student.fatherName}
+
+                  </strong>
+
+                  <p>
+
+                    {student.studentId}
+
+                  </p>
+
+                </div>
+
+                <span className="level-badge">
+
+                  {student.level}
+
+                </span>
+
               </div>
 
-              <ul className="activity-list">
-                {activities.map(
-                  (activity, index) => (
-                    <li key={index}>
-                      {activity}
-                    </li>
-                  )
-                )}
-              </ul>
+            ))
+
+          ) : (
+
+            <p>No students found.</p>
+
+          )}
+
+        </div>
+
+      </div>
+
+      {/* Bottom Section */}
+
+      <div className="dashboard-row">
+
+        {/* Attendance */}
+
+        <div className="card">
+
+          <div className="card-header">
+
+            <Activity size={20} />
+
+            <h3>
+
+              Today's Attendance
+
+            </h3>
+
+          </div>
+
+          <div className="attendance-summary">
+
+            <div>
+
+              <h2>
+
+                {dashboard.attendance.present}
+
+              </h2>
+
+              <p>Present</p>
+
             </div>
 
-            {/* Quick Actions */}
+            <div>
 
-            <div className="card">
-              <div className="card-header">
-                <BookOpen size={20} />
-                <h3>Quick Actions</h3>
-              </div>
+              <h2>
 
-              <div className="action-buttons">
+                {dashboard.attendance.late}
 
-                <button>
-                  Add Teacher
-                </button>
+              </h2>
 
-                <button>
-                  Manage Courses
-                </button>
+              <p>Late</p>
 
-                <button>
-                  View Students
-                </button>
+            </div>
 
-                <button>
-                  Generate Report
-                </button>
+            <div>
 
-              </div>
+              <h2>
+
+                {dashboard.attendance.absent}
+
+              </h2>
+
+              <p>Absent</p>
+
             </div>
 
           </div>
 
         </div>
+
+        {/* Course Summary */}
+
+        <div className="card">
+
+          <div className="card-header">
+
+            <BookOpen size={20} />
+
+            <h3>
+
+              Course Summary
+
+            </h3>
+
+          </div>
+
+          <div className="summary-list">
+
+            <div>
+
+              Assigned
+
+              <strong>
+
+                {dashboard.courseSummary.assignedCourses}
+
+              </strong>
+
+            </div>
+
+            <div>
+
+              Unassigned
+
+              <strong>
+
+                {dashboard.courseSummary.unassignedCourses}
+
+              </strong>
+
+            </div>
+
+            <div>
+
+              Active
+
+              <strong>
+
+                {dashboard.courseSummary.activeCourses}
+
+              </strong>
+
+            </div>
+
+            <div>
+
+              Inactive
+
+              <strong>
+
+                {dashboard.courseSummary.inactiveCourses}
+
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Quick Actions */}
+
+      <div className="card">
+
+        <div className="card-header">
+
+          <BookOpen size={20} />
+
+          <h3>
+
+            Quick Actions
+
+          </h3>
+
+        </div>
+
+        <div className="action-buttons">
+
+          <button
+            onClick={() =>
+              navigate("/department-head/teachers/create")
+            }
+          >
+            Add Teacher
+          </button>
+
+          <button
+            onClick={() =>
+              navigate("/department-head/courses/create")
+            }
+          >
+            Add Course
+          </button>
+
+          <button
+            onClick={() =>
+              navigate("/department-head/students")
+            }
+          >
+            View Students
+          </button>
+
+          <button
+            onClick={() =>
+              navigate("/department-head/reports")
+            }
+          >
+            Reports
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
   );
 }

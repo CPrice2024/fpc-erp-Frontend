@@ -11,7 +11,7 @@
 
 .teacher-top h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 18px;
 }
 
 .teacher-top p {
@@ -24,6 +24,8 @@
   color: white;
   border: none;
   width: auto;
+      margin-bottom: 15px;
+    margin-top: 15px;
   padding: 12px 18px;
   border-radius: 6px;
 
@@ -139,15 +141,26 @@ table {
 }
 
 thead {
-  background: #f8fafc;
-}
+    background: #1a5fa6;
+    color: white;
+    font-size: 15px;}
 
-th,
+
 td {
   padding: 14px;
   border-bottom: 1px solid #e5e7eb;
   text-align: left;
+  font-size: 12px;
+  color: rgb(95, 95, 95);
 }
+th{
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+}
+
 
 .dept-badge {
   background: #dbeafe;
@@ -230,4 +243,64 @@ td {
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
+}
+
+.action-cell{
+    position:relative;
+    text-align:center;
+}
+
+.menu-btn{
+    width:36px;
+    height:36px;
+    border:none;
+    background:#ffffff00;
+    border-radius:10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.25s;
+}
+
+.menu-btn:hover{
+    background:#f3f4f600;
+    color:black;
+}
+
+.action-menu{
+    position:absolute;
+    right:15px;
+    top:42px;
+    width:170px;
+    background:#fff;
+    border-radius:12px;
+    border:1px solid #ececec;
+    z-index:100;
+    overflow:hidden;
+}
+
+.action-menu button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 16px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.action-menu button:hover{
+    background:#f5f7fb;
+}
+
+.delete-action{
+    color:#dc2626;
+}
+
+.delete-action:hover{
+    background:#fef2f2 !important;
 }

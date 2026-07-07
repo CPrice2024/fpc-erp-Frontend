@@ -44,6 +44,7 @@ const menuByRole = {
     },
   ],
 },
+
       
       {
   label: "Registrars",
@@ -65,44 +66,92 @@ const menuByRole = {
         path: "/college-head/reports",
         icon: <ClipboardCheck size={18} />,
       },
+      {
+      label: "Profile",
+      path: "/department-head/profile",
+      icon: <User size={18} />,
+    },
     ],
   },
 
   department_head: {
-    title: "Department Head",
-    items: [
-      {
-        label: "Dashboard",
-        path: "/department-head",
-        icon: <LayoutDashboard size={18} />,
-      },
-      {
-        label: "Teachers",
-        path: "/department-head/teachers",
-        icon: <Users size={18} />,
-      },
-      {
-        label: "Students",
-        path: "/department-head/students",
-        icon: <GraduationCap size={18} />,
-      },
-      {
-        label: "Courses",
-        path: "/department-head/courses",
-        icon: <BookOpen size={18} />,
-      },
-      {
-        label: "Attendance",
-        path: "/department-head/attendance",
-        icon: <ClipboardCheck size={18} />,
-      },
-            {
-        label: "Report",
-        path: "/department-head/report",
-        icon: <ClipboardCheck size={18} />,
-      },
-    ],
-  },
+  title: "Department Head",
+  items: [
+
+    {
+      label: "Dashboard",
+      path: "/department-head",
+      icon: <LayoutDashboard size={18} />,
+    },
+
+    {
+      label: "Teachers",
+      path: "/department-head/teachers",
+      icon: <Users size={18} />,
+      subItems: [
+        {
+          label: "All Teachers",
+          path: "/department-head/teachers",
+        },
+        {
+          label: "Create Teacher",
+          path: "/department-head/teachers/create",
+        },
+      ],
+    },
+
+    {
+      label: "Students",
+      path: "/department-head/students",
+      icon: <GraduationCap size={18} />,
+      subItems: [
+        {
+          label: "All Students",
+          path: "/department-head/students",
+        },
+        {
+          label: "Attendance",
+          path: "/department-head/attendance",
+        },
+      ],
+    },
+
+    {
+      label: "Courses",
+      path: "/department-head/courses",
+      icon: <BookOpen size={18} />,
+      subItems: [
+        {
+          label: "All Courses",
+          path: "/department-head/courses",
+        },
+        {
+          label: "Create Course",
+          path: "/department-head/courses/create",
+        },
+      ],
+    },
+
+    {
+      label: "Reports",
+      path: "/department-head/report",
+      icon: <ClipboardCheck size={18} />,
+      subItems: [
+        {
+          label: "Department Report",
+          path: "/department-head/report",
+        },
+      
+      ],
+    },
+    {
+      label: "Profile",
+      path: "/department-head/profile",
+      icon: <User size={18} />,
+    },
+
+  ],
+},
 
   registrar: {
     title: "Registrar",
@@ -137,34 +186,60 @@ const menuByRole = {
         path: "/registrar/reports",
         icon: <ClipboardCheck size={18} />,
       },
+      {
+      label: "Profile",
+      path: "/registrar/profile",
+      icon: <User size={18} />,
+    },
     ],
   },
 
   teacher: {
-    title: "Teacher",
-    items: [
-      {
-        label: "Dashboard",
-        path: "/teacher",
-        icon: <LayoutDashboard size={18} />,
-      },
-      {
-        label: "My Class",
-        path: "/teacher/classes",
-        icon: <BookOpen size={18} />,
-      },
-      {
-        label: "Student Attendance",
-        path: "/teacher/student-attendance",
-        icon: <ClipboardCheck size={18} />,
-      },
-      {
-        label: "Grades",
-        path: "/teacher/grades",
-        icon: <GraduationCap size={18} />,
-      },
-    ],
-  },
+  title: "Teacher",
+  items: [
+    {
+      label: "Dashboard",
+      path: "/teacher",
+      icon: <LayoutDashboard size={18} />,
+    },
+
+    {
+      label: "My Course",
+      path: "/teacher/my-course",
+      icon: <BookOpen size={18} />,
+    },
+
+    {
+      label: "My Students",
+      path: "/teacher/my-students",
+      icon: <Users size={18} />,
+    },
+
+    {
+      label: "Attendance",
+      path: "/teacher/attendance",
+      icon: <ClipboardCheck size={18} />,
+    },
+
+    {
+      label: "Grade Entry",
+      path: "/teacher/grades",
+      icon: <GraduationCap size={18} />,
+    },
+
+    {
+      label: "Reports",
+      path: "/teacher/reports",
+      icon: <ClipboardCheck size={18} />,
+    },
+
+    {
+      label: "Profile",
+      path: "/teacher/profile",
+      icon: <User size={18} />,
+    },
+  ],
+},
 };
 
 export default function Sidebar() {

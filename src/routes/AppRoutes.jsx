@@ -31,15 +31,18 @@ import ViewRegistrar from "../pages/collegeHead/ViewRegistrar";
 
 // Department Head
 import DHDashboard from "../pages/departmentHead/DHDashboard";
-import Teachers from "../pages/departmentHead/Teachers";
 import Students from "../pages/departmentHead/Students";
 import Attendance from "../pages/departmentHead/Attendance";
 import Report from "../pages/departmentHead/Report";
 import Courses from "../pages/departmentHead/Courses";
+import ViewStudent from "../pages/departmentHead/ViewStudent";
 import CreateCourse from "../pages/departmentHead/CreateCourse";
 import EditCourse from "../pages/departmentHead/EditCourse";
 import ViewCourse from "../pages/departmentHead/ViewCourse";
+import Teachers from "../pages/departmentHead/Teachers";
 import CreateTeacher from "../pages/departmentHead/CreateTeacher";
+import EditTeacher from "../pages/departmentHead/EditTeacher";
+import ViewTeacher from "../pages/departmentHead/ViewTeacher";
 
 // Registrar
 import RDashboard from "../pages/registrar/RDashboard";
@@ -53,10 +56,13 @@ import EditStudent from "../pages/registrar/EditStudent";
 import CreatePayment from "../pages/registrar/CreatePayment";
 
 // Teacher
-import TDashboard from "../pages/teacher/TDashboard";
-import MyClass from "../pages/teacher/MyClass";
-import StudentAttendance from "../pages/teacher/StudentAttendance";
+import TeacherDashboard from "../pages/teacher/TeacherDashboard";
+import MyCourse from "../pages/teacher/MyCourse";
+import MyStudents from "../pages/teacher/MyStudents";
+import StudentProfile from "../pages/teacher/StudentProfile";
 import GradeEntry from "../pages/teacher/GradeEntry";
+import StudentAttendance from "../pages/teacher/Attendance";
+
 
 export default function AppRoutes() {
   return (
@@ -105,8 +111,11 @@ export default function AppRoutes() {
           <Route path="registrars/view/:id" element={<ViewRegistrar />} />
 
           <Route path="reports" element={<Reports />} />
+          
+          
 
         </Route>
+        
       </Route>
 
       {/* ================= DEPARTMENT HEAD ================= */}
@@ -117,19 +126,67 @@ export default function AppRoutes() {
       >
         <Route element={<MainLayout />}>
 
-          <Route index element={<DHDashboard />} />
+        <Route index element={<DHDashboard />} />
 
-          <Route path="teachers" element={<Teachers />} />
-          <Route path="students" element={<Students />} />
-          <Route path="attendance" element={<Attendance />} />
-          <Route path="report" element={<Report />} />
+{/* ================= Teachers ================= */}
 
-          <Route path="courses" element={<Courses />} />
-          <Route path="courses/create" element={<CreateCourse />} />
-          <Route path="courses/edit/:id" element={<EditCourse />} />
-          <Route path="courses/view/:id" element={<ViewCourse />} />
+<Route path="teachers" element={<Teachers />} />
 
-          <Route path="create-teacher" element={<CreateTeacher />} />
+<Route
+    path="teachers/create"
+    element={<CreateTeacher />}
+/>
+
+<Route
+    path="teachers/edit/:id"
+    element={<EditTeacher />}
+/>
+
+<Route
+    path="teachers/view/:id"
+    element={<ViewTeacher />}
+/>
+
+{/* ================= Students ================= */}
+
+<Route path="students" element={<Students />} />
+
+<Route
+    path="attendance"
+    element={<Attendance />}
+/>
+
+{/* ================= Courses ================= */}
+
+<Route
+    path="courses"
+    element={<Courses />}
+/>
+
+<Route
+    path="courses/create"
+    element={<CreateCourse />}
+/>
+
+<Route
+    path="courses/edit/:id"
+    element={<EditCourse />}
+/>
+
+<Route path="students/view/:id" element={<ViewStudent />} />
+
+<Route
+    path="courses/view/:id"
+    element={<ViewCourse />}
+/>
+
+{/* ================= Reports ================= */}
+
+<Route
+    path="report"
+    element={<Report />}
+/>
+<Route path="profile" element={<Profile />} />
 
         </Route>
       </Route>
@@ -146,38 +203,41 @@ export default function AppRoutes() {
 
           <Route path="enrollment" element={<Enrollment />} />
           <Route path="enrollment/:id" element={<Enrollment />} />
-
           <Route path="studentRecords" element={<StudentRecords />} />
           <Route path="student-records" element={<StudentRecords />} />
           <Route path="records" element={<StudentRecords />} />
-
           <Route path="students/edit/:id" element={<EditStudent />} />
           <Route path="students/view/:id" element={<ViewStudentPage />} />
-
           <Route path="grade-report" element={<GradeReport />} />
           <Route path="finance" element={<Finance />} />
           <Route path="reports" element={<RegistrarReports />} />
           <Route path="createPayment" element={<CreatePayment />} />
+          <Route path="profile" element={<Profile />} />
 
         </Route>
       </Route>
 
       {/* ================= TEACHER ================= */}
 
-      <Route
-        path="/teacher"
-        element={<ProtectedRoute allowedRoles={["teacher"]} />}
-      >
-        <Route element={<MainLayout />}>
+      <Route path="/teacher"element={<ProtectedRoute allowedRoles={["teacher"]} />}>
+      <Route element={<MainLayout />}>
 
-          <Route index element={<TDashboard />} />
+    {/* Dashboard */}
+    <Route index element={<TeacherDashboard />} />
 
-          <Route path="classes" element={<MyClass />} />
-          <Route path="student-attendance" element={<StudentAttendance />} />
-          <Route path="grades" element={<GradeEntry />} />
+    {/* Teacher Pages */}
+    <Route path="my-course" element={<MyCourse />} />
+    <Route path="my-students" element={<MyStudents />} />
+    <Route path="attendance" element={<StudentAttendance />} />
+    <Route path="reports" element={<Reports />} />
+    <Route path="profile" element={<Profile />} />
 
-        </Route>
-      </Route>
+    {/* Student */}
+    <Route path="student/:id" element={<StudentProfile />} />
+    <Route path="grades" element={<GradeEntry />} />
+
+  </Route>
+</Route>
 
     </Routes>
   );

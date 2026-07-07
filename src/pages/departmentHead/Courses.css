@@ -1,0 +1,165 @@
+/* ===========================
+   Action Menu
+=========================== */
+
+.action-cell{
+    position:relative;
+    text-align:center;
+    width:70px;
+}
+
+.menu-btn{
+    width:38px;
+    height:38px;
+    border:none;
+    background:#ffffff00;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all .25s ease;
+    color:#4b5563;
+}
+
+.menu-btn:hover{
+    background:#2563eb;
+    color:#fff;
+    border-color:#2563eb;
+}
+
+.menu-btn:active{
+    transform:scale(.96);
+}
+
+.action-menu{
+    position:absolute;
+    top:45px;
+    right:15px;
+    width:190px;
+    background:#fff;
+    border-radius:14px;
+    border:1px solid #e5e7eb;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.12),
+        0 5px 10px rgba(0,0,0,.05);
+    overflow:hidden;
+    z-index:999;
+    animation:menuFade .18s ease;
+}
+
+@keyframes menuFade{
+
+    from{
+        opacity:0;
+        transform:translateY(-8px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+.action-menu button{
+    width:100%;
+    border:none;
+    background:transparent;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:500;
+    color:#374151;
+    transition:.2s;
+}
+
+.action-menu button svg{
+    width:17px;
+    height:17px;
+}
+
+.action-menu button:hover{
+    background:#f8fafc;
+}
+
+.action-menu button:not(:last-child){
+    border-bottom:1px solid #f1f5f9;
+}
+
+/* View */
+
+.action-menu .view-action{
+    color:#2563eb;
+}
+
+.action-menu .view-action:hover{
+    background:#eff6ff;
+}
+
+/* Edit */
+
+.action-menu .edit-action{
+    color:#0f766e;
+}
+
+.action-menu .edit-action:hover{
+    background:#ecfeff;
+}
+
+/* Delete */
+
+.action-menu .delete-action{
+    color:#dc2626;
+}
+
+.action-menu .delete-action:hover{
+    background:#fef2f2;
+}
+
+/* Small Arrow */
+
+.action-menu::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-8px;
+
+    right:18px;
+
+    width:14px;
+
+    height:14px;
+
+    background:#fff;
+
+    border-left:1px solid #e5e7eb;
+
+    border-top:1px solid #e5e7eb;
+
+    transform:rotate(45deg);
+
+}
+.thead {
+    background: #1a5fa6;
+    color: white;
+    font-size: 15px;}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+    .action-menu{
+
+        right:0;
+        width:170px;
+
+    }
+
+}

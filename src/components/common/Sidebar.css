@@ -55,7 +55,7 @@
 
 .role-badge {
 font-size: 0.65rem;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 1.5rem;
     color: #dfdfdf;
     border-style: solid;
     border-width: thin;
@@ -74,7 +74,7 @@ font-size: 0.65rem;
 display: flex;
     align-items: center;
     gap: 14px;
-    color: #cbd5e1;
+    color: #ffffff;
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 4px;

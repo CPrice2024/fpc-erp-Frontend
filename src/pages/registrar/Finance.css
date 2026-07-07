@@ -1097,11 +1097,12 @@
   gap: 8px;
   padding: 8px 16px;
   background: #f1f5f9;
-  border: none;
+  border-style: solid;
+  border-color: #0f172a;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: #475569;
+  color: #293444;
   cursor: pointer;
   transition: all 0.2s ease;
 }

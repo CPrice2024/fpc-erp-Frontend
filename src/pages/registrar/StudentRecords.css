@@ -98,7 +98,7 @@
   background: #ffffff;
   color: #475569;
   width: fit-content;
-  border: 1px solid #00439b;
+  border: 1px solid #c9c9c9;
 }
 
 .header-actions button:not(.refresh-btn):not(.add-btn):hover {
@@ -274,8 +274,8 @@
 .table-card tbody td:nth-child(2) {
   font-family: monospace;
   font-weight: 400;
-  color: #3b82f6;
-  font-size: 10px;
+  color: #2b3e5d;
+  font-size: 12px;
 }
 
 /* Student Name */
@@ -363,13 +363,16 @@
   justify-content: center;
   background: transparent;
 }
+.table-card tbody td:last-child button.action-menu-btn:hover{
+  color: #0f172a;
+}
 
 .table-card tbody td:last-child button.view {
   color: #3b82f6;
 }
 
 .table-card tbody td:last-child button.view:hover {
-  background: #eff6ff;
+  background: #eff6ff00;
 }
 
 .table-card tbody td:last-child button.edit {

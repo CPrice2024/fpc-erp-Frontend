@@ -1,0 +1,615 @@
+/* MyStudents.css - Minimalist White Modern Student List */
+
+/* ============================================
+   PAGE CONTAINER
+   ============================================ */
+
+.students-container {
+  background: #f8fafc;
+  min-height: calc(100vh - 70px);
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.students-header {
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.students-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #343e5e;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.students-header h1 svg {
+  color: #1a1f2e;
+  size: 12px;
+}
+
+.students-header p {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   SEARCH BOX
+   ============================================ */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    border: 1.5px solid #71839c;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-bottom: 24px;
+    max-width: 400px;
+    transition: all 0.2s ease;
+}
+
+.search-box:hover {
+  border-color: #cbd5e1;
+}
+
+.search-box:focus-within {
+  border-color: #1a1f2e;
+  box-shadow: 0 0 0 3px rgba(26, 31, 46, 0.06);
+}
+
+.search-box svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.search-box:focus-within svg {
+  color: #1a1f2e;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1a1f2e;
+}
+
+.search-box input::placeholder {
+  color: #cbd5e1;
+}
+
+/* ============================================
+   STUDENT TABLE
+   ============================================ */
+
+.student-table {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 20px;
+  overflow: hidden;
+  border-collapse: collapse;
+}
+
+.student-table thead th {
+  text-align: left;
+  padding: 14px 20px;
+  background: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.student-table tbody td {
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #303957;
+  border-bottom: 1px solid #c2c8cd;
+  vertical-align: middle;
+}
+
+.student-table tbody tr:hover {
+  background: #fafcff;
+}
+
+.student-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================
+   STUDENT AVATAR
+   ============================================ */
+
+.student-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #eef2f6;
+  background: #f8fafc;
+  display: block;
+}
+
+/* ============================================
+   STATUS BADGE
+   ============================================ */
+
+.active-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.active-status.active {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.active-status.inactive {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.active-status.suspended {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+.active-status.graduated {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+/* Status dot */
+.active-status::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.active-status.active::before {
+  background: #16a34a;
+}
+
+.active-status.inactive::before {
+  background: #dc2626;
+}
+
+.active-status.suspended::before {
+  background: #f59e0b;
+}
+
+.active-status.graduated::before {
+  background: #3b82f6;
+}
+
+/* ============================================
+   VIEW BUTTON
+   ============================================ */
+
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-btn:hover {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.loading-state .spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #4e5b81;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+  gap: 16px;
+}
+
+.empty-state svg {
+  color: #cbd5e1;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1f2e;
+  margin: 0;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .students-container {
+    padding: 24px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .students-container {
+    padding: 20px;
+  }
+
+  .students-header h1 {
+    font-size: 24px;
+  }
+
+  .students-header p {
+    font-size: 14px;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  /* Mobile card view for table */
+  .student-table thead {
+    display: none;
+  }
+
+  .student-table tbody tr {
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid #eef2f6;
+    border-radius: 16px;
+    padding: 16px;
+    background: #ffffff;
+  }
+
+  .student-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border: none;
+    font-size: 13px;
+  }
+
+  .student-table tbody td:first-child {
+    justify-content: center;
+    padding-bottom: 12px;
+  }
+
+  .student-table tbody td:last-child {
+    justify-content: flex-end;
+    padding-top: 12px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .student-table tbody td::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .student-table tbody td:first-child::before {
+    display: none;
+  }
+
+  .student-table tbody td:last-child::before {
+    display: none;
+  }
+
+  .student-table tbody tr:hover {
+    background: #ffffff;
+  }
+}
+
+@media (max-width: 480px) {
+  .students-container {
+    padding: 16px;
+  }
+
+  .students-header h1 {
+    font-size: 22px;
+  }
+
+  .student-table tbody tr {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .student-table tbody td {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .student-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .active-status {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .view-btn {
+    padding: 6px;
+  }
+
+  .view-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+body.dark-mode .students-container {
+  background: #0f172a;
+}
+
+body.dark-mode .students-header h1 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .students-header p {
+  color: #94a3b8;
+}
+
+body.dark-mode .students-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .search-box {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .search-box:hover {
+  border-color: #475569;
+}
+
+body.dark-mode .search-box input {
+  color: #f1f5f9;
+}
+
+body.dark-mode .search-box input::placeholder {
+  color: #64748b;
+}
+
+body.dark-mode .search-box svg {
+  color: #64748b;
+}
+
+body.dark-mode .search-box:focus-within svg {
+  color: #e2e8f0;
+}
+
+body.dark-mode .search-box:focus-within {
+  border-color: #e2e8f0;
+  box-shadow: 0 0 0 3px rgba(226, 232, 240, 0.06);
+}
+
+body.dark-mode .student-table {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .student-table thead th {
+  background: #0f172a;
+  color: #94a3b8;
+}
+
+body.dark-mode .student-table tbody td {
+  color: #e2e8f0;
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .student-table tbody tr:hover {
+  background: #0f172a;
+}
+
+body.dark-mode .student-avatar {
+  border-color: #334155;
+  background: #0f172a;
+}
+
+body.dark-mode .active-status.active {
+  background: #064e3b;
+  color: #34d399;
+}
+
+body.dark-mode .active-status.inactive {
+  background: #7f1d1d;
+  color: #f87171;
+}
+
+body.dark-mode .active-status.suspended {
+  background: #78350f;
+  color: #fbbf24;
+}
+
+body.dark-mode .active-status.graduated {
+  background: #1e3a5f;
+  color: #60a5fa;
+}
+
+body.dark-mode .view-btn:hover {
+  background: #1e293b;
+  color: #60a5fa;
+}
+
+body.dark-mode .loading-state .spinner {
+  border-color: #334155;
+  border-top-color: #e2e8f0;
+}
+
+body.dark-mode .loading-state p {
+  color: #94a3b8;
+}
+
+body.dark-mode .empty-state h3 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .empty-state p {
+  color: #94a3b8;
+}
+
+body.dark-mode .empty-state svg {
+  color: #475569;
+}
+
+/* Mobile dark mode */
+@media (max-width: 768px) {
+  body.dark-mode .student-table tbody tr {
+    background: #1e293b;
+    border-color: #334155;
+  }
+
+  body.dark-mode .student-table tbody td::before {
+    color: #94a3b8;
+  }
+
+  body.dark-mode .student-table tbody td:last-child {
+    border-top-color: #334155;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.view-btn:focus-visible {
+  outline: 2px solid #1a1f2e;
+  outline-offset: 2px;
+}
+
+.search-box input:focus-visible {
+  outline: 2px solid #1a1f2e;
+  outline-offset: 2px;
+}
+
+body.dark-mode .view-btn:focus-visible,
+body.dark-mode .search-box input:focus-visible {
+  outline-color: #e2e8f0;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-state .spinner {
+    animation: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .students-container {
+    background: white;
+    padding: 20px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .student-table {
+    border: 1px solid #e2e8f0;
+  }
+
+  .student-table thead th {
+    background: #f1f5f9;
+  }
+
+  .student-table tbody td {
+    border-bottom-color: #e2e8f0;
+  }
+
+  .view-btn {
+    display: none;
+  }
+
+  .student-table tbody tr:hover {
+    background: transparent;
+  }
+}

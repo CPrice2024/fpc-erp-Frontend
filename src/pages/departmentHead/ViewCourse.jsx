@@ -1,50 +1,67 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import api from "../../api/axios";
+
 import {
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+
+import {
+  getCourse,
+} from "../../api/departmentAPI";
+
+import {
+  ArrowLeft,
   BookOpen,
   GraduationCap,
-  Award,
   User,
   Building2,
-  Calendar,
   Clock,
-  ArrowLeft,
-  Edit2,
-  CheckCircle,
-  XCircle
+  Layers,
 } from "lucide-react";
-import "./CourseForm.css"
+
+import "./ViewCourse.css";
 
 export default function ViewCourse() {
-  const { id } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [course, setCourse] = useState(null);
 
-  useEffect(() => {
-    fetchCourse();
-  }, [id]);
+const { id } = useParams();
 
-  const fetchCourse = async () => {
-    try {
-      const res = await api.get(`/courses/${id}`);
-      setCourse(res.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const [course, setCourse] = useState(null);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return "Not specified";
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
+const [loading, setLoading] =
+useState(true);
+
+ useEffect(() => {
+
+  fetchCourse();
+
+}, []);
+
+const fetchCourse = async () => {
+
+  try {
+
+    const { data } =
+      await getCourse(id);
+
+    setCourse(data);
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.message ||
+      "Failed to load course"
+    );
+
+  } finally {
+
+    setLoading(false);
+
+  }
+
+};
+
+
 
   if (loading) {
     return (
@@ -68,92 +85,216 @@ export default function ViewCourse() {
   }
 
   return (
-    <div className="view-course-page">
-      <div className="view-header">
-        <h1>{course.courseName}</h1>
-        <span className="course-code">{course.courseCode}</span>
-      </div>
 
-      <div className="course-details-card">
-        <div className="detail-row">
-          <BookOpen size={18} />
-          <span>Course Name</span>
-          <strong>{course.courseName}</strong>
-        </div>
+<div className="view-course-page">
 
-        <div className="detail-row">
-          <GraduationCap size={18} />
-          <span>Level</span>
-          <strong>{course.level || "Not specified"}</strong>
-        </div>
+<div className="page-header">
 
-        <div className="detail-row">
-          <Award size={18} />
-          <span>Credit Hour</span>
-          <strong>{course.creditHour}</strong>
-        </div>
+<button
+className="back-btn"
+onClick={() => navigate(-1)}
+>
 
-        <div className="detail-row">
-          <Building2 size={18} />
-          <span>Department</span>
-          <strong>{course.department?.name || "Not assigned"}</strong>
-        </div>
+<ArrowLeft size={18}/>
 
-        <div className="detail-row">
-          <User size={18} />
-          <span>Teacher</span>
-          <strong>{course.teacher?.name || "Not Assigned"}</strong>
-        </div>
+Back
 
-        <div className="detail-row">
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            {course.status === "active" ? (
-              <CheckCircle size={18} color="#16a34a" />
-            ) : (
-              <XCircle size={18} color="#dc2626" />
-            )}
-            <span>Status</span>
-          </div>
-          <strong>
-            <span className={`status-badge ${course.status === "active" ? "active" : "inactive"}`}>
-              {course.status === "active" ? "Active" : "Inactive"}
-            </span>
-          </strong>
-        </div>
+</button>
 
-        <div className="detail-row">
-          <Calendar size={18} />
-          <span>Created</span>
-          <strong>{formatDate(course.createdAt)}</strong>
-        </div>
+<div>
+  <h1>Course Details</h1>
+  <p>View complete information about this course.</p>
+</div>
 
-        {course.updatedAt && course.updatedAt !== course.createdAt && (
-          <div className="detail-row">
-            <Clock size={18} />
-            <span>Last Updated</span>
-            <strong>{formatDate(course.updatedAt)}</strong>
-          </div>
-        )}
-      </div>
+</div>
+<div className="course-card">
 
-      <div className="form-actions" style={{ maxWidth: 700, margin: "24px auto 0" }}>
-        <button
-          type="button"
-          className="cancel-btn"
-          onClick={() => navigate("/department-head/courses")}
-        >
-          <ArrowLeft size={16} />
-          Back to Courses
-        </button>
-        <button
-          type="button"
-          className="save-btn"
-          onClick={() => navigate(`/department-head/courses/edit/${course._id}`)}
-        >
-          <Edit2 size={16} />
-          Edit Course
-        </button>
-      </div>
-    </div>
-  );
+<div className="course-title">
+
+<div className="course-avatar">
+  <BookOpen size={40} />
+</div>
+
+<div>
+
+<h2>
+
+{course.courseName}
+
+</h2>
+
+<p>
+
+{course.courseCode}
+
+</p>
+
+</div>
+
+</div>
+<div className="details-grid">
+  <div className="detail-item">
+
+<Building2 size={18} />
+
+<div>
+
+<label>Department</label>
+
+<p>
+
+{course.department?.name || "N/A"}
+
+</p>
+
+</div>
+
+</div>
+<div className="detail-item">
+
+<User size={18} />
+
+<div>
+
+<label>Teacher</label>
+
+<div>
+  <label>Teacher</label>
+
+  {course.teacher ? (
+    <>
+      <p>{course.teacher.name}</p>
+      <small>{course.teacher.email}</small>
+    </>
+  ) : (
+    <p>Not Assigned</p>
+  )}
+</div>
+
+</div>
+
+</div>
+<div className="detail-item">
+
+<Layers size={18} />
+
+<div>
+
+<label>Level</label>
+
+<p>
+
+{course.level}
+
+</p>
+
+</div>
+
+</div>
+<div className="detail-item">
+
+<GraduationCap size={18} />
+
+<div>
+
+<label>Semester</label>
+
+<p>
+
+{course.semester}
+
+</p>
+
+</div>
+
+</div>
+<div className="detail-item">
+
+<BookOpen size={18} />
+
+<div>
+
+<label>Section</label>
+
+<p>
+
+{course.section}
+
+</p>
+
+</div>
+
+</div>
+<div className="detail-item">
+
+<Clock size={18} />
+
+<div>
+
+<label>Credit Hour</label>
+
+<p>
+
+{course.creditHour}
+
+</p>
+
+</div>
+
+</div>
+<div className="detail-item">
+
+<label>Status</label>
+
+<p>
+
+<span
+  className={`status-badge ${
+    course.status === "active"
+      ? "active"
+      : "inactive"
+  }`}
+>
+  {course.status === "active"
+    ? "Active"
+    : "Inactive"}
+</span>
+
+</p>
+
+</div>
+<div className="detail-item">
+
+<label>Created</label>
+
+<p>
+
+{course.createdAt
+  ? new Date(course.createdAt).toLocaleDateString()
+  : "N/A"}
+
+</p>
+
+</div>
+</div>
+
+</div>
+<div className="page-actions">
+
+  <button
+    className="edit-btn"
+    onClick={() =>
+      navigate(
+        `/department-head/courses/edit/${course._id}`
+      )
+    }
+  >
+    Edit Course
+  </button>
+
+</div>
+
+</div>
+
+);
 }

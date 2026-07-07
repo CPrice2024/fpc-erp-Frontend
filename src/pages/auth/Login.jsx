@@ -40,8 +40,8 @@ export default function Login() {
   },
   {
     role: "Teacher",
-    email: "TadeTeacher@fpc.edu",
-    password: "TEA001@123",
+    email: "john3@gmail.com",
+    password: "TEA008@123",
   },
 ];
 
@@ -91,14 +91,7 @@ const fillCredentials = (account) => {
   return (
     <div className="login-page">
       <div className="login-overlay"></div>
-
-      <div className="login-container">
-        {/* Left Side */}
-        <div className="login-info">
-
-  {/* Quick Links */}
-
-  <div className="info-top-links">
+      <div className="info-top-links">
 
     <Link to="/admissions">
       Admissions
@@ -117,6 +110,15 @@ const fillCredentials = (account) => {
     </Link>
 
   </div>
+
+      <div className="login-container">
+        {/* Left Side */}
+        
+        <div className="login-info">
+
+  {/* Quick Links */}
+
+  
 
   <img
     src={logo}

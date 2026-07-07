@@ -1,0 +1,500 @@
+/* MyCourse.css - Minimalist White Modern Course View */
+
+/* ============================================
+   PAGE CONTAINER
+   ============================================ */
+
+.teacher-course-page {
+  padding: 32px 40px;
+  background: #f8fafc;
+  min-height: calc(100vh - 70px);
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.page-header {
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.page-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #252d47;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-header h1 svg {
+  color: #1a1f2e;
+}
+
+.page-header p {
+  font-size: 15px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   COURSE CARD
+   ============================================ */
+
+.course-card {
+  max-width: 1200px;
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 4px;
+  padding: 32px 36px;
+}
+
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   COURSE TITLE SECTION
+   ============================================ */
+
+.course-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #4d7398;
+  margin-bottom: 24px;
+}
+
+.course-title svg {
+  flex-shrink: 0;
+  color: #1a1f2e;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #eef2f6;
+}
+
+.course-title div {
+  flex: 1;
+}
+
+.course-title h2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1f2e;
+  margin: 0 0 4px 0;
+}
+
+.course-title p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin: 0;
+  font-family: monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   COURSE GRID - Info Boxes
+   ============================================ */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+      color: #1f2f5d;
+    font-size: 14px;
+    font-family: monospace;
+}
+
+
+
+.info-box svg {
+  flex-shrink: 0;
+  color: #1a1f2e;
+}
+
+.info-box div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-box span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-box strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222c49;
+}
+
+/* Individual Info Box Colors */
+.info-box:nth-child(1) svg {
+  color: #3b82f6;
+}
+
+.info-box:nth-child(2) svg {
+  color: #f59e0b;
+}
+
+.info-box:nth-child(3) svg {
+  color: #8b5cf6;
+}
+
+.info-box:nth-child(4) svg {
+  color: #22c55e;
+}
+
+.info-box:nth-child(5) svg {
+  color: #ec4899;
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+}
+
+.loading-state .spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #1a1f2e;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  text-align: center;
+}
+
+.empty-state svg {
+  color: #cbd5e1;
+}
+
+.empty-state h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1f2e;
+  margin: 0;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .teacher-course-page {
+    padding: 24px 20px;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+  }
+
+  .course-card {
+    padding: 24px;
+    border-radius: 4px;
+  }
+
+  .course-title {
+    gap: 16px;
+    padding-bottom: 20px;
+  }
+
+  .course-title svg {
+    padding: 10px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .course-title h2 {
+    font-size: 20px;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .info-box {
+    padding: 14px 16px;
+  }
+
+  .info-box strong {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .teacher-course-page {
+    padding: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 22px;
+  }
+
+  .course-card {
+    padding: 20px 16px;
+    border-radius: 4px;
+  }
+
+  .course-title {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .course-title svg {
+    width: 56px;
+    height: 56px;
+    padding: 14px;
+  }
+
+  .course-title h2 {
+    font-size: 18px;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .info-box {
+    padding: 12px 14px;
+  }
+
+  .info-box strong {
+    font-size: 14px;
+  }
+
+  .info-box span {
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT
+   ============================================ */
+
+body.dark-mode .teacher-course-page {
+  background: #0f172a;
+}
+
+body.dark-mode .page-header h1 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .page-header p {
+  color: #94a3b8;
+}
+
+body.dark-mode .page-header {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .course-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+
+body.dark-mode .course-title {
+  border-bottom-color: #334155;
+}
+
+body.dark-mode .course-title h2 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .course-title p {
+  color: #94a3b8;
+}
+
+body.dark-mode .course-title svg {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode .info-box {
+  background: #0f172a;
+}
+
+body.dark-mode .info-box:hover {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-mode .info-box strong {
+  color: #f1f5f9;
+}
+
+body.dark-mode .info-box span {
+  color: #94a3b8;
+}
+
+body.dark-mode .info-box svg {
+  color: #f1f5f9;
+}
+
+body.dark-mode .info-box:nth-child(1) svg {
+  color: #60a5fa;
+}
+
+body.dark-mode .info-box:nth-child(2) svg {
+  color: #fbbf24;
+}
+
+body.dark-mode .info-box:nth-child(3) svg {
+  color: #a78bfa;
+}
+
+body.dark-mode .info-box:nth-child(4) svg {
+  color: #34d399;
+}
+
+body.dark-mode .info-box:nth-child(5) svg {
+  color: #f472b6;
+}
+
+body.dark-mode .loading-state .spinner {
+  border-color: #334155;
+  border-top-color: #e2e8f0;
+}
+
+body.dark-mode .loading-state p {
+  color: #94a3b8;
+}
+
+body.dark-mode .empty-state h2 {
+  color: #f1f5f9;
+}
+
+body.dark-mode .empty-state p {
+  color: #94a3b8;
+}
+
+body.dark-mode .empty-state svg {
+  color: #475569;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.info-box:focus-visible {
+  outline: 2px solid #1a1f2e;
+  outline-offset: 2px;
+}
+
+body.dark-mode .info-box:focus-visible {
+  outline-color: #e2e8f0;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .course-card {
+    animation: none;
+  }
+  
+  .info-box:hover {
+    transform: none;
+  }
+  
+  .loading-state .spinner {
+    animation: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .teacher-course-page {
+    background: white;
+    padding: 20px;
+  }
+  
+  .course-card {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .course-card:hover {
+    box-shadow: none;
+  }
+  
+  .info-box:hover {
+    transform: none;
+    background: #f8fafc;
+    border-color: transparent;
+  }
+  
+  .loading-state {
+    display: none;
+  }
+}

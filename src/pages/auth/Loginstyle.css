@@ -351,6 +351,8 @@ display: flex;
 
     left:40px;
 
+    margin-top:-30px;
+
     right:40px;
 
     display:flex;
@@ -380,15 +382,17 @@ display: flex;
 .info-top-links a{
 
 text-decoration: none;
-    color: white;
+        text-decoration: none;
+    color: #1f2a53;
     font-size: 14px;
-    font-family: monospace;
-    font-weight: 500;
+    font-family: math;
+    font-weight: 600;
     letter-spacing: .3px;
     transition: .3s;
     position: relative;
-
 }
+
+
 
 .info-top-links a::after{
 
@@ -404,7 +408,7 @@ text-decoration: none;
 
     height:2px;
 
-    background:#fbbf24;
+    background:#15418d;
 
     transition:.3s;
 
@@ -412,7 +416,7 @@ text-decoration: none;
 
 .info-top-links a:hover{
 
-    color:#fbbf24;
+    color:#15426e;
 
 }
 

@@ -8,7 +8,7 @@
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 18px;
 }
 
 .dashboard-header p {
@@ -82,10 +82,16 @@
 
 .teacher-card th,
 .teacher-card td {
-  padding: 12px;
-  text-align: left;
-  border-bottom:
-    1px solid #e5e7eb;
+ padding: 12px;
+    text-align: left;
+    font-size: 13px;
+    color: #2f2f2f;
+    border-bottom: 1px solid #e5e7eb;
+}
+strong {
+  font-weight: 500;
+  font-size: 14px;
+  color: #1e2f44;
 }
 
 .score {
@@ -135,15 +141,15 @@
   border: none;
   border-radius: 8px;
 
-  background: #2563eb;
-  color: white;
+  background: #e6e6e6;
+  color: rgb(40, 59, 116);
 
   cursor: pointer;
   font-weight: 500;
 }
 
 .action-buttons button:hover {
-  background: #1d4ed8;
+  background: #cccccc;
 }
 
 @media (max-width: 992px) {

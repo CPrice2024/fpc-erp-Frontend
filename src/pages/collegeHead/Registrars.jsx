@@ -13,12 +13,15 @@ import {
   Mail,
   Phone,
   User,
+  MoreVertical,
 } from "lucide-react";
+
 import "./RegistrarForms.css";
 
 export default function Registrars() {
   const navigate = useNavigate();
   const [registrars, setRegistrars] = useState([]);
+  const [activeMenu, setActiveMenu] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -181,34 +184,84 @@ export default function Registrars() {
                       {r.status}
                     </span>
                   </td>
-                  <td data-label="Actions">
-                    <div className="actions-cell-registrar">
-                      <button
-                        className="action-btn-registrar view"
-                        onClick={() => navigate(`/college-head/registrars/view/${r._id}`)}
-                      >
-                        <Eye size={14} />
-                      </button>
-                      <button
-                        className="action-btn-registrar edit"
-                        onClick={() => navigate(`/college-head/registrars/edit/${r._id}`)}
-                      >
-                        <Edit2 size={14} />
-                      </button>
-                      <button
-                        className={`action-btn-registrar toggle ${r.status === "inactive" ? "inactive" : ""}`}
-                        onClick={() => toggleStatus(r._id)}
-                      >
-                        {r.status === "active" ? <UserX size={14} /> : <UserCheck size={14} />}
-                      </button>
-                      <button
-                        className="action-btn-registrar delete"
-                        onClick={() => deleteRegistrar(r._id)}
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                  </td>
+
+                  <td className="action-cell">
+
+  <button
+    className="menu-btn"
+    onClick={() =>
+      setActiveMenu(
+        activeMenu === r._id
+          ? null
+          : r._id
+      )
+    }
+  >
+    <MoreVertical size={18} />
+  </button>
+
+  {activeMenu === r._id && (
+
+    <div className="action-menu">
+
+      <button
+        className="view-action"
+        onClick={() => {
+          navigate(`/college-head/registrars/view/${r._id}`);
+          setActiveMenu(null);
+        }}
+      >
+        <Eye size={16}/>
+        View Registrar
+      </button>
+
+      <button
+        className="edit-action"
+        onClick={() => {
+          navigate(`/college-head/registrars/edit/${r._id}`);
+          setActiveMenu(null);
+        }}
+      >
+        <Edit2 size={16}/>
+        Edit Registrar
+      </button>
+
+      <button
+        className="toggle-action"
+        onClick={() => {
+          toggleStatus(r._id);
+          setActiveMenu(null);
+        }}
+      >
+        {r.status === "active" ? (
+          <>
+            <UserX size={16}/>
+            Deactivate
+          </>
+        ) : (
+          <>
+            <UserCheck size={16}/>
+            Activate
+          </>
+        )}
+      </button>
+
+      <button
+        className="delete-action"
+        onClick={() => {
+          deleteRegistrar(r._id);
+          setActiveMenu(null);
+        }}
+      >
+        <Trash2 size={16}/>
+        Delete Registrar
+      </button>
+
+    </div>
+
+  )}
+
+</td>
                 </tr>
               ))}
             </tbody>

@@ -1,0 +1,79 @@
+.teacher-dashboard{
+    padding:3px;
+}
+
+.dashboard-header{
+    margin-bottom:30px;
+}
+
+.dashboard-header h1{
+    font-size:18px;
+    color:#213156;
+}
+
+.dashboard-header p{
+    color:#64748b;
+}
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-bottom:30px;
+}
+
+.stat-card{
+
+    background:#ffffff;
+
+    border-radius:6px;
+
+    padding:20px;
+
+
+    text-align:center;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-1px);
+
+}
+
+.stat-card h2{
+
+    margin:15px 0;
+
+    font-size:18px;
+    color:#213156;
+
+}
+
+.course-card{
+
+    background:#ffffff;
+
+    padding:30px;
+
+    border-radius:6px;
+
+
+}
+
+.course-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:25px;
+
+    margin-top:20px;
+
+}

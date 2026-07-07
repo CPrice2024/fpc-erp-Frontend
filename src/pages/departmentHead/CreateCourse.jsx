@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/axios";
+import {
+  createCourse,
+} from "../../api/departmentAPI";
+
 import {
   BookOpen,
   GraduationCap,
@@ -18,12 +21,14 @@ export default function CreateCourse() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    courseCode: "",
-    courseName: "",
-    level: "",
-    creditHour: 3,
-    status: "active",
-  });
+  courseCode: "",
+  courseName: "",
+  level: "",
+  semester: "",
+  section: "",
+  creditHour: 3,
+  status: "active",
+});
 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +53,16 @@ export default function CreateCourse() {
     if (formData.creditHour < 1 || formData.creditHour > 6) {
       newErrors.creditHour = "Credit hour must be between 1 and 6";
     }
+    if (!formData.semester) {
+  newErrors.semester = "Please select a semester";
+}
+
+if (!formData.section) {
+  newErrors.section = "Please select a section";
+}
+if (!formData.level) {
+  newErrors.level = "Please select a level";
+}
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -71,8 +86,11 @@ export default function CreateCourse() {
     setIsLoading(true);
     
     try {
-      await api.post("/courses", formData);
-      navigate("/department-head/courses");
+      await createCourse(formData);
+      alert("Course created successfully!");
+
+     navigate("/department-head/courses");
+
     } catch (error) {
       setErrors({ submit: error.response?.data?.message || "Failed to create course" });
     } finally {
@@ -175,6 +193,49 @@ export default function CreateCourse() {
               </div>
             )}
           </div>
+
+          <div className="form-group">
+  <label>Semester</label>
+
+  <select
+    name="semester"
+    value={formData.semester}
+    onChange={handleChange}
+  >
+    <option value="">Select Semester</option>
+    <option value="1">Semester 1</option>
+    <option value="2">Semester 2</option>
+  </select>
+  {errors.semester && (
+  <div className="error-message">
+    <AlertCircle size={12} />
+    {errors.semester}
+  </div>
+)}
+</div>
+
+<div className="form-group">
+  <label>Section</label>
+
+  <select
+    name="section"
+    value={formData.section}
+    onChange={handleChange}
+  >
+    <option value="">Select Section</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+  </select>
+  {errors.section && (
+  <div className="error-message">
+    <AlertCircle size={12} />
+    {errors.section}
+  </div>
+)}
+  
+</div>
 
           <div className="form-group">
             <label>

@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
-import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+
+import {
+  getTeachers,
+  deleteTeacher,
+} from "../../api/departmentAPI";
 
 import {
   Plus,
   Trash2,
+  Eye,
+  Edit,
+  Search,
+  MoreVertical,
 } from "lucide-react";
 
 import "./Teachers.css";
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [credentials, setCredentials] = useState(null);
+  const [activeMenu, setActiveMenu] = useState(null);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
-
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-  });
 
   useEffect(() => {
     fetchTeachers();
@@ -28,46 +29,15 @@ export default function Teachers() {
 
   const fetchTeachers = async () => {
     try {
-      const res = await api.get("/department-teachers");
-      setTeachers(res.data);
+      const { data } = await getTeachers();
+      setTeachers(data);
     } catch (error) {
       console.error("Error fetching teachers:", error);
       alert("Failed to load teachers");
     }
   };
 
-  const createTeacher = async () => {
-    if (!form.name.trim() || !form.email.trim()) {
-      return alert("Please fill all fields");
-    }
 
-    try {
-      const res = await api.post(
-        "/department-teachers",
-        form
-      );
-
-      setCredentials(
-        res.data?.loginCredentials || null
-      );
-
-      setForm({
-        name: "",
-        email: "",
-      });
-
-      setShowModal(false);
-
-      fetchTeachers();
-    } catch (error) {
-      console.error("Create teacher error:", error);
-
-      alert(
-        error.response?.data?.message ||
-          "Failed to create teacher"
-      );
-    }
-  };
   const filteredTeachers = teachers.filter(
   (teacher) =>
     teacher.name
@@ -77,29 +47,28 @@ export default function Teachers() {
       .toLowerCase()
       .includes(search.toLowerCase())
 );
+const handleDeleteTeacher = async (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this teacher?"
+  );
 
-  const deleteTeacher = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this teacher?"
+  if (!confirmDelete) return;
+
+  try {
+    await deleteTeacher(id);
+
+    fetchTeachers();
+
+    alert("Teacher deleted successfully");
+  } catch (error) {
+    console.error("Delete teacher error:", error);
+
+    alert(
+      error.response?.data?.message ||
+      "Failed to delete teacher"
     );
-
-    if (!confirmDelete) return;
-
-    try {
-      await api.delete(
-        `/department-teachers/${id}`
-      );
-
-      fetchTeachers();
-    } catch (error) {
-      console.error("Delete teacher error:", error);
-
-      alert(
-        error.response?.data?.message ||
-          "Failed to delete teacher"
-      );
-    }
-  };
+  }
+};
 
   return (
     <>
@@ -117,7 +86,7 @@ export default function Teachers() {
 
 <button
   className="add-btn"
-  onClick={() => navigate("/department-head/create-teacher")}
+  onClick={() => navigate("/department-head/teachers/create")}
 >
   <Plus size={18} />
   Add Teacher
@@ -145,47 +114,23 @@ export default function Teachers() {
 
   </div>
 
-  {credentials && (
-    <div className="credential-box">
-
-      <h3>
-        Login Credentials
-      </h3>
-
-      <div className="credential-row">
-        <span>Email</span>
-        <strong>
-          {credentials.email}
-        </strong>
-      </div>
-
-      <div className="credential-row">
-        <span>Password</span>
-        <strong>
-          {credentials.password}
-        </strong>
-      </div>
-
-      <small>
-        Save these credentials.
-        Password will not be shown again.
-      </small>
-
-    </div>
-  )}
-
   <div className="table-card">
 
     <div className="table-header">
+      <div className="search-box">
 
-      <input
+    <Search size={18} />
+
+    <input
         type="text"
-        placeholder="Search teacher..."
+        placeholder="Search by name or email..."
         value={search}
         onChange={(e) =>
-          setSearch(e.target.value)
+            setSearch(e.target.value)
         }
-      />
+    />
+
+</div>
 
     </div>
 
@@ -196,6 +141,8 @@ export default function Teachers() {
     <th>Name</th>
     <th>Email</th>
     <th>Gender</th>
+    <th>Specialization</th>
+    <th>Experience</th>
     <th>Course</th>
     <th>Department</th>
     <th>Status</th>
@@ -219,10 +166,17 @@ export default function Teachers() {
       {teacher.gender || "N/A"}
     </span>
   </td>
+  <td>
+  {teacher.specialization || "-"}
+</td>
+<td>
+  {teacher.experience || 0} Years
+</td>
 
   <td>
-    {teacher.course?.courseName ||
-      "Not Assigned"}
+        {teacher.course
+    ? `${teacher.course.courseCode} - ${teacher.course.courseName}`
+    : "Not Assigned"}
   </td>
 
   <td>
@@ -242,16 +196,67 @@ export default function Teachers() {
     </span>
   </td>
 
-  <td>
-    <button
-      className="delete-btn"
-      onClick={() =>
-        deleteTeacher(teacher._id)
-      }
-    >
-      <Trash2 size={18} />
-    </button>
-  </td>
+<td className="action-cell">
+
+  <button
+    className="menu-btn"
+    onClick={() =>
+      setActiveMenu(
+        activeMenu === teacher._id
+          ? null
+          : teacher._id
+      )
+    }
+  >
+    <MoreVertical size={18} />
+  </button>
+
+  {activeMenu === teacher._id && (
+
+    <div className="action-menu">
+
+      <button
+        className="view-action"
+        onClick={() => {
+          navigate(
+            `/department-head/teachers/view/${teacher._id}`
+          );
+          setActiveMenu(null);
+        }}
+      >
+        <Eye size={16}/>
+        View Teacher
+      </button>
+
+      <button
+        className="edit-action"
+        onClick={() => {
+          navigate(
+            `/department-head/teachers/edit/${teacher._id}`
+          );
+          setActiveMenu(null);
+        }}
+      >
+        <Edit size={16}/>
+        Edit Teacher
+      </button>
+
+      <button
+        className="delete-action"
+        onClick={() => {
+          handleDeleteTeacher(teacher._id);
+          setActiveMenu(null);
+        }}
+      >
+        <Trash2 size={16}/>
+        Delete Teacher
+      </button>
+
+    </div>
+
+  )}
+
+</td>
 </tr>
             )
           )
@@ -260,7 +265,7 @@ export default function Teachers() {
 
           <tr>
            <td
-  colSpan="7"
+  colSpan="9"
   className="empty-row"
 >
               No teachers found
@@ -276,66 +281,6 @@ export default function Teachers() {
   </div>
 
 </div>
-
-      {showModal && (
-        <div
-          className="modal"
-          onClick={() =>
-            setShowModal(false)
-          }
-        >
-          <div
-            className="modal-content"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
-          >
-            <h3>Add Teacher</h3>
-
-            <input
-              type="text"
-              placeholder="Teacher Name"
-              value={form.name}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  name: e.target.value,
-                })
-              }
-            />
-
-            <input
-              type="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  email: e.target.value,
-                })
-              }
-            />
-
-            <div className="modal-actions">
-              <button
-                className="save-btn"
-                onClick={createTeacher}
-              >
-                Save
-              </button>
-
-              <button
-                className="cancel-btn"
-                onClick={() =>
-                  setShowModal(false)
-                }
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

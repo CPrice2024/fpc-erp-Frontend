@@ -26,16 +26,6 @@ h1 {
 color: #375581;
 }
 
-h2 {
-  font-size: 16px;
-  font-weight: 600;
-      display: flex;
-    gap: 16px;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
-    align-items: center;
-color: #375581;
-}
 h3{
   font-size: 14px;
   font-weight: 500;
@@ -219,9 +209,8 @@ color: #267dff;
 /* Form Card */
 .form-card {
   background: white;
-  border-radius: 20px;
+  border-radius: 6px;
   padding: 32px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   border: 1px solid #eef2f8;
 }
 

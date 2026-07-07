@@ -122,7 +122,7 @@ function Topbar({ setIsOpen }) {
         ? "Good Afternoon"
         : "Good Evening"}
 
-      , {user?.name || "Admin"} 👋
+      , {user?.name || "Admin"} 
 
     </h3>
 
