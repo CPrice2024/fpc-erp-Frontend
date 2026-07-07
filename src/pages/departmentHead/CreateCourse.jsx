@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   createCourse,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   BookOpen,

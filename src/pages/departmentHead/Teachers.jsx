@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getTeachers,
   deleteTeacher,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   Plus,

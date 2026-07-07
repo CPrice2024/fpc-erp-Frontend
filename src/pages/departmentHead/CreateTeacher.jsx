@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
-import { createTeacher } from "../../api/departmentAPI";
+import { createTeacher } from "../../api/departmentApi";
 import {
   ArrowLeft,
   Save,

@@ -6,7 +6,7 @@ import api from "../../api/axios";
 import {
   getTeacher,
   updateTeacher,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   ArrowLeft,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getTeacher } from "../../api/departmentAPI";
+import { getTeacher } from "../../api/departmentApi";
 
 import {
   ArrowLeft,

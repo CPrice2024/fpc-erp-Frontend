@@ -7,7 +7,7 @@ import {
 import {
   getCourse,
   updateCourse,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   BookOpen,

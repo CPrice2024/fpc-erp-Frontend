@@ -5,7 +5,7 @@ import {
   getCourses,
   getCourseStats,
   deleteCourse,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   Plus,

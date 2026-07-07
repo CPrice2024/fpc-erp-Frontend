@@ -7,7 +7,7 @@ import {
 
 import {
   getCourse,
-} from "../../api/departmentAPI";
+} from "../../api/departmentApi";
 
 import {
   ArrowLeft,
