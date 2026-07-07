@@ -1,6 +1,4 @@
-// ============================================================
-// FILE: GradeEntry.jsx
-// ============================================================
+
 import React, { useEffect, useState } from 'react';
 import {
   Search,
@@ -18,8 +16,8 @@ import {
   saveGrades,
   getMyCourse,
   getCourseGrades,
-} from '../../api/teacherAPI';
-import './GradeEntry.css'; // styles in separate file
+} from '../../api/teacherApi';
+import './GradeEntry.css'; 
 
 const GradeEntry = () => {
   const [students, setStudents] = useState([]);

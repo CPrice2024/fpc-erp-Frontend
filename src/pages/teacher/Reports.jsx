@@ -22,7 +22,7 @@ getGradeReport,
 
 getAttendanceHistory,
 
-} from "../../api/teacherAPI";
+} from "../../api/teacherApi";
 
 import "./Reports.css";
 

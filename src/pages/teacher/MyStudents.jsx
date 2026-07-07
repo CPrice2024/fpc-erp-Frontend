@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Search, Eye, Users, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { getMyStudents } from "../../api/teacherAPI";
+import { getMyStudents } from "../../api/teacherApi";
 
 import "./MyStudents.css";
 

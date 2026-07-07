@@ -11,7 +11,7 @@ import {
 
 import {
   getStudentProfile,
-} from "../../api/teacherAPI";
+} from "../../api/teacherApi";
 
 import "./StudentProfile.css";
 
