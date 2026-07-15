@@ -47,7 +47,7 @@ export default function TVETTrainerDataSheetPDF({
           </h2>
 
           <h3>
-            TVET TRAINERS DATA SHEET
+           የኢፌዲሪ የትምህርትና ስልጠና ባለሥልጣን
           </h3>
 
         </div>
