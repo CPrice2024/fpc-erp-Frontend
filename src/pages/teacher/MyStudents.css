@@ -105,22 +105,21 @@
 }
 
 .student-table thead th {
-  text-align: left;
-  padding: 14px 20px;
-  background: #f8fafc;
-  font-size: 12px;
-  font-weight: 600;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid #eef2f6;
+text-align: left;
+    background: #3771aa;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #8ea2b6;
 }
 
-.student-table tbody td {
+.student-table tbody td tr {
   padding: 6px 10px;
   font-size: 12px;
   color: #303957;
-  border-bottom: 1px solid #c2c8cd;
+  border-bottom: 1px solid #677f93;
   vertical-align: middle;
 }
 

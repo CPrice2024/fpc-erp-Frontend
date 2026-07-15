@@ -234,6 +234,7 @@
 
 .table-card thead th {
   text-align: left;
+  font-family: system-ui;
   padding: 14px 16px;
   background: #f8fafc;
   font-size: 11px;
