@@ -39,6 +39,9 @@ from "../../components/pdf/StudentProfilePDF";
 import TranscriptPDF
 from "../../components/pdf/TranscriptPDF";
 
+import TVETTrainerDataSheetPDF
+from "../../components/pdf/TVETTrainerDataSheetPDF";
+
 export default function ViewStudentPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -57,6 +60,7 @@ export default function ViewStudentPage() {
   const transcriptRef = useRef(null);
   const profileRef = useRef(null);
   const slipRef = useRef(null);
+  const trainerSheetRef = useRef(null);
   const [courseStats, setCourseStats] = useState({
     total: 0,
     passed: 0,
@@ -154,6 +158,10 @@ const printTranscript = useReactToPrint({
 const printSlip = useReactToPrint({
   contentRef: slipRef,
   documentTitle: `${student?.studentId}-RegistrationSlip`,
+});
+const printTrainerSheet = useReactToPrint({
+  contentRef: trainerSheetRef,
+  documentTitle: `${student?.studentId}-TVET-Trainer-Data-Sheet`,
 });
 
 
@@ -455,6 +463,13 @@ const printSlip = useReactToPrint({
   onClick={printTranscript}>
   <Download size={18} />
   Transcript
+</button>
+<button
+  className="btn-export"
+  onClick={printTrainerSheet}
+>
+  <Download size={18} />
+  ETA 
 </button>
         </div>
       </header>
@@ -1318,6 +1333,17 @@ const printSlip = useReactToPrint({
         student={student}
         courses={courses}
     />
+</div>
+<div ref={trainerSheetRef}>
+  <TVETTrainerDataSheetPDF
+    students={[student]}
+    department={student.department?.name}
+    college="Federal Prison College"
+    programLevel={student.level}
+    modality={student.program}
+    admissionDate={student.registrationDate}
+    graduationDate={student.educationEndDate}
+  />
 </div>
 
 </div>

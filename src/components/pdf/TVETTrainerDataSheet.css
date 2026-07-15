@@ -1,0 +1,388 @@
+/* ===========================================
+   TVET TRAINER DATA SHEET
+   Federal Prison College ERP
+=========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pdf-preview-wrapper {
+  background: #eceff4;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.tvet-sheet {
+  width: 297mm;
+  min-height: 210mm;
+  background: #fff;
+  position: relative;
+  padding: 20px 25px;
+  color: #222;
+  font-family: "Times New Roman", serif;
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+  overflow: hidden;
+}
+
+/* ================= WATERMARK ================= */
+
+.pdf-watermark {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-28deg);
+
+  font-size: 72px;
+  font-weight: 700;
+  color: rgba(0,0,0,.04);
+
+  letter-spacing: 6px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ================= HEADER ================= */
+
+.pdf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 3px solid #0f172a;
+
+  padding-bottom: 15px;
+  margin-bottom: 18px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.logo-area {
+  width: 90px;
+}
+
+.college-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.header {
+  flex: 1;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.header h2 {
+  font-size: 18px;
+  margin-top: 4px;
+  color: #374151;
+}
+
+.header h3 {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #1d4ed8;
+  text-transform: uppercase;
+}
+
+.header-right table {
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.header-right td {
+  border: 1px solid #999;
+  padding: 6px 10px;
+}
+
+.header-right td:first-child {
+  background: #f4f4f4;
+  font-weight: bold;
+}
+
+/* ================= SECTION ================= */
+
+.pdf-section {
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  background: #0f172a;
+  color: white;
+
+  padding: 8px 15px;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  margin-bottom: 10px;
+
+  letter-spacing: .5px;
+}
+
+.section-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3,1fr);
+
+  gap: 12px;
+}
+
+.section-item {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  padding: 10px 12px;
+
+  background: #fafafa;
+}
+
+.section-item strong {
+  display: block;
+
+  color: #0f172a;
+
+  margin-bottom: 4px;
+
+  font-size: 13px;
+}
+
+.section-item span {
+  font-size: 14px;
+  color: #444;
+}
+
+/* ================= CHECKBOX ================= */
+
+.checkbox-section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+
+  margin-bottom: 18px;
+
+  padding: 10px 15px;
+
+  background: #f9fafb;
+
+  border: 1px solid #dbe2ea;
+}
+
+.checkbox-section strong {
+  color: #0f172a;
+}
+
+.checkbox-section span {
+  font-size: 14px;
+}
+
+/* ================= TABLE ================= */
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 9px;
+}
+
+.student-table th,
+.student-table td {
+
+  border: 1px solid #444;
+
+  padding: 5px 4px;
+
+  text-align: center;
+
+  word-wrap: break-word;
+}
+
+.student-table th {
+
+  background: #0f172a;
+
+  color: white;
+
+  font-weight: bold;
+
+  font-size: 10px;
+}
+
+.student-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.student-table tbody tr:hover {
+  background: #edf4ff;
+}
+
+/* Column Widths */
+
+.student-table th:nth-child(1),
+.student-table td:nth-child(1){
+width:35px;
+}
+
+.student-table th:nth-child(2),
+.student-table td:nth-child(2){
+width:70px;
+}
+
+.student-table th:nth-child(3),
+.student-table td:nth-child(3){
+width:90px;
+}
+
+.student-table th:nth-child(4),
+.student-table td:nth-child(4){
+width:90px;
+}
+
+.student-table th:nth-child(5),
+.student-table td:nth-child(5){
+width:90px;
+}
+
+/* ================= SIGNATURE ================= */
+
+.signature-section {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 30px;
+
+  gap: 40px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.signature-card {
+
+  flex: 1;
+
+  text-align: center;
+}
+
+.signature-line {
+
+  border-top: 2px solid #000;
+
+  margin-bottom: 10px;
+}
+
+.signature-card h4 {
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  color: #111827;
+}
+
+/* ================= FOOTER ================= */
+
+.pdf-footer {
+
+  margin-top: 25px;
+
+  text-align: center;
+
+  border-top: 2px solid #d1d5db;
+
+  padding-top: 12px;
+
+  font-size: 12px;
+
+  color: #555;
+}
+
+/* ================= PRINT ================= */
+
+@page {
+  size: A4 landscape;
+  margin: 10mm;
+}
+
+@media print {
+
+  body {
+    background: white;
+  }
+
+  .pdf-preview-wrapper {
+    padding: 0;
+    background: white;
+  }
+
+  .tvet-sheet {
+
+    width: 100%;
+
+    min-height: auto;
+
+    box-shadow: none;
+
+    margin: 0;
+
+    page-break-after: always;
+  }
+
+  .student-table thead {
+    display: table-header-group;
+  }
+
+  .student-table tr {
+    page-break-inside: avoid;
+  }
+
+  .student-table td,
+  .student-table th {
+    font-size: 8px;
+  }
+
+  .signature-section {
+    page-break-inside: avoid;
+  }
+
+  .pdf-footer {
+    page-break-inside: avoid;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1200px){
+
+.tvet-sheet{
+transform:scale(.80);
+transform-origin:top center;
+margin-bottom:-120px;
+}
+
+}
+
+@media (max-width:992px){
+
+.tvet-sheet{
+transform:scale(.65);
+margin-bottom:-250px;
+}
+
+}

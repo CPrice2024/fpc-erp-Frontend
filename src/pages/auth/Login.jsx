@@ -126,7 +126,7 @@ const fillCredentials = (account) => {
     className="college-logoo"
   />
 
-  <h1>Federal Prison Commission Educational System</h1>
+  <h1>Tesfa technical and vocational training college</h1>
 
   <p className="description">Our College Management System streamlines administrative tasks, enhances communication, and provides a centralized platform for managing student records, faculty information, and academic processes.
   </p>
