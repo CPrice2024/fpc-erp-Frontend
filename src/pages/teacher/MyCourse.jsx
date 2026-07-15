@@ -336,7 +336,7 @@ const removeBook = async (id) => {
           <div className="book-actions">
 
             <a
-              href={`http://localhost:5000/${book.filePath}`}
+              href={`http://localhost:5000${book.fileUrl}`}
               target="_blank"
               rel="noreferrer"
             >

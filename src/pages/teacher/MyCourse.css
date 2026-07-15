@@ -631,10 +631,10 @@ body.dark-mode .info-box:focus-visible {
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:18px 22px;
+    padding:8px 22px;
     border-radius:14px;
-    border:1px solid #e5e7eb;
-    background:#fafcff;
+    border:1px solid #34518b32;
+    background:#fafcff00;
     transition:.25s;
 }
 
@@ -681,7 +681,7 @@ body.dark-mode .info-box:focus-visible {
     width:42px;
     height:42px;
     border:none;
-    border-radius:10px;
+    border-radius:50%;
     display:flex;
     justify-content:center;
     align-items:center;
