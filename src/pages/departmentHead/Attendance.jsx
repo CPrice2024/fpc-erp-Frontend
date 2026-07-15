@@ -5,6 +5,7 @@ import {
   CheckCircle,
   Clock,
   XCircle,
+  MoreVertical,
 } from "lucide-react";
 
 import {
@@ -18,6 +19,7 @@ import "./attendance.css";
 export default function Attendance() {
 
   const [teachers, setTeachers] = useState([]);
+  const [activeMenu, setActiveMenu] = useState(null);
 
   const [stats, setStats] = useState({
     totalTeachers: 0,
@@ -64,30 +66,55 @@ export default function Attendance() {
 
   };
 
-  const handleAttendance = async (
-    teacherId,
-    status
-  ) => {
+  const handleAttendance = async (teacherId, status) => {
+  try {
+    await saveTeacherAttendance({
+      teacherId,
+      status,
+    });
 
-    try {
+    setTeachers((prev) =>
+      prev.map((teacher) =>
+        teacher._id === teacherId
+          ? {
+              ...teacher,
+              attendanceStatus: status,
+            }
+          : teacher
+      )
+    );
 
-      await saveTeacherAttendance({
-        teacherId,
-        status,
-      });
-
-      fetchAttendance();
-
-    } catch (error) {
-
-      alert(
-        error.response?.data?.message ||
-        "Unable to save attendance."
+    setStats((prev) => {
+      const teachersUpdated = teachers.map((teacher) =>
+        teacher._id === teacherId
+          ? {
+              ...teacher,
+              attendanceStatus: status,
+            }
+          : teacher
       );
 
-    }
+      return {
+        totalTeachers: teachersUpdated.length,
+        present: teachersUpdated.filter(
+          (t) => t.attendanceStatus === "present"
+        ).length,
+        late: teachersUpdated.filter(
+          (t) => t.attendanceStatus === "late"
+        ).length,
+        absent: teachersUpdated.filter(
+          (t) => t.attendanceStatus === "absent"
+        ).length,
+      };
+    });
 
-  };
+  } catch (error) {
+    alert(
+      error.response?.data?.message ||
+      "Unable to save attendance."
+    );
+  }
+};
 
   const filteredTeachers =
     teachers.filter((teacher) => {
@@ -141,21 +168,15 @@ export default function Attendance() {
 
 <div className="attendance-top">
 
-<div>
+    <div>
 
-<h1>
+        <h1>Teacher Attendance</h1>
 
-Teacher Attendance
+        <p>
+            {new Date().toLocaleDateString()}
+        </p>
 
-</h1>
-
-<p>
-
-Manage today's attendance for department teachers
-
-</p>
-
-</div>
+    </div>
 
 </div>
 
@@ -286,7 +307,25 @@ filteredTeachers.map((teacher)=>(
 
 <td>
 
-{teacher.name}
+<div className="teacher-info">
+
+<img
+src={
+teacher.photo || "/avatar.png"
+}
+alt=""
+className="teacher-photo"
+/>
+
+<div>
+
+<strong>{teacher.name}</strong>
+
+<p>{teacher.specialization}</p>
+
+</div>
+
+</div>
 
 </td>
 
@@ -316,65 +355,78 @@ className={`status-badge ${teacher.attendanceStatus}`}
 
 </td>
 
-<td>
-
-<div className="attendance-actions">
+<td className="action-cell">
 
 <button
-className={`present-btn ${
-teacher.attendanceStatus==="present"
-? "active"
-: ""
-}`}
-onClick={()=>
+className="menu-btn"
+onClick={() =>
+setActiveMenu(
+activeMenu === teacher._id
+? null
+: teacher._id
+)
+}
+>
+
+<MoreVertical size={18}/>
+
+</button>
+
+{activeMenu === teacher._id && (
+
+<div className="action-menu">
+
+<button
+className="present-action"
+onClick={()=>{
 handleAttendance(
 teacher._id,
 "present"
-)
-}
+);
+setActiveMenu(null);
+}}
 >
 
-Present
+<CheckCircle size={16}/>
+Mark Present
 
 </button>
 
 <button
-className={`late-btn ${
-teacher.attendanceStatus==="late"
-? "active"
-: ""
-}`}
-onClick={()=>
+className="late-action"
+onClick={()=>{
 handleAttendance(
 teacher._id,
 "late"
-)
-}
+);
+setActiveMenu(null);
+}}
 >
 
-Late
+<Clock size={16}/>
+Mark Late
 
 </button>
 
 <button
-className={`absent-btn ${
-teacher.attendanceStatus==="absent"
-? "active"
-: ""
-}`}
-onClick={()=>
+className="absent-action"
+onClick={()=>{
 handleAttendance(
 teacher._id,
 "absent"
-)
-}
+);
+setActiveMenu(null);
+}}
 >
 
-Absent
+<XCircle size={16}/>
+Mark Absent
 
 </button>
 
 </div>
+
+)}
 
 </td>
 

@@ -1,0 +1,263 @@
+/* =====================================================
+   View Exam Result
+===================================================== */
+
+.view-exam-result{
+    padding:3px;
+    background:#f4f7fb00;
+    min-height:100vh;
+}
+
+/* =====================================================
+   Loading
+===================================================== */
+
+.exam-result-loading{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:80vh;
+    font-size:22px;
+    font-weight:600;
+    color:#64748b;
+}
+
+/* =====================================================
+   Header
+===================================================== */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    font-size:18px;
+    color:#1e293b;
+    font-weight:700;
+}
+
+.back-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 18px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#1d4ed8;
+}
+
+/* =====================================================
+   Summary
+===================================================== */
+
+.result-summary{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.summary-card{
+    background:white;
+    border-radius:6px;
+    padding:20px;
+    display:flex;
+    gap:18px;
+    align-items:center;
+    transition:.3s;
+}
+
+.summary-card:hover{
+    transform:translateY(-1px);
+}
+
+.summary-card svg{
+    width:55px;
+    height:55px;
+    color:#2563eb;
+    background:#eff6ff;
+    padding:12px;
+    border-radius:50%;
+}
+
+.summary-card h3{
+    margin:0;
+    color:#0f172a;
+    font-size:15px;
+}
+
+.summary-card p{
+    margin-top:5px;
+    color:#64748b;
+}
+
+/* =====================================================
+   Status
+===================================================== */
+
+.result-status{
+    display:flex;
+    justify-content:center;
+    margin-bottom:30px;
+}
+
+.passed,
+.failed{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 24px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.passed{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.failed{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* =====================================================
+   Question Section
+===================================================== */
+
+.question-section{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(15,23,42,.08);
+}
+
+.question-section h2{
+    margin-bottom:15px;
+    color:#1e293b;
+    font-size:18px;
+}
+
+/* =====================================================
+   Question Card
+===================================================== */
+
+.question-card{
+    border:1px solid #e2e8f0;
+    border-radius:6px;
+    padding:20px;
+    margin-bottom:25px;
+}
+
+.question-card:hover{
+    border-color:#2563eb;
+}
+
+.question-card h3{
+    margin-bottom:12px;
+    color:#2563eb;
+}
+
+.question-card>p{
+    font-size:16px;
+    color:#334155;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+/* =====================================================
+   Answer Grid
+===================================================== */
+
+.answer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.answer-grid>div{
+    background:#f8fafc;
+    border-radius:10px;
+    padding:18px;
+}
+
+.answer-grid strong{
+    display:block;
+    color:#0f172a;
+    margin-bottom:8px;
+}
+
+.answer-grid p{
+    margin:0;
+    color:#475569;
+    word-break:break-word;
+}
+
+/* =====================================================
+   Correct / Incorrect
+===================================================== */
+
+.correct{
+    color:#16a34a !important;
+    font-weight:700;
+}
+
+.incorrect{
+    color:#dc2626 !important;
+    font-weight:700;
+}
+
+/* =====================================================
+   Responsive
+===================================================== */
+
+@media(max-width:768px){
+
+.view-exam-result{
+    padding:20px;
+}
+
+.page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.page-header h1{
+    font-size:24px;
+}
+
+.result-summary{
+    grid-template-columns:1fr;
+}
+
+.summary-card{
+    flex-direction:column;
+    text-align:center;
+}
+
+.answer-grid{
+    grid-template-columns:1fr;
+}
+
+.question-section{
+    padding:20px;
+}
+
+.question-card{
+    padding:18px;
+}
+
+}

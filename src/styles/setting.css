@@ -70,10 +70,9 @@
 }
 
 .settings-card:hover {
-  background: #fafcff;
+  background: #fbfbfb;
   border-color: #e2e8f0;
-  transform: translateX(4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transform: translateX(0px);
 }
 
 .settings-card:active {

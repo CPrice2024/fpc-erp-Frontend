@@ -90,10 +90,6 @@
   border-color: #cbd5e1;
 }
 
-.save-btn:hover:not(:disabled) {
-  background: #1a2f47;
-  border-color: #1a2f47;
-}
 
 /* ----- stats cards ----- */
 .dashboard-cards {

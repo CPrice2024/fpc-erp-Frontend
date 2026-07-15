@@ -6,15 +6,36 @@ import {
   Clock, 
   AlertCircle,
   RefreshCw,
-  User
+  User,
+  Upload,
+  Trash2,
+  ExternalLink,
+  FileText,
 } from "lucide-react";
 import { teacherAPI } from "../../services/teacherAPI";
+import {
+  uploadBook,
+  getBooks,
+  deleteBook,
+} from "../../api/digitalBookAPI";
 import "./MyCourse.css";
 
 export default function MyCourse() {
   const [course, setCourse] = useState(null);
+  const [books, setBooks] = useState([]);
+
+const [title, setTitle] = useState("");
+
+const [description, setDescription] =
+  useState("");
+
+const [file, setFile] = useState(null);
+
+const [uploading, setUploading] =
+  useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     loadCourse();
@@ -26,6 +47,9 @@ export default function MyCourse() {
     try {
       const { data } = await teacherAPI.myCourse();
       setCourse(data);
+      const list = await getBooks(data._id);
+
+setBooks(list);
     } catch (error) {
       console.error(error);
       setError(error.response?.data?.message || "Failed to load course.");
@@ -33,6 +57,66 @@ export default function MyCourse() {
       setLoading(false);
     }
   };
+
+  const handleUpload = async () => {
+  if (!title || !file) {
+    return alert("Select a file.");
+  }
+
+  try {
+    setUploading(true);
+
+    const formData = new FormData();
+
+    formData.append("title", title);
+
+    formData.append(
+      "description",
+      description
+    );
+
+    formData.append("book", file);
+
+    await uploadBook(formData);
+
+    alert("Book uploaded.");
+
+    setTitle("");
+
+    setDescription("");
+
+    setFile(null);
+
+    loadCourse();
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert(
+      err.response?.data?.message ||
+      "Upload failed."
+    );
+
+  } finally {
+
+    setUploading(false);
+
+  }
+};
+
+const removeBook = async (id) => {
+
+  if (
+    !window.confirm("Delete this book?")
+  )
+    return;
+
+  await deleteBook(id);
+
+  loadCourse();
+
+};
 
   if (loading) {
     return (
@@ -153,6 +237,133 @@ export default function MyCourse() {
           </div>
         </div>
       </div>
+      <div className="library-card">
+
+  <div className="library-header">
+
+    <h2>
+
+      <BookOpen size={20} />
+
+      Digital Course Library
+
+    </h2>
+
+  </div>
+
+  <div className="upload-grid">
+
+    <input
+      placeholder="Book title"
+      value={title}
+      onChange={(e)=>
+        setTitle(e.target.value)
+      }
+    />
+
+    <input
+      placeholder="Description"
+      value={description}
+      onChange={(e)=>
+        setDescription(e.target.value)
+      }
+    />
+
+    <input
+      type="file"
+      accept=".pdf,.doc,.docx,.ppt,.pptx"
+      onChange={(e)=>
+        setFile(e.target.files[0])
+      }
+    />
+
+    <button
+      onClick={handleUpload}
+      disabled={uploading}
+      className="upload-btn"
+    >
+
+      <Upload size={18}/>
+
+      {uploading
+        ? "Uploading..."
+        : "Upload Book"}
+
+    </button>
+
+  </div>
+
+  <div className="book-list">
+
+    {books.length===0 ? (
+
+      <div className="empty-books">
+
+        No books uploaded.
+
+      </div>
+
+    ) : (
+
+      books.map(book=>(
+        <div
+          key={book._id}
+          className="book-item"
+        >
+
+          <div>
+
+            <FileText size={22}/>
+
+            <div>
+
+              <strong>
+
+                {book.title}
+
+              </strong>
+
+              <p>
+
+                {book.description}
+
+              </p>
+
+            </div>
+
+          </div>
+
+          <div className="book-actions">
+
+            <a
+              href={`http://localhost:5000/${book.filePath}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+
+              <ExternalLink size={18}/>
+
+            </a>
+
+            <button
+              onClick={()=>
+                removeBook(book._id)
+              }
+            >
+
+              <Trash2 size={18}/>
+
+            </button>
+
+          </div>
+
+        </div>
+      ))
+    )}
+
+  </div>
+
+</div>
     </div>
   );
 }

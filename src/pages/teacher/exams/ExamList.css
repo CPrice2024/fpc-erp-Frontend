@@ -1,0 +1,456 @@
+/* ExamList.css - Minimalist Modern Style */
+
+/* ===== CSS Variables ===== */
+:root {
+  --color-primary: #4670e5;
+  --color-primary-hover: #3875ca;
+  --color-primary-light: #EEF2FF;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #ffffff;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 50px -8px rgba(0, 0, 0, 0.10);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== Page Container ===== */
+.exam-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--color-gray-800);
+  background: var(--color-gray-50);
+  min-height: 100vh;
+}
+
+/* ===== Header ===== */
+.exam-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.exam-header > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.exam-header h1 {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.exam-header p {
+  font-size: 0.95rem;
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+/* ===== Create Button ===== */
+.create-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.create-btn:hover {
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.create-btn:active {
+  transform: scale(0.98);
+}
+
+.create-btn svg {
+  flex-shrink: 0;
+}
+
+/* ===== Toolbar ===== */
+.exam-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Search Box ===== */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+
+.search-box:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.10);
+}
+
+.search-box svg {
+  color: var(--color-gray-400);
+  flex-shrink: 0;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 0.6rem 0;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: var(--color-gray-800);
+  background: transparent;
+  min-width: 0;
+}
+
+.search-box input::placeholder {
+  color: var(--color-gray-400);
+}
+
+/* ===== Filter Select ===== */
+.exam-toolbar select {
+  padding: 0.6rem 2.25rem 0.6rem 1rem;
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+  cursor: pointer;
+  transition: var(--transition);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  min-width: 140px;
+}
+
+.exam-toolbar select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.10);
+  outline: none;
+}
+
+/* ===== Statistics Cards ===== */
+.exam-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-100);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gray-200);
+}
+
+.stat-card h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--color-gray-900);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.stat-card span {
+  font-size: 0.85rem;
+  color: var(--color-gray-500);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ===== Table Container ===== */
+.exam-table {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-gray-100);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+/* ===== Table ===== */
+.exam-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.exam-table thead {
+  background: var(--color-gray-50);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.exam-table th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-500);
+  white-space: nowrap;
+}
+
+.exam-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--color-gray-100);
+  color: var(--color-gray-700);
+  vertical-align: middle;
+}
+
+.exam-table tbody tr {
+  transition: var(--transition);
+}
+
+.exam-table tbody tr:hover {
+  background: var(--color-gray-50);
+}
+
+.exam-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== Status Badge ===== */
+.exam-table td:nth-child(4) {
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+/* You can add color coding via JS or keep it simple */
+/* ===== Actions ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-gray-400);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.actions button:hover {
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+}
+
+.actions button:first-child:hover {
+  color: var(--color-primary);
+}
+
+.actions button:nth-child(2):hover {
+  color: var(--color-primary);
+}
+
+.actions button:nth-child(3):hover {
+  color: var(--color-success);
+}
+
+.actions button:last-child:hover {
+  color: var(--color-danger);
+  background: #FEF2F2;
+}
+
+.actions button svg {
+  flex-shrink: 0;
+}
+
+/* ===== Empty State ===== */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  color: var(--color-gray-400);
+}
+
+.empty svg {
+  color: var(--color-gray-300);
+}
+
+.empty h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+/* ===== Loading ===== */
+.exam-table > p {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-gray-400);
+  font-size: 0.95rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .exam-page {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .exam-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .exam-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .create-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .exam-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    max-width: none;
+  }
+
+  .exam-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Table scroll on mobile */
+  .exam-table {
+    overflow-x: auto;
+  }
+
+  .exam-table table {
+    font-size: 0.85rem;
+    min-width: 700px;
+  }
+
+  .exam-table th,
+  .exam-table td {
+    padding: 0.6rem 0.75rem;
+  }
+
+  .actions {
+    gap: 0.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .exam-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .stat-card {
+    padding: 0.75rem 1rem;
+  }
+
+  .stat-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .exam-header h1 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ===== Scrollbar Styling (Optional) ===== */
+.exam-table::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.exam-table::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+  border-radius: 8px;
+}
+
+.exam-table::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: 8px;
+}
+
+.exam-table::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-400);
+}

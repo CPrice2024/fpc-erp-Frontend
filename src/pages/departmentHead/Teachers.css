@@ -271,10 +271,10 @@ th{
 .action-menu{
     position:absolute;
     right:15px;
-    top:42px;
+    top:60px;
     width:170px;
     background:#fff;
-    border-radius:12px;
+    border-radius:6px;
     border:1px solid #ececec;
     z-index:100;
     overflow:hidden;

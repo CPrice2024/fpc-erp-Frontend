@@ -98,11 +98,6 @@
   color: #ffffff;
 }
 
-.save-btn:hover:not(:disabled) {
-  background: #0f141e;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(26, 31, 46, 0.15);
-}
 
 .save-btn:disabled {
   opacity: 0.6;
@@ -143,6 +138,8 @@
 }
 
 .summary-card div {
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 

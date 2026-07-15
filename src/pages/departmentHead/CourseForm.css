@@ -36,7 +36,7 @@
 
 .page-header h1 {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: #1a1f2e;
   margin: 0 0 8px 0;
   display: flex;
@@ -244,7 +244,7 @@
   border: 1px solid #e2e8f0;
   flex: 1;
   justify-content: center;
-      margin-top: 20px;
+      margin-top: 2px;
     background: #2d69eb;
     width: auto;
     color: white;
@@ -265,31 +265,7 @@
     border-radius: 6px;
 }
 
-.save-btn:hover,
-.submit-btn:hover {
-    display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-  color: #475569;
-  border: 1px solid #e2e8f0;
-  flex: 1;
-  justify-content: center;
-      margin-top: 20px;
-    background: #2d69eb;
-    width: auto;
-    color: white;
-    border: none;
-    
-    border-radius: 2px;
-    cursor: pointer;
-}
+
 
 .save-btn:active,
 .submit-btn:active {
@@ -309,7 +285,7 @@
   border: 1px solid #e2e8f0;
   flex: 1;
   justify-content: center;
-      margin-top: 20px;
+      margin-top: 2px;
     background: #2d69eb;
     width: auto;
     color: white;

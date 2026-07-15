@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronRight,
   User,
+  FileQuestion,
 } from "lucide-react";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -97,6 +98,11 @@ const menuByRole = {
           label: "Create Teacher",
           path: "/department-head/teachers/create",
         },
+        
+        {
+          label: "Attendance",
+          path: "/department-head/attendance",
+        },
       ],
     },
 
@@ -108,10 +114,6 @@ const menuByRole = {
         {
           label: "All Students",
           path: "/department-head/students",
-        },
-        {
-          label: "Attendance",
-          path: "/department-head/attendance",
         },
       ],
     },
@@ -226,6 +228,25 @@ const menuByRole = {
       path: "/teacher/grades",
       icon: <GraduationCap size={18} />,
     },
+    {
+  label: "Digital Exams",
+  path: "/teacher/exams",
+  icon: <FileQuestion size={18} />,
+  subItems: [
+    {
+      label: "All Exams",
+      path: "/teacher/exams",
+    },
+    {
+      label: "Create Exam",
+      path: "/teacher/exams/create",
+    },
+    {
+      label: "Exam Results",
+      path: "/teacher/exams/results",
+    },
+  ],
+},
 
     {
       label: "Reports",

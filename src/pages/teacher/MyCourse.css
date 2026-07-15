@@ -22,7 +22,7 @@
 
 .page-header h1 {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: #252d47;
   margin: 0 0 6px 0;
   display: flex;
@@ -497,4 +497,260 @@ body.dark-mode .info-box:focus-visible {
   .loading-state {
     display: none;
   }
+}
+
+
+/* ===========================
+   DIGITAL LIBRARY
+=========================== */
+
+.library-card{
+    margin-top:30px;
+    background:#ffffff;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 8px 30px rgba(15,23,42,.08);
+    border:1px solid #eef2f7;
+}
+
+.library-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:24px;
+}
+
+.library-header h2{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:16px;
+    color:#1e293b;
+    font-weight:700;
+}
+
+.library-header svg{
+    color:#2563eb;
+}
+
+/* ===========================
+   Upload Area
+=========================== */
+
+.upload-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.upload-grid input[type="text"],
+.upload-grid input:not([type]),
+.upload-grid textarea,
+.upload-grid input[type="file"]{
+       width: 100%;
+    padding: 6px 16px;
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    background: #fafbfc;
+    font-size: 14px;
+    transition: .25s;
+    font-family: inherit;
+}
+
+.upload-grid input:focus,
+.upload-grid textarea:focus{
+    outline:none;
+    border-color:#2563eb;
+    background:#fff;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.upload-grid input[type=file]{
+    cursor:pointer;
+    padding:10px;
+}
+
+.upload-grid input[type=file]::file-selector-button{
+    border:none;
+    background:#2563eb;
+    color:#fff;
+    padding:8px 14px;
+    border-radius:8px;
+    margin-right:12px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.upload-grid input[type=file]::file-selector-button:hover{
+    background:#1d4ed8;
+}
+
+/* ===========================
+   Upload Button
+=========================== */
+
+.upload-btn{
+    border:none;
+    border-radius:6px;
+    background:#2563eb;
+    color:#fff;
+    font-size:15px;
+    font-weight:500;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    transition:.25s;
+    min-height:30px;
+}
+
+.upload-btn:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+.upload-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* ===========================
+   Book List
+=========================== */
+
+.book-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.book-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 22px;
+    border-radius:14px;
+    border:1px solid #e5e7eb;
+    background:#fafcff;
+    transition:.25s;
+}
+
+.book-item:hover{
+    border-color:#2563eb;
+    box-shadow:0 10px 24px rgba(37,99,235,.08);
+    transform:translateY(-2px);
+}
+
+.book-item>div:first-child{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.book-item svg{
+    color:#2563eb;
+}
+
+.book-item strong{
+    display:block;
+    font-size:16px;
+    color:#1e293b;
+    margin-bottom:4px;
+}
+
+.book-item p{
+    margin:0;
+    color:#64748b;
+    font-size:14px;
+}
+
+/* ===========================
+   Actions
+=========================== */
+
+.book-actions{
+    display:flex;
+    gap:12px;
+}
+
+.book-actions a,
+.book-actions button{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.25s;
+    text-decoration:none;
+}
+
+.book-actions a{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.book-actions a:hover{
+    background:#2563eb;
+    color:#fff;
+}
+
+.book-actions button{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.book-actions button:hover{
+    background:#dc2626;
+    color:#fff;
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.empty-books{
+    text-align:center;
+    padding:60px 20px;
+    border:2px dashed #dbe3ef;
+    border-radius:16px;
+    color:#94a3b8;
+    font-size:15px;
+    background:#fafbfc;
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:768px){
+
+    .library-card{
+        padding:20px;
+    }
+
+    .upload-grid{
+        grid-template-columns:1fr;
+    }
+
+    .book-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .book-actions{
+        width:100%;
+        justify-content:flex-end;
+    }
+
+    .library-header h2{
+        font-size:20px;
+    }
+
 }

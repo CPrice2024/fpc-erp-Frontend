@@ -62,6 +62,16 @@ import MyStudents from "../pages/teacher/MyStudents";
 import StudentProfile from "../pages/teacher/StudentProfile";
 import GradeEntry from "../pages/teacher/GradeEntry";
 import StudentAttendance from "../pages/teacher/Attendance";
+import ExamList from "../pages/teacher/exams/ExamList";
+import CreateExam from "../pages/teacher/exams/CreateExam";
+import EditExam from "../pages/teacher/exams/EditExam";
+import QuestionList from "../pages/teacher/exams/QuestionList";
+import ExamResults from "../pages/teacher/exams/ExamResults";
+import PreviewQuestion from "../pages/teacher/exams/PreviewQuestion";
+import PublishExam from "../pages/teacher/exams/PublishExam";
+import CreateQuestion from "../pages/teacher/exams/CreateQuestion";
+import EditQuestion from "../pages/teacher/exams/EditQuestion";
+import ViewExamResult from "../pages/teacher/exams/ViewExamResult";
 
 
 export default function AppRoutes() {
@@ -235,6 +245,42 @@ export default function AppRoutes() {
     {/* Student */}
     <Route path="student/:id" element={<StudentProfile />} />
     <Route path="grades" element={<GradeEntry />} />
+    <Route path="exams" element={<ExamList />} />
+
+<Route path="exams/create" element={<CreateExam />} />
+
+<Route path="exams/edit/:id" element={<EditExam />} />
+
+<Route
+  path="exams/:examId/questions"
+  element={<QuestionList />}
+/>
+
+<Route
+  path="exams/results"
+  element={<ExamResults />}
+/>
+<Route
+  path="questions/:id/preview"
+  element={<PreviewQuestion />}
+/>
+
+<Route
+  path="exams/:examId/publish"
+  element={<PublishExam />}
+/>
+<Route
+  path="exams/:examId/questions/create"
+  element={<CreateQuestion />}
+/>
+<Route
+  path="questions/edit/:id"
+  element={<EditQuestion />}
+/>
+<Route
+  path="exams/results/:id"
+  element={<ViewExamResult />}
+/>
 
   </Route>
 </Route>

@@ -1,0 +1,292 @@
+/* ===========================
+   Publish Exam
+=========================== */
+
+.publish-page{
+    padding:3px;
+    background:#f5f7fb00;
+    min-height:100vh;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.page-header h1{
+    font-size:30px;
+    color:#1e293b;
+    font-weight:700;
+}
+
+.back-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#ffffff;
+    color:#1b376a;
+    border:none;
+    padding:11px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#ffffff;
+}
+
+/* ===========================
+   Summary Cards
+=========================== */
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:22px;
+    margin-bottom:30px;
+}
+
+.summary-card{
+    background:#fff;
+    border-radius:6px;
+    padding:18px;
+    text-align:center;
+    transition:.3s;
+}
+
+.summary-card:hover{
+    transform:translateY(-1px);
+}
+
+.summary-card svg{
+        color: #627296;
+    margin-bottom: 0px;
+}
+
+.summary-card h3{
+    margin: 8px 0;
+    color: #34435b;
+    font-size: 18px;
+}
+
+.summary-card p{
+    color:#64748b;
+    font-size:14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.validation-card,
+.settings-card,
+.warning-box{
+    background:#fff;
+    border-radius:6px;
+    padding:30px;
+    margin-bottom:25px;
+}
+
+.validation-card h2,
+.settings-card h2{
+    color:#1e293b;
+    margin-bottom:20px;
+    border-left:5px solid #2563eb;
+    padding-left:12px;
+}
+
+/* ===========================
+   Validation
+=========================== */
+
+.validation-card ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.validation-card li{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 14px;
+    font-family: monospace;
+    color: #475569;
+}
+
+.validation-card li:last-child{
+    border-bottom:none;
+}
+
+/* ===========================
+   Settings Table
+=========================== */
+
+.settings-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.settings-card td{
+    padding:15px;
+    border-bottom:1px solid #edf2f7;
+}
+
+.settings-card td:first-child{
+    font-weight:600;
+    color:#334155;
+}
+
+.settings-card td:last-child{
+    text-align:right;
+    color:#4360a0;
+    font-weight:600;
+}
+
+/* ===========================
+   Warning
+=========================== */
+
+.warning-box{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+    background:#fff8e1;
+    border-left:6px solid #f59e0b;
+}
+
+.warning-box svg{
+    color:#f59e0b;
+    flex-shrink:0;
+}
+
+.warning-box strong{
+    display:block;
+    margin-bottom:8px;
+    color:#92400e;
+}
+
+.warning-box p{
+    margin:0;
+    color:#7c2d12;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:16px;
+    margin-top:35px;
+}
+
+.cancel-btn,
+.publish-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 28px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+    font-size:15px;
+}
+
+.cancel-btn{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.cancel-btn:hover{
+    background:#cbd5e1;
+}
+
+.publish-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.publish-btn:hover{
+    background:#15803d;
+}
+
+.publish-btn:disabled{
+    background:#94a3b8;
+    cursor:not-allowed;
+}
+
+/* ===========================
+   Loading
+=========================== */
+
+.publish-page h2{
+       text-align: center;
+    color: #334155;
+    font-size: 15px;
+    background: #f2f2f2;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+.publish-page{
+    padding:20px;
+}
+
+.page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.page-header h1{
+    font-size:24px;
+}
+
+.summary-grid{
+    grid-template-columns:1fr;
+}
+
+.settings-card td{
+    display:block;
+    width:100%;
+    text-align:left !important;
+}
+
+.settings-card tr{
+    display:block;
+    margin-bottom:12px;
+}
+
+.actions{
+    flex-direction:column;
+}
+
+.actions button{
+    width:100%;
+    justify-content:center;
+}
+
+.warning-box{
+    flex-direction:column;
+}
+
+}
