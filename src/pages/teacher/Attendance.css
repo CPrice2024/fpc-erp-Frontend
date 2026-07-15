@@ -50,6 +50,7 @@
 .header-actions button {
   display: inline-flex;
   align-items: center;
+  width: auto;
   gap: 8px;
   padding: 8px 16px;
   font-size: 13px;

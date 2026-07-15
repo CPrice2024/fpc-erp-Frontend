@@ -187,10 +187,11 @@ color: #267dff;
   font-size: 0.7rem;
 }
 
-.upload-btn {
+.upload-btnn {
      display: flex;
     align-items: center;
     gap: 8px;
+    margin-bottom: 0px;
     padding: 8px 14px;
     background: #ffffff;
     border: 1px solid #308aff;
@@ -202,7 +203,7 @@ color: #267dff;
     transition: all 0.2s ease;
 }
 
-.upload-btn:hover {
+.upload-btnn:hover {
   background: #f9f9f9;
 }
 

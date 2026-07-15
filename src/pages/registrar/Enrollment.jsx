@@ -10,7 +10,6 @@ import {
   Camera,
   Save,
   X,
-  ArrowLeft,
   ChevronRight,
   ChevronLeft
 } from "lucide-react";
@@ -1189,7 +1188,7 @@ const renderStepContent = () => {
         {/* Upload Photo */}
         <div className="form-navigation">
 
-        <label className="upload-btn">
+        <label className="upload-btnn">
 
           <Upload size={16} />
           Upload
@@ -1204,7 +1203,7 @@ const renderStepContent = () => {
         </label>
         <button
           type="button"
-          className="upload-btn"
+          className="upload-btnn"
           onClick={startCamera}
         >
           <Camera size={16} />
