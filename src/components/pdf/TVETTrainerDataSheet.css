@@ -98,16 +98,19 @@
 
 .header-right table {
   border-collapse: collapse;
+  width: auto;
   font-size: 13px;
 }
 
 .header-right td {
   border: 1px solid #999;
+  width: auto;
   padding: 6px 10px;
 }
 
 .header-right td:first-child {
   background: #f4f4f4;
+  width: auto;
   font-weight: bold;
 }
 
