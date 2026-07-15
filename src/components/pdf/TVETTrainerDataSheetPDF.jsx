@@ -45,10 +45,8 @@ export default function TVETTrainerDataSheetPDF({
           <h2>
             OFFICE OF THE REGISTRAR
           </h2>
+          <h2>የኢፌዲሪ የትምህርትና ስልጠና ባለሥልጣን</h2>
 
-          <h3>
-           የኢፌዲሪ የትምህርትና ስልጠና ባለሥልጣን
-          </h3>
 
         </div>
 

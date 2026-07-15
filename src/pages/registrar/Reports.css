@@ -27,6 +27,7 @@
 .btn-back {
   display: flex;
   align-items: center;
+  width: auto;
   gap: 8px;
   border: 1px solid #004db1;
   padding: 8px 16px;

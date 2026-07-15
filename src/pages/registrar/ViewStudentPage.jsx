@@ -1306,9 +1306,9 @@ const printTrainerSheet = useReactToPrint({
       {/* Temporary PDF Preview */}
       <div
   style={{
-    position: "absolute",
-    left: "-9999px",
-    top: 0,
+    marginTop: "40px",
+    padding: "20px",
+    background: "#f3f4f6",
   }}
 >
 
