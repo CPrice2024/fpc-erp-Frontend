@@ -184,10 +184,11 @@ const CreateDepartment = () => {
             </div>
 
             <div className="form-actions">
-              <button type="button" className="btn-secondary" onClick={() => navigate("/college-head/departments")}>
+              <button type="button" className="upload-btnn" onClick={() => navigate("/college-head/departments")}>
                 <ArrowLeft size={16} /> Cancel
+                
               </button>
-              <button type="submit" className={`btn-primary ${isLoading ? "loading" : ""}`} disabled={isLoading}>
+              <button type="submit" className={`upload-btnn ${isLoading ? "loading" : ""}`} disabled={isLoading}>
                 {isLoading ? <><div className="spinner"></div>Creating...</> : <><Save size={16} />Create Department</>}
               </button>
             </div>

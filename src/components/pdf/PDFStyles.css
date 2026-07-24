@@ -1,25 +1,27 @@
-/* ===========================
-   PDF Preview
-=========================== */
-
 .pdf-preview-wrapper{
     background:#cfd4dc00;
-    padding:40px;
+    padding:0px;
     display:flex;
     justify-content:center;
 }
 
 .pdf-page{
-    width:210mm;
-    min-height:297mm;
+    width:260mm;
+    min-height:340mm;
     background:#ffffff00;
     color:#1b1b1b;
     position:relative;
-    padding:18mm;
+    padding:2mm;
     box-sizing:border-box;
-    overflow:hidden;
+    overflow:visible;
     font-family:"Segoe UI",Arial,sans-serif;
     box-shadow:0 5px 18px rgba(0,0,0,.15);
+}
+.header h1 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-left: 165px;
+    color: #000000;
 }
 
 /* ===========================
@@ -34,7 +36,7 @@
 
     font-size:64px;
     font-weight:700;
-    color:#0f3b74;
+    color:#04080e;
 
     opacity:.05;
 
@@ -57,7 +59,7 @@
 
     gap:18px;
 
-    border-bottom:3px solid #123d74;
+    border-bottom:3px solid #000000;
 
     padding-bottom:5px;
 
@@ -84,6 +86,14 @@
     object-fit:contain;
 
 }
+.college-stamp{
+
+    width: 135px;
+    height: auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+
+}
 
 .header{
 
@@ -91,25 +101,15 @@
 
 }
 
-.header h1{
 
-    margin:0;
-
-    color:#333333;
-
-    font-size:24px;
-
-    font-weight:700;
-
-}
 
 .header h2{
 
     margin:8px 0;
 
-    color:#2c2c2c;
+    color:#000000;
 
-    font-size:18px;
+    font-size:16px;
 
     font-weight:600;
 
@@ -118,9 +118,9 @@
 
     margin:8px 0;
 
-    color:#2c2c2c;
+    color:#000000;
 
-    font-size:14px;
+    font-size:16px;
 
     font-weight:600;
 
@@ -130,9 +130,9 @@
 
     margin:0;
 
-    font-size:14px;
+    font-size:16px;
 
-    color:#666;
+    color:#000000;
 
 }
 
@@ -142,7 +142,7 @@
 
     background:#f7f8fb00;
 
-    font-size:13px;
+    font-size:15px;
 
     line-height:1.8;
 
@@ -189,12 +189,10 @@ Student Card
 }
 
 .student-basic h2{
-
-    margin:0 0 6px;
-
-    color:#123d74;
-
-    font-size:20px;
+    margin: 0 0 6px;
+    color: #000000;
+    font-size: 20px;
+    font-family: math;
 
 }
 
@@ -204,14 +202,14 @@ Student Card
 
     border-collapse:collapse;
 
-    font-size:14px;
+    font-size:16px;
 
 }
 
 .student-basic td{
 
     padding:6px 10px;
-
+    color: #000000;
     border-bottom:1px solid #e5e5e5;
 
 }
@@ -220,6 +218,8 @@ Student Card
 
     width:140px;
 
+    color: black;
+    font-size: 13px;
     background:#ffffff;
 
     font-weight:600;
@@ -232,7 +232,7 @@ Sections
 
 .pdf-section{
 
-    margin-bottom:4px;
+    margin-bottom:2px;
 
 }
 
@@ -240,19 +240,19 @@ Sections
 
     background:#ffffff;
 
-    color:white;
+    color:rgb(0, 0, 0);
 
-    padding:9px 16px;
+    padding:5px 16px;
 
     border-radius:6px;
 
-    font-size:15px;
+    font-size:16px;
 
-    font-weight:700;
+    font-weight:600;
 
     letter-spacing:1px;
 
-    margin-bottom:2px;
+    margin-bottom:0px;
 
 }
 
@@ -260,7 +260,7 @@ Sections
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(4,1fr);
 
     gap:4px;
 
@@ -272,19 +272,24 @@ Sections
 
     border-radius:8px;
 
-    padding:4px 14px;
+    padding:2px 14px;
 
     background:rgba(255, 255, 255, 0);
 
+}
+tr {
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;
 }
 
 .section-item strong{
 
     display:block;
 
-    color:#666;
+    color:#000000;
 
-    font-size:11px;
+    font-size:13px;
 
     text-transform:uppercase;
 
@@ -296,7 +301,7 @@ Sections
 
 .section-item span{
 
-    font-size:14px;
+    font-size:16px;
 
 }
 
@@ -350,9 +355,9 @@ Seal & Signature
 
     margin:0;
 
-    color:#393939;
+    color:#000000;
 
-    font-size:14px;
+    font-size:16px;
 
 }
 
@@ -360,59 +365,11 @@ Seal & Signature
 
     margin-top:4px;
 
-    font-size:12px;
+    font-size:14px;
 
-    color:#666;
-
-}
-
-.seal-circle{
-
-    width:120px;
-
-    height:120px;
-
-    border:4px double #123d74;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
+    color:#000000;
 
 }
-
-.seal-inner{
-
-    width:92px;
-
-    height:92px;
-
-    border:2px dashed #123d74;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    font-size:12px;
-
-    color:#3b3b3b;
-
-    font-weight:bold;
-
-}
-
-/* ===========================
-Footer
-=========================== */
 
 .pdf-footer{
 
@@ -424,9 +381,9 @@ Footer
 
     text-align:center;
 
-    font-size:11px;
+    font-size:14px;
 
-    color:#777;
+    color:#242424;
 
 }
 
@@ -494,15 +451,15 @@ Print
     width:100%;
     border-collapse:collapse;
     margin-top:10px;
-    font-size:13px;
-    color: #1b1b1b;
+    font-size:15px;
+    color: #0d0d0d;
 }
 
 .course-table th{
-    background:#dbdbdb;
-    color:#000000;
-    padding:10px;
-    border:1px solid #404d5f;
+      background: #f1f1f1;
+    color: #000000;
+    padding: 10px;
+    border: 1px solid #404d5f;
 }
 
 .course-table td{
@@ -532,14 +489,14 @@ Print
 }
 
 .level-title {
-  background: #e5e5e5;
-  color: rgb(0, 0, 0);
-  padding: 8px 12px;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+    background: #f9f9f900;
+    color: rgb(0, 0, 0);
+    padding: 0px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
 .level-summary {
@@ -547,7 +504,7 @@ Print
   padding: 10px 15px;
   border: 1px solid #ccc;
   background: #f8f9fa;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.8;
 }
 

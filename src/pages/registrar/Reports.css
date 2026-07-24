@@ -58,14 +58,14 @@
 }
 
 .header-icon {
-  color: #3b82f6;
+  color: #2e4771;
 }
 
 .header-title h1 {
-  font-size: 18px;
-  font-weight: 500;
-  color: #3572ff;
-  margin: 0;
+      font-size: 17px;
+    font-weight: 500;
+    color: #42464f;
+    margin: 0;
 }
 
 .header-title span {
@@ -110,7 +110,7 @@
   gap: 10px;
   padding: 12px 24px;
   background: white;
-  border: 1px solid #e2e8f0;
+      border: 1px solid #a1a1a1;
   border-radius: 12px;
   font-size: 15px;
   font-weight: 500;
@@ -125,9 +125,9 @@
 }
 
 .tab-btn.active {
-  background: #ffffff;
-  border-color: #3b82f6;
-  color: #3b82f6;
+  background: #2759d0;
+    border-color: #3b82f6;
+    color: #ffffff;
 }
 
 .tab-badge {
@@ -198,34 +198,6 @@
   margin-bottom: 20px;
 }
 
-.stat-card {
-  background: white;
-  padding: 20px 24px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-}
-
-.stat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  background: #e9e9e9;
-    border-radius: 50%;
-    color: #3b82f6;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
 
 .stat-total .stat-icon { background: #eff6ff; color: #3b82f6; }
 .stat-active .stat-icon { background: #f0fdf4; color: #22c55e; }

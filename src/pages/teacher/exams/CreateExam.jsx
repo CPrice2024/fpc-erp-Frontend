@@ -132,7 +132,7 @@ const loadTeacherCourse = async () => {
       <div className="page-header">
 
         <button
-          className="back-btn"
+          className="upload-btnn"
           onClick={() =>
             navigate("/teacher/exams")
           }
@@ -426,7 +426,7 @@ const loadTeacherCourse = async () => {
 
           <button
             type="button"
-            className="cancel-btn"
+            className="upload-btnn"
             onClick={() =>
               navigate("/teacher/exams")
             }
@@ -436,7 +436,7 @@ const loadTeacherCourse = async () => {
 
           <button
             type="submit"
-            className="save-btn"
+            className="upload-btnn"
             disabled={loading}
           >
             <Save size={18} />

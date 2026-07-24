@@ -218,33 +218,7 @@
   margin-bottom: 16px;
 }
 
-.stat-card {
-  background: white;
-  padding: 20px 24px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border: 1px solid #e2e8f0;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-}
 
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-}
-
-.stat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
 
 .stat-total .stat-icon { background: #eff6ff; color: #3b82f6; }
 .stat-active .stat-icon { background: #f0fdf4; color: #22c55e; }

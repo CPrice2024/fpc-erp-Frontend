@@ -148,26 +148,7 @@ function Topbar({ setIsOpen }) {
       {/* RIGHT */}
       <div className="topbar-right">
         {/* DARK MODE */}
-        <button
-          className="topbar-icon-btn"
-          onClick={() => setDarkMode(!darkMode)}
-          title={darkMode ? "Light Mode" : "Dark Mode"}
-        >
-          {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
-
-        {/* NOTIFICATIONS */}
-        <div className="topbar-dropdown-wrapper">
-          <button
-            className="topbar-icon-btn notification-btn"
-            onClick={() => setShowNotifications(!showNotifications)}
-            title="Notifications"
-          >
-            <Bell size={18} />
-            {unreadCount > 0 && (
-              <span className="notification-badge">{unreadCount}</span>
-            )}
-          </button>
+       
 
           {showNotifications && (
             <div className="dropdown notifications-dropdown">
@@ -266,7 +247,6 @@ function Topbar({ setIsOpen }) {
           )}
         </div>
       </div>
-    </div>
   );
 }
 

@@ -114,7 +114,7 @@ export default function CreateTeacher() {
   return (
     <div className="create-teacher-page">
       <div className="create-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
+        <button className="upload-btnn" onClick={() => navigate(-1)}>
           <ArrowLeft size={18} />
           Back
         </button>
@@ -294,7 +294,7 @@ export default function CreateTeacher() {
 
           <button
             onClick={handleSubmit}
-            className={`create-btn ${loading ? "disabled" : ""}`}
+            className={`upload-btnn ${loading ? "disabled" : ""}`}
             disabled={loading}
           >
             {loading ? (

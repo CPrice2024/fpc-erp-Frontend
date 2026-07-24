@@ -48,12 +48,14 @@ export default function MyStudents() {
   };
 
   const getStatusClass = (status) => {
-    const statusMap = {
-      active: "active",
-      inactive: "inactive",
-      suspended: "suspended",
-      graduated: "graduated",
-    };
+   const statusMap = {
+  enrolled: "active",
+  suspended: "suspended",
+  graduated: "graduated",
+  transfer: "transfer",
+  withdrawn: "inactive",
+  deferred: "inactive",
+};
     return statusMap[status?.toLowerCase()] || "active";
   };
 
@@ -165,9 +167,13 @@ export default function MyStudents() {
                 </td>
                 <td data-label="Level">{student.level || "N/A"}</td>
                 <td data-label="Status">
-                  <span className={`active-status ${getStatusClass(student.status)}`}>
-                    {student.status || "active"}
-                  </span>
+                  <span
+  className={`active-status ${getStatusClass(
+    student.enrollmentStatus
+  )}`}
+>
+  {student.enrollmentStatus || "Enrolled"}
+</span>
                 </td>
                 <td data-label="Action">
                   <button

@@ -71,7 +71,7 @@ export default function CreateRegistrar() {
         </div>
         <div className="header-actions-registrar">
           <button
-            className="btn-secondary-registrar"
+           className="upload-btnn"
             onClick={() => navigate("/college-head/registrars")}
           >
             <ArrowLeft size={18} />
@@ -109,16 +109,16 @@ export default function CreateRegistrar() {
               </div>
             </div>
             <div className="cred-actions">
-              <button className="cred-btn primary" onClick={copyCredentials}>
+              <button className="upload-btnn" onClick={copyCredentials}>
                 <Copy size={16} />
                 Copy Credentials
               </button>
-              <button className="cred-btn" onClick={() => window.print()}>
+              <button className="upload-btnn" onClick={() => window.print()}>
                 <Printer size={16} />
                 Print
               </button>
               <button
-                className="cred-btn"
+                className="upload-btnn"
                 onClick={() => navigate("/college-head/registrars")}
               >
                 View All Registrars
@@ -182,7 +182,7 @@ export default function CreateRegistrar() {
           <div className="form-actions-registrar">
             <button
               type="button"
-              className="btn-cancel-registrar"
+              className="upload-btnn"
               onClick={() => navigate("/college-head/registrars")}
             >
               <ArrowLeft size={16} />
@@ -190,7 +190,7 @@ export default function CreateRegistrar() {
             </button>
             <button
               type="submit"
-              className="btn-submit-registrar"
+              className="upload-btnn"
               disabled={loading}
             >
               {loading ? (

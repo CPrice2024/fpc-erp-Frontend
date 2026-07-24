@@ -6,6 +6,7 @@ import {
   BookOpen,
   ClipboardCheck,
   GraduationCap,
+  UserX,
   LogOut,
   Menu,
   X,
@@ -67,11 +68,6 @@ const menuByRole = {
         path: "/college-head/reports",
         icon: <ClipboardCheck size={18} />,
       },
-      {
-      label: "Profile",
-      path: "/department-head/profile",
-      icon: <User size={18} />,
-    },
     ],
   },
 
@@ -169,6 +165,12 @@ const menuByRole = {
         icon: <GraduationCap size={18} />,
       },
       {
+  label: "Inactive Students",
+  path: "/registrar/inactive-students",
+  icon: <UserX size={18} />,
+},
+
+      {
         label: "Enrollment",
         path: "/registrar/enrollment",
         icon: <BookOpen size={18} />,
@@ -249,12 +251,6 @@ const menuByRole = {
 },
 
     {
-      label: "Reports",
-      path: "/teacher/reports",
-      icon: <ClipboardCheck size={18} />,
-    },
-
-    {
       label: "Profile",
       path: "/teacher/profile",
       icon: <User size={18} />,
@@ -332,7 +328,7 @@ const isActive = (path) => {
         </div>
 
         <div>
-          <h2>FPC</h2>
+          <h2>Tesfa college</h2>
         </div>
       </div>
 

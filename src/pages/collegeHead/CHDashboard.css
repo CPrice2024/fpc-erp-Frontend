@@ -19,45 +19,7 @@
   margin-bottom: 32px;
 }
 
-.stat-card {
-    background: #ffffff;
-    border: 1px solid #eef2f6;
-    border-radius: 20px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transition: all 0.2s ease;
-}
 
-.stat-card:hover {
-  border-color: #e2e8f0;
-}
-
-.stat-card svg {
-  width: 32px;
-  height: 32px;
-  color: #3b82f6;
-  background: #ececec00;
-  padding: 8px;
-  border-radius: 14px;
-}
-
-.stat-card .stat-value {
-  font-size: 22px;
-  font-weight: 600;
-  color: #3a63eb;
-  line-height: 1.2;
-  margin-bottom: 4px;
-}
-
-.stat-card .stat-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
 
 /* ============================================
    VISUALIZATION SECTION
@@ -83,7 +45,7 @@
 .section-header h2 {
   font-size: 16px;
   font-weight: 500;
-  color: #2e63ff;
+  color: #212121;
   margin: 0;
 }
 
@@ -149,10 +111,10 @@
 }
 
 .chart-header h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2d62ff;
-  margin: 0;
+      font-size: 14px;
+    font-weight: 500;
+    color: #212121;
+    margin: 0;
 }
 
 .chart-header svg {
@@ -181,9 +143,9 @@
 }
 
 .dept-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: #1a1f2e;
+ font-weight: 500;
+    color: #2f2f2f;
+    font-size: 13px;
 }
 
 .dept-students {
@@ -226,21 +188,21 @@
 }
 
 .analytics-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1a1f2e;
-  margin: 0 0 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+      font-size: 16px;
+    font-weight: 500;
+    color: #494949;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .level-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #d1d1d1;
 }
 
 .level-row:last-child {
@@ -254,14 +216,14 @@
 }
 
 .level-row span:last-child {
-  font-size: 18px;
-  font-weight: 700;
-  color: #3b82f6;
-  background: #eff6ff;
-  padding: 4px 12px;
-  border-radius: 20px;
-  min-width: 60px;
-  text-align: center;
+       font-size: 18px;
+    font-weight: 500;
+    color: #838383;
+    background: #f5f5f5;
+    padding: 0px 7px;
+    border-radius: 3px;
+    min-width: 60px;
+    text-align: center;
 }
 
 /* ============================================
@@ -288,12 +250,12 @@
 }
 
 .department-card h3 {
-  font-size: 14px;
-  font-weight: 500;
-  color: #2058ff;
-  margin: 0 0 16px 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #eef2f6;
+font-size: 14px;
+    font-weight: 500;
+    color: #414141;
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #9f9f9f;
 }
 
 .dept-metrics {
@@ -306,7 +268,7 @@
 .dept-metrics div {
   text-align: center;
   padding: 12px 8px;
-  background: #f8fafc;
+  background: #f6f6f6;
   border-radius: 12px;
 }
 
@@ -314,23 +276,23 @@
   display: block;
   font-size: 16px;
   font-weight: 500;
-  color: #3c6af4;
+  color: #5a5a5b;
   margin-bottom: 4px;
 }
 
 .dept-metrics span {
-  font-size: 11px;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+    font-size: 11px;
+    color: #2f2f2f;
+    font-family: monospace;
+    letter-spacing: 0.5px;
 }
 
 .department-card p {
-  font-size: 13px;
-  color: #6b7280;
-  margin: 0;
-  padding-top: 12px;
-  border-top: 1px solid #eef2f6;
+    font-size: 13px;
+    color: #3f5789;
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid #6b87a2;
 }
 
 /* ============================================
@@ -414,19 +376,23 @@
 }
 
 .clear-filters {
-  padding: 10px 20px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #ef4444;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    width: auto;
+    gap: 6px;
+    padding: 11px 20px;
+    background: #387bbe;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .clear-filters:hover {
-  background: #fef2f2;
+  background: #387bbe;
   border-color: #fecaca;
 }
 
@@ -441,22 +407,24 @@
 }
 
 .departments-table thead th {
-  text-align: left;
-  padding: 16px 20px;
-  background: #f8fafc;
-  font-size: 12px;
-  font-weight: 600;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid #eef2f6;
+    text-align: left;
+    padding: 16px 20px;
+    background: #4180d0;
+    font-size: 12px;
+    font-family: ui-monospace;
+    font-weight: 500;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eef2f6;
 }
 
 .departments-table tbody td {
-  padding: 16px 20px;
-  font-size: 14px;
-  color: #1a1f2e;
-  border-bottom: 1px solid #f1f5f9;
+    padding: 6px 20px;
+    font-size: 14px;
+    color: #242424;
+    font-weight: 400;
+    border-bottom: 1px solid #f1f5f9;
 }
 
 .departments-table tbody tr:hover {
@@ -493,9 +461,9 @@
 }
 
 .dept-name {
-  font-weight: 600;
-  color: #1a1f2e;
-  margin-bottom: 4px;
+      font-weight: 500;
+    color: #474747;
+    font-family: monospace;
 }
 
 .dept-status {
@@ -618,9 +586,9 @@
 }
 
 .page-number.active {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: #ffffff;
+     background: #dedede;
+    color: #141414;
+    border-color: #727272;
 }
 
 /* Loading State */
@@ -689,8 +657,12 @@
 }
 
 .summary-label {
-  font-size: 13px;
-  color: #6b7280;
+     display: block;
+    font-size: 12px;
+    color: #4e4e4e;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .summary-value {

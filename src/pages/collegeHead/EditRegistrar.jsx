@@ -176,7 +176,7 @@ export default function EditRegistrar() {
           <div className="form-actions-registrar">
             <button
               type="button"
-              className="btn-cancel-registrar"
+              className="upload-btnn"
               onClick={() => navigate("/college-head/registrars")}
             >
               <ArrowLeft size={16} />
@@ -184,7 +184,7 @@ export default function EditRegistrar() {
             </button>
             <button
               type="submit"
-              className="btn-submit-registrar"
+              className="upload-btnn"
               disabled={saving}
             >
               {saving ? (

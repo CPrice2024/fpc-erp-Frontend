@@ -23,14 +23,7 @@
   padding: 10px;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background: #2f80ed;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+
 
 .success { color: green; }
 .error { color: red; }

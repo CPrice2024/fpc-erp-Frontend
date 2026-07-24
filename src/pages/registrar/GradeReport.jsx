@@ -225,7 +225,7 @@ if (filters.status === "failed") {
 
   // ===== EXPORT FUNCTIONS =====
   const exportToCSV = () => {
-    const headers = ["Student ID", "Name", "Department", "Level", "Status", "GPA", "Credits"];
+    const headers = ["Student ID", "Name", "Department", "Level", "Status", "GPA", "nominalDurations"];
     const rows = filteredSummary.map(s => [
   s.studentId,
   `${s.firstName} ${s.fatherName}`,
@@ -271,10 +271,6 @@ if (filters.status === "failed") {
           </div>
         </div>
         <div className="header-right">
-          <button className="btn-export" onClick={exportToCSV}>
-            <Download size={18} />
-            Export CSV
-          </button>
           <button className="btn-print" onClick={handlePrint}>
             <Printer size={18} />
             Print
@@ -368,12 +364,14 @@ if (filters.status === "failed") {
             <select
               value={filters.level}
               onChange={(e) => setFilters({ ...filters, level: e.target.value })}
-            >
+            > 
+              <option value="Short Term">Short Term</option>
               <option value="Level I">Level I</option>
-<option value="Level II">Level II</option>
+              <option value="Level II">Level II</option>
 <option value="Level III">Level III</option>
 <option value="Level IV">Level IV</option>
 <option value="Level V">Level V</option>
+
             </select>
           </div>
 
@@ -436,7 +434,7 @@ if (filters.status === "failed") {
                   <th>Level</th>
                   <th>Status</th>
                   <th>GPA</th>
-                  <th>Credits</th>
+                  <th>nominalDurations</th>
                   <th>Action</th>
                 </tr>
               </thead>

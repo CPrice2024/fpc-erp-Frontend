@@ -227,26 +227,6 @@ export default function Registrars() {
       </button>
 
       <button
-        className="toggle-action"
-        onClick={() => {
-          toggleStatus(r._id);
-          setActiveMenu(null);
-        }}
-      >
-        {r.status === "active" ? (
-          <>
-            <UserX size={16}/>
-            Deactivate
-          </>
-        ) : (
-          <>
-            <UserCheck size={16}/>
-            Activate
-          </>
-        )}
-      </button>
-
-      <button
         className="delete-action"
         onClick={() => {
           deleteRegistrar(r._id);

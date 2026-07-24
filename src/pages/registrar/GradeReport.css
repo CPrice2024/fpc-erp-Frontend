@@ -92,35 +92,7 @@
   margin-bottom: 28px;
 }
 
-.stat-card {
-  background: white;
-  padding: 20px 24px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-}
 
-.stat-card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
-}
-
-.stat-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.stat-total .stat-icon {
-  background: #ececec;
-  color: #3b82f6;
-}
 .stat-passed .stat-icon {
   background: #ececec;
   color: #22c55e;

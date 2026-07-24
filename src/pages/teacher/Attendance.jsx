@@ -262,7 +262,7 @@ if (loading) {
 
         <button
         onClick={loadStudents}
-        className="print-btn"
+        className="upload-btnn"
         >
 
             <RefreshCw size={18}/>
@@ -271,7 +271,7 @@ if (loading) {
 
         </button>
 
-        <button className="print-btn">
+        <button className="upload-btnn">
 
             <Printer size={18}/>
 
@@ -279,16 +279,8 @@ if (loading) {
 
         </button>
 
-        <button className="export-btn">
-
-            <Download size={18}/>
-
-            Export
-
-        </button>
-
         <button
-        className="print-btn"
+        className="upload-btnn"
         onClick={handleSave}
         disabled={saving}
         >
@@ -347,7 +339,7 @@ if (loading) {
 
 </div>
 
-<div className="summary-card warning">
+<div className="summary-card success">
 
 <Clock3 size={24}/>
 

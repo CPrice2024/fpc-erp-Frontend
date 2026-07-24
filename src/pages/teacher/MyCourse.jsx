@@ -58,23 +58,28 @@ setBooks(list);
     }
   };
 
-  const handleUpload = async () => {
-  if (!title || !file) {
-    return alert("Select a file.");
+const handleUpload = async () => {
+  console.log("========== UPLOAD ==========");
+  console.log("Title:", title);
+  console.log("Description:", description);
+  console.log("File:", file);
+
+  if (!title) {
+    alert("Title is empty");
+    return;
+  }
+
+  if (!file) {
+    alert("File is empty");
+    return;
   }
 
   try {
     setUploading(true);
 
     const formData = new FormData();
-
     formData.append("title", title);
-
-    formData.append(
-      "description",
-      description
-    );
-
+    formData.append("description", description);
     formData.append("book", file);
 
     await uploadBook(formData);
@@ -82,26 +87,15 @@ setBooks(list);
     alert("Book uploaded.");
 
     setTitle("");
-
     setDescription("");
-
     setFile(null);
 
     loadCourse();
-
   } catch (err) {
-
     console.error(err);
-
-    alert(
-      err.response?.data?.message ||
-      "Upload failed."
-    );
-
+    alert(err.response?.data?.message || "Upload failed.");
   } finally {
-
     setUploading(false);
-
   }
 };
 
@@ -137,7 +131,7 @@ const removeBook = async (id) => {
           <h2>Unable to Load Course</h2>
           <p>{error}</p>
           <button 
-            className="retry-btn" 
+            className="upload-btnn"
             onClick={loadCourse}
             style={{
               marginTop: "12px",
@@ -223,8 +217,8 @@ const removeBook = async (id) => {
           <div className="info-box">
             <BookOpen size={22} />
             <div>
-              <span>Credit Hour</span>
-              <strong>{course.creditHour || "N/A"}</strong>
+              <span>Nominal Duration</span>
+              <strong>{course.nominalDuration || "N/A"}</strong>
             </div>
           </div>
 
@@ -270,17 +264,18 @@ const removeBook = async (id) => {
     />
 
     <input
-      type="file"
-      accept=".pdf,.doc,.docx,.ppt,.pptx"
-      onChange={(e)=>
-        setFile(e.target.files[0])
-      }
-    />
+  type="file"
+  accept=".pdf,.doc,.docx,.ppt,.pptx"
+  onChange={(e) => {
+    console.log("Selected:", e.target.files[0]);
+    setFile(e.target.files[0]);
+  }}
+/>
 
     <button
       onClick={handleUpload}
       disabled={uploading}
-      className="upload-btn"
+      className="upload-btnn"
     >
 
       <Upload size={18}/>
@@ -346,6 +341,7 @@ const removeBook = async (id) => {
             </a>
 
             <button
+            className="upload-btnn"
               onClick={()=>
                 removeBook(book._id)
               }

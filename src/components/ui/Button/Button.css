@@ -1,0 +1,337 @@
+/* ========================================
+   BUTTON BASE
+======================================== */
+
+.btn {
+  --btn-bg: #17569d;
+  --btn-color: #ffffff;
+  --btn-border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+
+  min-height: 42px;
+  padding: 0.7rem 1.1rem;
+
+  border: 1px solid var(--btn-border);
+  border-radius: 10px;
+
+  background: var(--btn-bg);
+  color: var(--btn-color);
+
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+
+  cursor: pointer;
+  user-select: none;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+/* ========================================
+   STATES
+======================================== */
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(.98);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(23,86,157,.20);
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================
+   SIZES
+======================================== */
+
+.btn-xs{
+  min-height:30px;
+  padding:.3rem .65rem;
+  font-size:.75rem;
+}
+
+.btn-sm{
+  min-height:36px;
+  padding:.45rem .9rem;
+  font-size:.85rem;
+}
+
+.btn-md{
+  min-height:42px;
+  padding:.65rem 1rem;
+  font-size:.92rem;
+}
+
+.btn-lg{
+  min-height:50px;
+  padding:.85rem 1.4rem;
+  font-size:1rem;
+}
+
+.btn-xl{
+  min-height:58px;
+  padding:1rem 1.8rem;
+  font-size:1.08rem;
+}
+
+/* ========================================
+   WIDTH
+======================================== */
+
+.btn-full{
+  width:100%;
+}
+
+/* ========================================
+   SHAPES
+======================================== */
+
+.btn-rounded{
+  border-radius:999px;
+}
+
+.btn-square{
+  width:42px;
+  height:42px;
+  padding:0;
+}
+
+/* ========================================
+   ICON
+======================================== */
+
+.btn-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:0;
+}
+
+.btn-icon svg{
+  width:18px;
+  height:18px;
+}
+
+.btn-icon-only{
+  width:42px;
+  height:42px;
+  padding:0;
+}
+
+/* ========================================
+   PRIMARY
+======================================== */
+
+.btn-primary{
+  --btn-bg:#17569d;
+  --btn-color:#ffffff;
+  --btn-border:#17569d;
+}
+
+.btn-primary:hover:not(:disabled){
+  --btn-bg:#14487f;
+}
+
+/* ========================================
+   SECONDARY
+======================================== */
+
+.btn-secondary{
+  --btn-bg:#64748b;
+  --btn-color:#ffffff;
+  --btn-border:#64748b;
+}
+
+.btn-secondary:hover:not(:disabled){
+  --btn-bg:#475569;
+}
+
+/* ========================================
+   SUCCESS
+======================================== */
+
+.btn-success{
+  --btn-bg:#16a34a;
+  --btn-color:#ffffff;
+  --btn-border:#16a34a;
+}
+
+.btn-success:hover:not(:disabled){
+  --btn-bg:#15803d;
+}
+
+/* ========================================
+   DANGER
+======================================== */
+
+.btn-danger{
+  --btn-bg:#dc2626;
+  --btn-color:#ffffff;
+  --btn-border:#dc2626;
+}
+
+.btn-danger:hover:not(:disabled){
+  --btn-bg:#b91c1c;
+}
+
+/* ========================================
+   WARNING
+======================================== */
+
+.btn-warning{
+  --btn-bg:#ea580c;
+  --btn-color:#ffffff;
+  --btn-border:#ea580c;
+}
+
+.btn-warning:hover:not(:disabled){
+  --btn-bg:#c2410c;
+}
+
+/* ========================================
+   INFO
+======================================== */
+
+.btn-info{
+  --btn-bg:#0284c7;
+  --btn-color:#ffffff;
+  --btn-border:#0284c7;
+}
+
+.btn-info:hover:not(:disabled){
+  --btn-bg:#0369a1;
+}
+
+/* ========================================
+   OUTLINE
+======================================== */
+
+.btn-outline{
+  --btn-bg:#ffffff;
+  --btn-color:#17569d;
+  --btn-border:#cbd5e1;
+}
+
+.btn-outline:hover:not(:disabled){
+  --btn-bg:#eff6ff;
+  --btn-border:#17569d;
+}
+
+/* ========================================
+   GHOST
+======================================== */
+
+.btn-ghost{
+  --btn-bg:transparent;
+  --btn-color:#17569d;
+  --btn-border:transparent;
+}
+
+.btn-ghost:hover:not(:disabled){
+  --btn-bg:#eff6ff;
+}
+
+/* ========================================
+   LIGHT
+======================================== */
+
+.btn-light{
+  --btn-bg:#f8fafc;
+  --btn-color:#1e293b;
+  --btn-border:#e2e8f0;
+}
+
+.btn-light:hover:not(:disabled){
+  --btn-bg:#e2e8f0;
+}
+
+/* ========================================
+   DARK
+======================================== */
+
+.btn-dark{
+  --btn-bg:#0f172a;
+  --btn-color:#ffffff;
+  --btn-border:#0f172a;
+}
+
+.btn-dark:hover:not(:disabled){
+  --btn-bg:#1e293b;
+}
+
+/* ========================================
+   LOADING
+======================================== */
+
+.btn-loading{
+  pointer-events:none;
+}
+
+.btn-spinner{
+  width:16px;
+  height:16px;
+
+  border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff;
+
+  border-radius:50%;
+
+  animation:btn-spin .8s linear infinite;
+}
+
+/* Outline Spinner */
+
+.btn-outline .btn-spinner,
+.btn-light .btn-spinner,
+.btn-ghost .btn-spinner{
+  border:2px solid rgba(23,86,157,.25);
+  border-top-color:#17569d;
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes btn-spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width:768px){
+
+  .btn{
+    width:100%;
+  }
+
+  .btn-icon-only{
+    width:42px;
+  }
+
+}

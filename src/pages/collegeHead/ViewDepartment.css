@@ -16,6 +16,14 @@
   flex-wrap: wrap;
   gap: 16px;
 }
+.form-card h2{
+      display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #0f172a;
+    font-size: 20px;
+}
 
 .page-title-section h1 {
   font-size: 18px;

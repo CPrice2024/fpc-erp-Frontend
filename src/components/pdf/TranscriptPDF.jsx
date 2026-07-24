@@ -1,6 +1,6 @@
 import "./PDFStyles.css";
 import logo from "../../assets/FPClogo.png";
-
+import stamp from "../../assets/stamp_fpc.png";
 
 
 export default function TranscriptPDF({
@@ -10,8 +10,8 @@ export default function TranscriptPDF({
 
   if (!student) return null;
 
-  const totalCredits = courses.reduce(
-    (sum, c) => sum + (c.creditHour || c.credits || 0),
+  const totalnominalDuration = courses.reduce(
+    (sum, c) => sum + (c.nominalDuration || c.nominalDuration || 0),
     0
   );
 
@@ -34,8 +34,7 @@ export default function TranscriptPDF({
       <div className="pdf-page transcript-page">
 
         <div className="pdf-watermark">
-          Federal Prison College
-        </div>
+          Tesfa technical and vocational training college        </div>
 
         {/* Header */}
 
@@ -51,15 +50,15 @@ export default function TranscriptPDF({
 
           <div className="header">
 
-            <h1>FEDERAL PRISON COLLEGE</h1>
+            <h1>Tesfa technical and vocational training college</h1>
 
             <h2>
               OFFICE OF THE REGISTRAR
             </h2>
 
-            <h3>
+            <h2>
               OFFICIAL ACADEMIC TRANSCRIPT
-            </h3>
+            </h2>
 
           </div>
 
@@ -171,9 +170,9 @@ export default function TranscriptPDF({
   {Object.entries(groupedCourses).map(
     ([level, levelCourses]) => {
 
-      const levelCredits = levelCourses.reduce(
+      const levelNominalDuration = levelCourses.reduce(
         (sum, c) =>
-          sum + (c.creditHour || c.credits || 0),
+          sum + (c.nominalDuration || c.nominalDuration || 0),
         0
       );
 
@@ -206,7 +205,7 @@ export default function TranscriptPDF({
 
                 <th>Course Title</th>
 
-                <th>Credit Hour</th>
+                <th>Nominal Duration</th>
 
                 <th>Grade</th>
 
@@ -234,7 +233,7 @@ export default function TranscriptPDF({
                     </td>
 
                     <td>
-                      {course.creditHour}
+                      {course.nominalDuration}
                     </td>
 
                     <td>
@@ -262,11 +261,11 @@ export default function TranscriptPDF({
 
             <strong>
 
-              Total Credit Hours:
+              Total Nominal Durations:
 
             </strong>
 
-            {levelCredits}
+            {levelNominalDuration}
 
             <br />
 
@@ -292,10 +291,10 @@ export default function TranscriptPDF({
 
     <div>
 
-        <strong>Total Credit Hours</strong>
+        <strong>Total Nominal Durations</strong>
 
         <span>
-            {totalCredits}
+            {totalnominalDuration}
         </span>
 
     </div>
@@ -346,35 +345,12 @@ export default function TranscriptPDF({
 
             </div>
 
-            <div className="signature-card">
-
-              <div className="signature-line"></div>
-
-              <h4>
-                College Head
-              </h4>
-
-            </div>
+           
 
           </div>
-
-          <div className="seal-circle">
-
-            <div className="seal-inner">
-
-              VIRTUAL
-
-              <br/>
-
-              COLLEGE
-
-              <br/>
-
-              SEAL
-
+           <div className="logo-area">
+              <img src={stamp} alt="College Stamp" className="college-stamp" />
             </div>
-
-          </div>
 
         </div>
 
@@ -384,7 +360,7 @@ export default function TranscriptPDF({
 
           <br/>
 
-          Federal Prison College • Registrar Office
+          Tesfa technical and vocational training college • Registrar Office
 
         </div>
 

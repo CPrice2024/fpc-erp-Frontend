@@ -26,7 +26,7 @@ export default function CreateCourse() {
   level: "",
   semester: "",
   section: "",
-  creditHour: 3,
+  nominalDuration: 30,
   status: "active",
 });
 
@@ -38,8 +38,8 @@ export default function CreateCourse() {
     
     if (!formData.courseCode.trim()) {
       newErrors.courseCode = "Course code is required";
-    } else if (!/^[A-Z]{2,4}[0-9]{3,4}$/.test(formData.courseCode.toUpperCase())) {
-      newErrors.courseCode = "Format: 2-4 letters followed by 3-4 numbers (e.g., CS101)";
+    } else if (!/^[A-Z]{2,10}[0-9]{2,10}$/.test(formData.courseCode.toUpperCase())) {
+      newErrors.courseCode = "Format: 2-10 letters followed by 2-10 numbers (e.g., CS101)";
     }
     
     if (!formData.courseName.trim()) {
@@ -50,8 +50,8 @@ export default function CreateCourse() {
       newErrors.level = "Please select a level";
     }
     
-    if (formData.creditHour < 1 || formData.creditHour > 6) {
-      newErrors.creditHour = "Credit hour must be between 1 and 6";
+    if (formData.nominalDuration < 30 || formData.nominalDuration > 200) {
+      newErrors.nominalDuration = "Nominal duration must be between 30 and 200 Hour";
     }
     if (!formData.semester) {
   newErrors.semester = "Please select a semester";
@@ -98,13 +98,13 @@ if (!formData.level) {
     }
   };
 
-  const levels = ["Level I", "Level II", "Level III", "Level IV", "Level V"];
+  const levels = ["Short Term", "Level I", "Level II", "Level III", "Level IV", "Level V"];
 
   return (
     <div className="course-form-page">
       <div className="page-header">
         <h1>
-          <BookOpen size={28} />
+          <BookOpen size={25} />
           Add Course
         </h1>
         <p className="page-subtitle">Add a new course to the curriculum</p>
@@ -203,8 +203,8 @@ if (!formData.level) {
     onChange={handleChange}
   >
     <option value="">Select Semester</option>
-    <option value="1">Semester 1</option>
-    <option value="2">Semester 2</option>
+<option value="Semester I">Semester I</option>
+<option value="Semester II">Semester II</option>
   </select>
   {errors.semester && (
   <div className="error-message">
@@ -240,27 +240,28 @@ if (!formData.level) {
           <div className="form-group">
             <label>
               <Clock size={16} />
-              Credit Hour
+                            Nominal duration range from 30 to 200 Total Hour
+
               <span className="required-star">*</span>
             </label>
             <input
               type="number"
-              name="creditHour"
-              min="1"
-              max="6"
+              name="nominalDuration"
+              min="30"
+              max="200"
               step="1"
-              value={formData.creditHour}
+              value={formData.nominalDuration}
               onChange={handleChange}
-              className={errors.creditHour ? "error" : ""}
+              className={errors.nominalDuration ? "error" : ""}
             />
             <div className="field-hint">
               <Info size={12} />
-              Credit hours range from 1 to 6
+              Nominal duration range from 30 to 200 Hour
             </div>
-            {errors.creditHour && (
+            {errors.nominalDuration && (
               <div className="error-message">
                 <AlertCircle size={12} />
-                {errors.creditHour}
+                {errors.nominalDuration}
               </div>
             )}
           </div>
@@ -281,13 +282,13 @@ if (!formData.level) {
         <div className="form-actions">
           <button
             type="button"
-            className="cancel-btn"
+            className="upload-btnn"
             onClick={() => navigate("/department-head/courses")}
           >
             <ArrowLeft size={16} />
             Cancel
           </button>
-          <button type="submit" className="submit-btn" disabled={isLoading}>
+          <button type="submit" className="upload-btnn" disabled={isLoading}>
             {isLoading ? (
               <>
                 <div className="loading-spinner" style={{ width: 16, height: 16 }}></div>

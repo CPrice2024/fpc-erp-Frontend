@@ -19,8 +19,7 @@ export default function TVETTrainerDataSheetPDF({
       {/* Watermark */}
 
       <div className="pdf-watermark">
-        FEDERAL PRISON COLLEGE
-      </div>
+        Tesfa technical and vocational training college      </div>
 
       {/* ================= HEADER ================= */}
 
@@ -39,8 +38,7 @@ export default function TVETTrainerDataSheetPDF({
         <div className="header">
 
           <h1>
-            FEDERAL PRISON COLLEGE
-          </h1>
+            Tesfa technical and vocational training college          </h1>
 
           <h2>
             OFFICE OF THE REGISTRAR
@@ -391,7 +389,7 @@ export default function TVETTrainerDataSheetPDF({
 
       <div className="pdf-footer">
 
-        Federal Prison College • Registrar Office
+        Tesfa technical and vocational training college • Registrar Office
 
         <br />
 

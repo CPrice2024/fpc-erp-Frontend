@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDepartments } from "../../api/collegeHeadApi";
+import Button from "../../components/ui/Button";
 import {
   Building2,
   Mail,
@@ -74,9 +75,12 @@ const ViewDepartment = () => {
             <AlertCircle size={20} /> {error}
           </div>
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", marginTop: "20px" }}>
-            <button className="btn-secondary" onClick={() => navigate("/college-head/departments")}>
-              <ArrowLeft size={16} /> Back
-            </button>
+            <Button variant="primary"
+                size="md" 
+                onClick={() => navigate("/college-head/departments")}>
+              <ArrowLeft size={16} />
+               Back
+            </Button>
             <button className="btn-primary" onClick={loadDepartment}>
               <RefreshCw size={16} /> Retry
             </button>
@@ -107,7 +111,7 @@ const ViewDepartment = () => {
           {/* Header with Code */}
           <div style={{ marginBottom: "24px" }}>
             <div className="code-badge" style={{ marginBottom: "12px" }}>{department.code}</div>
-            <h2 style={{ margin: "0 0 8px 0", fontSize: "24px", color: "#1a1f2e" }}>{department.name}</h2>
+            <h2 style={{ margin: "0 0 8px 0", fontSize: "18px", color: "#3d3d3d" }}>{department.name}</h2>
             {department.description && <p style={{ color: "#6b7280", margin: 0, lineHeight: "1.6" }}>{department.description}</p>}
           </div>
 
@@ -162,7 +166,7 @@ const ViewDepartment = () => {
             <div className="info-section">
               <div className="info-label">Leadership</div>
               <div className="hod-card">
-                <div className="hod-avatar"><User size={28} /></div>
+                <div className="hod-avatar"><User size={26} /></div>
                 <div className="hod-info">
                   <div className="hod-name">{department.departmentHead?.name || department.headName || "Not Assigned"}</div>
                   <div className="hod-email">Head of Department</div>
@@ -192,12 +196,15 @@ const ViewDepartment = () => {
 
           {/* Action Buttons */}
           <div className="form-actions" style={{ marginTop: "32px" }}>
-            <button className="btn-secondary" onClick={() => navigate("/college-head/departments")}>
+            <Button className="btn-secondary" onClick={() => navigate("/college-head/departments")}>
               <ArrowLeft size={16} /> Back to Departments
-            </button>
-            <button className="btn-primary" onClick={() => navigate(`/college-head/departments/edit/${department._id}`)}>
-              <Edit2 size={16} /> Edit Department
-            </button>
+            </Button>
+            <Button  variant="primary"
+                size="md"
+                 onClick={() => navigate(`/college-head/departments/edit/${department._id}`)}>
+              <Edit2 size={16} /> 
+              Edit Department
+            </Button>
           </div>
         </div>
       </div>

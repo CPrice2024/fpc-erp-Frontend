@@ -46,66 +46,6 @@
 
 
 
-.header-actions button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    font-size: 12px;
-    font-weight: 500;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    font-family: inherit;
-    background: #ffffff;
-    color: #0043a2;
-    border: 1px solid #0351ba;
-}
-
-.refresh-btn {
-  background: #ffffff;
-  color: #475569;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #0f172a;
-  border: 1px solid #124588;
-}
-
-.refresh-btn:hover {
-  background: #ececec00;
-  border-color: #012f67;
-  color: #ffffff;
-}
-
-.refresh-btn .spinning {
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.add-btn {
-  background: #3b82f6;
-  color: white;
-}
-
-.add-btn:hover {
-  background: #2563eb;
-}
-
-.header-actions button:not(.refresh-btn):not(.add-btn) {
-  background: #ffffff;
-  color: #475569;
-  width: fit-content;
-  border: 1px solid #c9c9c9;
-}
-
-.header-actions button:not(.refresh-btn):not(.add-btn):hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-}
-
 /* ============================================
    FILTERS SECTION
    ============================================ */
@@ -235,7 +175,7 @@
 .table-card thead th {
   text-align: left;
   font-family: system-ui;
-  padding: 14px 16px;
+  padding: 14px 12px;
   background: #f8fafc;
   font-size: 11px;
   font-weight: 600;
@@ -775,7 +715,7 @@ body.dark-mode .table-card tbody td:first-child img {
 
 /* Popup Card */
 .action-popup {
-  position: absolute;
+  position: sticky;
   right: 0;
   top: calc(100% + 8px);
   background: #ffffff;

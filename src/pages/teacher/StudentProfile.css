@@ -15,14 +15,26 @@
     display:flex;
 
     align-items:center;
-
-    gap:25px;
     margin-bottom:30px;
+
+}
+@media print {
+
+.profile-card{
+    gap:12px;
+}
+@media print {
+
+.profile-photo{
+    margin-left:0 !important;
+}
+
+}
 
 }
 
 .profile-photo{
-        width: 100px;
+    width: 100px;
     height: 100px;
     border-style: solid;
     border-width: 1px;
@@ -74,5 +86,145 @@
 .info-box strong{
 
     font-size:16px;
+
+}
+/* ================= PRINT ================= */
+
+@page {
+    size: A4 !important;
+    margin: 10mm !important;
+}
+
+@media print {
+
+    body {
+        background: #fff !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    .profile-page {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .profile-card {
+        width: 100%;
+        margin: 0 0 20px;
+        padding: 20px;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .profile-photo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .info-box {
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+
+    * {
+        box-shadow: none !important;
+    }
+}
+@page {
+    size: A4;
+    margin: 10mm;
+}
+
+@media print {
+
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+    }
+
+    .profile-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .profile-card,
+    .info-box {
+        box-shadow: none !important;
+        border: 1px solid #ddd;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media print {
+
+.main-content,
+.content,
+.page-content,
+.dashboard-content {
+
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+
+}
+
+}
+@media print {
+
+.sidebar,
+.topbar,
+.header,
+.navbar,
+.menu,
+button {
+    display: none !important;
+}
+
+}
+tr {
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;
+}
+@media print {
+
+.profile-card{
+    display: grid !important;
+    grid-template-columns: 90px 1fr;
+    gap: 15px;
+
+    width: 100%;
+    overflow: visible !important;
+}
+
+.profile-photo{
+    width: 80px;
+    height: 80px;
+}
+
+}
+@media print {
+
+.profile-page{
+    padding-left: 8mm !important;
+    padding-right: 8mm !important;
+}
 
 }

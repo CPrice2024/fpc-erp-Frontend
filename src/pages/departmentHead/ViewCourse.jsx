@@ -91,7 +91,7 @@ const fetchCourse = async () => {
 <div className="page-header">
 
 <button
-className="back-btn"
+className="upload-btnn"
 onClick={() => navigate(-1)}
 >
 
@@ -231,11 +231,11 @@ Back
 
 <div>
 
-<label>Credit Hour</label>
+<label>Nominal Duration</label>
 
 <p>
 
-{course.creditHour}
+{course.nominalDuration}
 
 </p>
 
@@ -282,7 +282,7 @@ Back
 <div className="page-actions">
 
   <button
-    className="edit-btn"
+    className="upload-btnn"
     onClick={() =>
       navigate(
         `/department-head/courses/edit/${course._id}`

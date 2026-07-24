@@ -152,33 +152,7 @@ textarea.form-control {
   border-top: 2px solid #f3f4f6;
 }
 
-/* Buttons */
-.btn-primary,
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-}
 
-.btn-primary {
-  background: linear-gradient(135deg, #4361ee 0%, #3b2f9e 100%);
-  color: white;
-  flex: 1;
-  justify-content: center;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
-}
 
 .btn-primary:active {
   transform: translateY(0);

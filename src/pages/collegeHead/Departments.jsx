@@ -146,12 +146,9 @@ const filteredDepartments = departments.filter((dept) => {
           <p className="page-subtitle">Manage college departments and their information</p>
         </div>
         <div className="header-actions">
-          <button className="btn-secondary" onClick={exportToCSV}>
-            <Download size={18} />
-            Export
-          </button>
           <button
-  className="btn-primary"
+  
+className="upload-btnn"
   onClick={() =>
     navigate("/college-head/departments/create")
   }
@@ -195,7 +192,8 @@ const filteredDepartments = departments.filter((dept) => {
               ))}
             </select>
             <button 
-              className="clear-filters"
+              
+className="upload-btnn"
               onClick={() => {
                 setFilterHead("");
                 setSearchTerm("");
@@ -307,9 +305,7 @@ const filteredDepartments = departments.filter((dept) => {
                   <th>Department Name</th>
                   <th>Code</th>
                   <th>Contact</th>
-                  <th>Established</th>
                   <th>Students</th>
-                  <th>Faculty</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -338,13 +334,12 @@ const filteredDepartments = departments.filter((dept) => {
                         <div><Phone size={12} /> {dept.phone}</div>
                       </div>
                     </td>
-                    <td>{dept.established}</td>
                     <td className="student-count">{(dept.students || 0).toLocaleString()}</td>
-                    <td>{(dept.teachers || dept.faculty || 0).toLocaleString()}</td>
 <td className="actions-cell">
 
   <button
-    className="action-btn view"
+    
+className="upload-btnn"
     onClick={() =>
       navigate(
         `/college-head/departments/view/${dept._id}`
@@ -356,7 +351,8 @@ const filteredDepartments = departments.filter((dept) => {
   </button>
 
   <button
-    className="action-btn edit"
+    
+className="upload-btnn"
     onClick={() =>
       navigate(
         `/college-head/departments/edit/${dept._id}`
@@ -368,7 +364,8 @@ const filteredDepartments = departments.filter((dept) => {
   </button>
 
   <button
-    className="action-btn delete"
+    
+className="upload-btnn"
     onClick={() =>
       handleDelete(dept._id)
     }
@@ -389,7 +386,8 @@ const filteredDepartments = departments.filter((dept) => {
                 <button
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1}
-                  className="page-btn"
+                  
+className="upload-btnn"
                 >
                   <ChevronLeft size={16} />
                   Previous
@@ -408,7 +406,8 @@ const filteredDepartments = departments.filter((dept) => {
                 <button
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}
-                  className="page-btn"
+                  
+className="upload-btnn"
                 >
                   Next
                   <ChevronRight size={16} />
@@ -427,7 +426,8 @@ managing academic units.
 </p>
 
 <button
-  className="btn-primary"
+  
+className="upload-btnn"
   onClick={() =>
     navigate(
       "/college-head/departments/create"

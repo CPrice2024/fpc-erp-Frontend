@@ -115,7 +115,7 @@ const filteredCourses = courses.filter((course) => {
   </div>
 
   <button
-    className="add-btn"
+    className="upload-btnn"
     onClick={() =>
       navigate("/department-head/courses/create")
     }
@@ -196,7 +196,7 @@ const filteredCourses = courses.filter((course) => {
         <th>Level</th>
         <th>Semester</th>
         <th>Section</th>
-        <th>Credit</th>
+        <th>nominalDuration</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -223,7 +223,7 @@ const filteredCourses = courses.filter((course) => {
 
             <td>{course.section}</td>
 
-            <td>{course.creditHour}</td>
+            <td>{course.nominalDuration}</td>
 
             <td className="action-cell">
 

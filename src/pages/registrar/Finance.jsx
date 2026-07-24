@@ -4,7 +4,6 @@ import api from "../../api/axios";
 import {
   DollarSign,
   Users,
-  CreditCard,
   Search,
   Filter,
   X,
@@ -167,13 +166,13 @@ export default function FinanceDashboard() {
 
         <div className="header-right">
           <button 
-            className="btn-outline" 
+            className="btn-print" 
             onClick={() => navigate("/registrar/CreatePayment")}
           >
             <Plus size={18} />
               Add
           </button>
-          <button className="btn-outline" onClick={() => window.print()}>
+          <button className="btn-print" onClick={() => window.print()}>
             <Printer size={18} />
             Print
           </button>
@@ -208,7 +207,6 @@ export default function FinanceDashboard() {
 
         <div className="stat-card stat-funded">
           <div className="stat-icon">
-            <CreditCard size={24} />
           </div>
           <div className="stat-info">
             <span className="stat-label">Funded Students</span>

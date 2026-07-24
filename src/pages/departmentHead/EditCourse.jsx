@@ -40,7 +40,7 @@ const [formData, setFormData] = useState({
   level: "",
   semester: "",
   section: "",
-  creditHour: 3,
+  nominalDuration: 30,
   status: "active",
 });
 
@@ -59,7 +59,7 @@ const fetchCourse = async () => {
       level: data.level || "",
       semester: data.semester || "",
       section: data.section || "",
-      creditHour: data.creditHour || 3,
+      nominalDuration: data.nominalDuration || 3,
       status: data.status || "active",
     });
 
@@ -120,11 +120,11 @@ const validateForm = () => {
   }
 
   if (
-    formData.creditHour < 1 ||
-    formData.creditHour > 6
+    formData.nominalDuration < 30 ||
+    formData.nominalDuration > 200
   ) {
-    newErrors.creditHour =
-      "Credit hour must be between 1 and 6";
+    newErrors.nominalDuration =
+      "Nominal duration must be between 30 and 200 Hours";
   }
 
   setErrors(newErrors);
@@ -164,6 +164,7 @@ const handleSubmit = async (e) => {
 
 };
 const levels = [
+  "Short Term",
   "Level I",
   "Level II",
   "Level III",
@@ -321,27 +322,27 @@ const levels = [
           <div className="form-group">
             <label>
               <Clock size={16} />
-              Credit Hour
+              Nominal duration
               <span className="required-star">*</span>
             </label>
             <input
               type="number"
-              name="creditHour"
-              min="1"
-              max="6"
+              name="Nominal duration"
+              min="30"
+              max="200"
               step="1"
-              value={formData.creditHour}
+              value={formData.nominalDuration}
               onChange={handleChange}
-              className={errors.creditHour ? "error" : ""}
+              className={errors.nominalDuration ? "error" : ""}
             />
             <div className="field-hint">
               <Info size={12} />
-              Credit hours range from 1 to 6
+              Nominal duration range from 30 to 200
             </div>
-            {errors.creditHour && (
+            {errors.nominalDuration && (
               <div className="error-message">
                 <AlertCircle size={12} />
-                {errors.creditHour}
+                {errors.nominalDuration}
               </div>
             )}
           </div>
@@ -362,7 +363,7 @@ const levels = [
         <div className="form-actions">
           <button
             type="button"
-            className="cancel-btn"
+            className="upload-btnn"
             onClick={() => navigate("/department-head/courses")}
           >
             <ArrowLeft size={16} />
@@ -370,13 +371,13 @@ const levels = [
           </button>
           <button
   type="submit"
-  className="submit-btn"
+ className="upload-btnn"
   disabled={saving}
 >
   {saving ? (
     <>
       <div
-        className="loading-spinner"
+        className="upload-btnn"
         style={{ width: 16, height: 16 }}
       />
       Updating...

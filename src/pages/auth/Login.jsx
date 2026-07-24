@@ -203,7 +203,7 @@ const fillCredentials = (account) => {
             </div>
 
             <div className="login-links">
-              <Link to="/forgot-password">
+              <Link to="/">
                 Forgot Password?
               </Link>
             </div>
@@ -238,7 +238,7 @@ const fillCredentials = (account) => {
 </div>
 
           </form>
-          <h3 className="footer-text">© 2026 Federal Prison College. All rights reserved.</h3>
+          <h3 className="footer-text">© 2026 Tesfa technical and vocational training college. All rights reserved.</h3>
       
           
         </div>

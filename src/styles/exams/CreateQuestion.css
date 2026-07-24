@@ -25,24 +25,7 @@
     font-weight: 600;
 }
 
-.page-header button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: auto;
-    border: none;
-    cursor: pointer;
-    background: #ffffff;
-    color: #3959ba;
-    padding: 10px 18px;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: .3s;
-}
 
-.page-header button:hover {
-    background: #ffffff;
-}
 
 /* ===========================
    Form Cards

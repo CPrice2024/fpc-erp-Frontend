@@ -95,7 +95,7 @@ export default function ExamList() {
         </div>
 
         <button
-          className="create-btn"
+          className="upload-btnn"
           onClick={() =>
             navigate("/teacher/exams/create")
           }
@@ -236,6 +236,7 @@ export default function ExamList() {
                   <td className="actions">
 
                     <button
+                    className="upload-btnn"
                       onClick={() =>
                         navigate(
                           `/teacher/exams/edit/${exam._id}`
@@ -246,6 +247,7 @@ export default function ExamList() {
                     </button>
 
                     <button
+                    className="upload-btnn"
                       onClick={() =>
                         navigate(
                           `/teacher/exams/${exam._id}/questions`
@@ -256,6 +258,7 @@ export default function ExamList() {
                     </button>
 
                     <button
+                    className="upload-btnn"
                       onClick={() =>
                         navigate(
                           "/teacher/exams/results"
@@ -265,7 +268,9 @@ export default function ExamList() {
                       <BarChart3 size={16} />
                     </button>
 
-                    <button>
+                    <button
+                    className="upload-btnn">
+                      
                       <Trash2 size={16} />
                     </button>
 

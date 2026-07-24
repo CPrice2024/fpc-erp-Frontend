@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import {
   ArrowLeft,
   User,
@@ -12,7 +14,6 @@ import {
   CheckCircle,
   XCircle,
   Download,
-  GraduationCap,
   MapPin,
   Hash,
   Building,
@@ -25,10 +26,10 @@ import {
   ChevronDown,
   ChevronUp,
   Search,
+AlertCircle,
 } from "lucide-react";
 import "./ViewStudentPage.css";
 import { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 
 import RegistrationSlipPDF
 from "../../components/pdf/RegistrationSlipPDF";
@@ -61,13 +62,59 @@ export default function ViewStudentPage() {
   const profileRef = useRef(null);
   const slipRef = useRef(null);
   const trainerSheetRef = useRef(null);
+  const downloadPDF = async (
+  ref,
+  fileName
+) => {
+
+  if (!ref.current) return;
+
+  const canvas =
+    await html2canvas(ref.current, {
+
+      scale: 2,
+
+      useCORS: true,
+
+      backgroundColor: "#ffffff",
+
+    });
+
+  const imgData =
+    canvas.toDataURL("image/png");
+
+  const pdf = new jsPDF(
+    "p",
+    "mm",
+    "a4"
+  );
+
+  const pdfWidth =
+    pdf.internal.pageSize.getWidth();
+
+  const pdfHeight =
+    (canvas.height * pdfWidth) /
+    canvas.width;
+
+  pdf.addImage(
+    imgData,
+    "PNG",
+    0,
+    0,
+    pdfWidth,
+    pdfHeight
+  );
+
+  pdf.save(fileName);
+
+};
   const [courseStats, setCourseStats] = useState({
     total: 0,
     passed: 0,
     failed: 0,
     inProgress: 0,
     averageGrade: 0,
-    totalCredits: 0,
+    totalnominalDurations: 0,
     gpa: 0,
     bySemester: {},
     byDepartment: {},
@@ -145,25 +192,6 @@ try {
     }
   }, [id]);
 
-  const printProfile = useReactToPrint({
-  contentRef: profileRef,
-  documentTitle: `${student?.studentId || "Student"}-Profile`,
-});
-
-const printTranscript = useReactToPrint({
-  contentRef: transcriptRef,
-  documentTitle: `${student?.studentId || "Student"}-Transcript`,
-});
-
-const printSlip = useReactToPrint({
-  contentRef: slipRef,
-  documentTitle: `${student?.studentId}-RegistrationSlip`,
-});
-const printTrainerSheet = useReactToPrint({
-  contentRef: trainerSheetRef,
-  documentTitle: `${student?.studentId}-TVET-Trainer-Data-Sheet`,
-});
-
 
   // ===== CALCULATE COURSE STATISTICS =====
   const calculateCourseStats = (courseData) => {
@@ -172,26 +200,26 @@ const printTrainerSheet = useReactToPrint({
     let failed = 0;
     let inProgress = 0;
     let totalPoints = 0;
-    let totalCredits = 0;
+    let totalnominalDurations = 0;
     const bySemester = {};
     const byDepartment = {};
 
     courseData.forEach(course => {
       const status = course.status || course.gradeStatus || "in-progress";
-      const credits = course.credits || 3;
+      const nominalDurations = course.nominalDurations || 3;
       const gradePoint = getGradePoint(course.grade);
 
       // Count by status
       if (status === "passed" || (course.grade && course.grade !== 'F' && course.grade !== 'D' && course.grade !== 'W')) {
         passed++;
-        totalPoints += gradePoint * credits;
+        totalPoints += gradePoint * nominalDurations;
       } else if (status === "failed" || course.grade === 'F' || course.grade === 'D') {
         failed++;
       } else {
         inProgress++;
       }
 
-      totalCredits += credits;
+      totalnominalDurations += nominalDurations;
 
       // Group by semester
       const semester = course.semester || "N/A";
@@ -202,7 +230,7 @@ const printTrainerSheet = useReactToPrint({
       byDepartment[dept] = (byDepartment[dept] || 0) + 1;
     });
 
-    const gpa = totalCredits > 0 ? (totalPoints / totalCredits) : 0;
+    const gpa = totalnominalDurations > 0 ? (totalPoints / totalnominalDurations) : 0;
     const averageGrade = total > 0 ? (totalPoints / total) : 0;
 
     setCourseStats({
@@ -211,7 +239,7 @@ const printTrainerSheet = useReactToPrint({
       failed,
       inProgress,
       averageGrade,
-      totalCredits,
+      totalnominalDurations,
       gpa,
       bySemester,
       byDepartment,
@@ -248,33 +276,51 @@ const printTrainerSheet = useReactToPrint({
     }).format(amount);
   };
 
-  const getStatusBadge = (status) => {
-    if (status === "active" || status === "passed") {
-      return { 
-        icon: CheckCircle, 
-        class: "status-passed", 
-        label: "Active" 
+const getStatusBadge = (status) => {
+  switch (status) {
+    case "Enrolled":
+      return {
+        icon: CheckCircle,
+        class: "status-passed",
+        label: "Enrolled",
       };
-    } else if (status === "inactive" || status === "failed") {
-      return { 
-        icon: XCircle, 
-        class: "status-failed", 
-        label: "Inactive" 
+
+    case "Deferred":
+      return {
+        icon: Clock,
+        class: "status-warning",
+        label: "Deferred",
       };
-    } else if (status === "in-progress") {
-      return { 
-        icon: Clock, 
-        class: "status-in-progress", 
-        label: "In Progress" 
+
+    case "Suspended":
+      return {
+        icon: AlertTriangle,
+        class: "status-warning",
+        label: "Suspended",
       };
-    } else {
-      return { 
-        icon: AlertCircle, 
-        class: "status-pending", 
-        label: "Pending" 
+
+    case "Withdrawn":
+      return {
+        icon: XCircle,
+        class: "status-failed",
+        label: "Withdrawn",
       };
-    }
-  };
+
+    case "Graduated":
+      return {
+        icon: Award,
+        class: "status-passed",
+        label: "Graduated",
+      };
+
+    default:
+      return {
+        icon: AlertCircle,
+        class: "status-pending",
+        label: status || "Unknown",
+      };
+  }
+};
 
   const getGradeColor = (grade) => {
     const gradeMap = {
@@ -430,7 +476,6 @@ const printTrainerSheet = useReactToPrint({
           </button>
           <div className="header-divider"></div>
           <div className="header-title">
-            <GraduationCap size={24} className="header-icon" />
             <div>
               <h1>Student Profile</h1>
             </div>
@@ -445,14 +490,29 @@ const printTrainerSheet = useReactToPrint({
             
           
   className="btn-export"
-  onClick={printProfile}
+  onClick={() =>
+  downloadPDF(
+    profileRef,
+    `${student.studentId}-Student-Profile.pdf`
+  )
+}
 >
   <Download size={18} />
   Profile
 </button>
 <button
     className="btn-export"
-    onClick={printSlip}
+    onClick={() =>
+  downloadPDF(
+    slipRef,
+    `${student.studentId}-Registration-Slip.pdf`
+  )
+}onClick={() =>
+  downloadPDF(
+    slipRef,
+    `${student.studentId}-Registration-Slip.pdf`
+  )
+}
 >
     <Download size={18} />
     Slip
@@ -460,13 +520,23 @@ const printTrainerSheet = useReactToPrint({
 
 <button
   className="btn-export"
-  onClick={printTranscript}>
+  onClick={() =>
+  downloadPDF(
+    transcriptRef,
+    `${student.studentId}-Transcript.pdf`
+  )
+}>
   <Download size={18} />
   Transcript
 </button>
 <button
   className="btn-export"
-  onClick={printTrainerSheet}
+  onClick={() =>
+  downloadPDF(
+    trainerSheetRef,
+    `${student.studentId}-TVET-Trainer-Data-Sheet.pdf`
+  )
+}
 >
   <Download size={18} />
   ETA 
@@ -517,8 +587,8 @@ const printTrainerSheet = useReactToPrint({
             <span className="stat-mini-value">{courseStats.gpa.toFixed(2)}</span>
           </div>
           <div className="stat-mini">
-            <span className="stat-mini-label">Credits</span>
-            <span className="stat-mini-value">{courseStats.totalCredits}</span>
+            <span className="stat-mini-label">nominalDurations</span>
+            <span className="stat-mini-value">{courseStats.totalnominalDurations}</span>
           </div>
           <div className="stat-mini">
             <span className="stat-mini-label">Attendance</span>
@@ -537,7 +607,6 @@ const printTrainerSheet = useReactToPrint({
           className={`tab-btn ${activeTab === "profile" ? "active" : ""}`}
           onClick={() => setActiveTab("profile")}
         >
-          <User size={18} />
           Profile
         </button>
         <button
@@ -646,6 +715,12 @@ const printTrainerSheet = useReactToPrint({
     </div>
 
     <div className="info-item">
+      <div className="info-item">
+  <span className="info-label">Zone</span>
+  <span className="info-value">
+    {student.zone || "N/A"}
+  </span>
+</div>
       <span className="info-label">Woreda</span>
       <span className="info-value">
         {student.Woreda || "N/A"}
@@ -724,9 +799,9 @@ const printTrainerSheet = useReactToPrint({
     </div>
 
     <div className="info-item">
-      <span className="info-label">Major</span>
+      <span className="info-label">COC</span>
       <span className="info-value">
-        {student.major || "N/A"}
+        {student.COC || "N/A"}
       </span>
     </div>
 
@@ -818,6 +893,144 @@ const printTrainerSheet = useReactToPrint({
 
   </div>
 </div>
+{/* Inmate Information */}
+{student.isInmate && (
+  <div className="info-card">
+    <h3>Inmate Information</h3>
+
+    <div className="info-grid">
+      <div className="info-item">
+        <span className="info-label">Prison ID</span>
+        <span className="info-value">
+          {student.prisonId || "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Crime Type</span>
+        <span className="info-value">
+          {student.crimeType || "N/A"}
+        </span>
+      </div>
+      <div className="info-item">
+        <span className="info-label">Crime Type</span>
+        <span className="info-value">
+          {student.crimeType || "N/A"}
+        </span>
+      </div>
+
+
+      <div className="info-item">
+        <span className="info-label">Sentence Duration</span>
+        <span className="info-value">
+          {student.sentenceDuration
+            ? `${student.sentenceDuration} Years`
+            : "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Security Level</span>
+        <span className="info-value">
+          {student.securityLevel || "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Prison Facility</span>
+        <span className="info-value">
+          {student.prisonFacility || "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Cell Number</span>
+        <span className="info-value">
+          {student.cellNumber || "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Imprisonment Start Date</span>
+        <span className="info-value">
+          {formatDate(student.imprisonmentStartDate)}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Expected Release Date</span>
+        <span className="info-value">
+          {formatDate(student.expectedReleaseDate)}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Parole Date</span>
+        <span className="info-value">
+          {formatDate(student.paroleDate)}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Current Status</span>
+        <span className="info-value">
+          {student.currentStatus || "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Assigned Officer</span>
+        <span className="info-value">
+          {student.assignedOfficer || "N/A"}
+        </span>
+      </div>
+
+      <div className="info-item">
+        <span className="info-label">Officer Phone</span>
+        <span className="info-value">
+          {student.officerPhone || "N/A"}
+        </span>
+      </div>
+    </div>
+  </div>
+)}
+{/* ================= GUARDIAN INFORMATION ================= */}
+
+<div className="pdf-section">
+
+  <div className="section-title">
+    GUARDIAN INFORMATION
+  </div>
+
+  <div className="section-grid">
+
+    <div className="section-itemm">
+      <strong>Guardian Name</strong>
+      <span
+      className="info-value">
+        {student.guardianName || "N/A"}
+      </span>
+    </div>
+
+    <div className="section-itemm">
+      <strong>Guardian Phone</strong>
+      <span
+      className="info-value">
+        {student.guardianPhone || "N/A"}
+      </span>
+    </div>
+
+    <div className="section-itemm">
+      <strong>Relationship</strong>
+      <span
+      className="info-value">
+        {student.relationship || "N/A"}
+      </span>
+    </div>
+
+  </div>
+
+</div>
 
               {/* Academic Summary */}
               <div className="info-card summary-card">
@@ -828,8 +1041,8 @@ const printTrainerSheet = useReactToPrint({
                     <span className="summary-value cgpa">{courseStats.gpa.toFixed(2)}</span>
                   </div>
                   <div className="summary-item">
-                    <span className="summary-label">Total Credits</span>
-                    <span className="summary-value">{courseStats.totalCredits}</span>
+                    <span className="summary-label">Total nominalDurations</span>
+                    <span className="summary-value">{courseStats.totalnominalDurations}</span>
                   </div>
                   <div className="summary-item">
                     <span className="summary-label">Passed</span>
@@ -913,7 +1126,7 @@ const printTrainerSheet = useReactToPrint({
                       <th>#</th>
                       <th>Course Code</th>
                       <th>Course Name</th>
-                      <th>Credits</th>
+                      <th>nominalDurations</th>
                       <th>Semester</th>
                       <th>Grade</th>
                       <th>Grade Point</th>
@@ -937,7 +1150,7 @@ const printTrainerSheet = useReactToPrint({
                               <span className="course-code">{course.courseCode || "N/A"}</span>
                             </td>
                             <td>{course.courseName || "N/A"}</td>
-                            <td>{course.creditHour || 3}</td>
+                            <td>{course.nominalDuration || 30}</td>
                             <td>
                               <span className="semester-badge">
                                 {getSemesterName(course.semester)} {course.year || ""}
@@ -997,8 +1210,8 @@ const printTrainerSheet = useReactToPrint({
                                         <span>{course.courseName || "N/A"}</span>
                                       </div>
                                       <div className="detail-item">
-                                        <span className="detail-label">Credits</span>
-                                        <span>{course.creditHour || 3}</span>
+                                        <span className="detail-label">nominalDurations</span>
+                                        <span>{course.nominalDuration || 30}</span>
                                       </div>
                                       <div className="detail-item">
                                         <span className="detail-label">Department</span>
@@ -1075,7 +1288,7 @@ const printTrainerSheet = useReactToPrint({
                         <strong>Summary</strong>
                       </td>
                       <td>
-                        <strong>{courseStats.totalCredits} Credits</strong>
+                        <strong>{courseStats.totalnominalDurations} nominalDurations</strong>
                       </td>
                       <td colSpan="2">
                         <strong>CGPA: {courseStats.gpa.toFixed(2)}</strong>
@@ -1338,7 +1551,7 @@ const printTrainerSheet = useReactToPrint({
   <TVETTrainerDataSheetPDF
     students={[student]}
     department={student.department?.name}
-    college="Federal Prison College"
+    college="Tesfa technical and vocational training college"
     programLevel={student.level}
     modality={student.program}
     admissionDate={student.registrationDate}

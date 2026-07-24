@@ -183,22 +183,6 @@
   margin-bottom: 2rem;
 }
 
-.stat-card {
-  background: white;
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-gray-100);
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.stat-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-gray-200);
-}
 
 .stat-card h2 {
   font-size: 15px;

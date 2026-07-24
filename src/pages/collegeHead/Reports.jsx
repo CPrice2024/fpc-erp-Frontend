@@ -9,9 +9,6 @@ import {
   Printer,
   Mail,
   ChevronDown,
-  DollarSign,
-  BookOpen,
-  Award,
   UserCheck
 } from "lucide-react";
 
@@ -42,14 +39,26 @@ setDepartmentSummary] =
   useState([]);
 
   // Report types
-  const reportTypes = [
-    { id: "academic", label: "Academic Report", icon: <BookOpen size={18} />, color: "#667eea" },
-    { id: "student", label: "Student Report", icon: <Users size={18} />, color: "#48bb78" },
-    { id: "department", label: "Department Report", icon: <Building2 size={18} />, color: "#ed8936" },
-    { id: "staff", label: "Staff Report", icon: <UserCheck size={18} />, color: "#4299e1" },
-    { id: "financial", label: "Financial Report", icon: <DollarSign size={18} />, color: "#fc8181" },
-    { id: "performance", label: "Performance Report", icon: <Award size={18} />, color: "#9f7aea" }
-  ];
+ const reportTypes = [
+  {
+    id: "student",
+    label: "Student Report",
+    icon: <Users size={18} />,
+    color: "#48bb78",
+  },
+  {
+    id: "department",
+    label: "Department Report",
+    icon: <Building2 size={18} />,
+    color: "#ed8936",
+  },
+  {
+    id: "staff",
+    label: "Staff Report",
+    icon: <UserCheck size={18} />,
+    color: "#4299e1",
+  },
+];
 
  useEffect(() => {
 
@@ -104,7 +113,9 @@ setDepartmentSummary] =
       
       // In production, this would call an API endpoint
       if (selectedFormat === "pdf") {
-        window.print();
+        setTimeout(() => {
+    window.print();
+}, 300);
       } else if (selectedFormat === "excel") {
         exportToExcel();
       } else if (selectedFormat === "csv") {
@@ -210,16 +221,11 @@ setDepartmentSummary] =
     window.print();
   };
 
-  const handleEmailReport = () => {
-    alert("Report will be sent to your email address");
-  };
-
   const getReportSummary = () => {
     switch(selectedReport) {
       case "academic":
         return {
-          title: "Academic Performance Summary",
-          description: "Overview of academic metrics including enrollment, graduation rates, and departmental performance"
+          title: "Academic Performance Summary"
         };
       case "student":
         return {
@@ -254,18 +260,14 @@ setDepartmentSummary] =
         </div>
         <div className="header-actions">
           <button
-  className="btn-secondary"
+  className="upload-btnn"
   onClick={fetchReportData}
 >
   Refresh
 </button>
-          <button className="btn-secondary" onClick={handlePrint}>
+          <button className="upload-btnn" onClick={handlePrint}>
             <Printer size={18} />
             Print
-          </button>
-          <button className="btn-secondary" onClick={handleEmailReport}>
-            <Mail size={18} />
-            Email
           </button>
         </div>
       </div>
@@ -275,7 +277,7 @@ setDepartmentSummary] =
         {reportTypes.map((type) => (
           <button
             key={type.id}
-            className={`report-type-btn ${selectedReport === type.id ? 'active' : ''}`}
+            className={`upload-btnn ${selectedReport === type.id ? 'active' : ''}`}
             onClick={() => setSelectedReport(type.id)}
             style={{ borderColor: selectedReport === type.id ? type.color : 'transparent' }}
           >
@@ -283,73 +285,6 @@ setDepartmentSummary] =
             <span>{type.label}</span>
           </button>
         ))}
-      </div>
-
-      {/* Filters Section */}
-      <div className="filters-section">
-        <button 
-          className="filter-toggle-btn"
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          <Filter size={18} />
-          Filters
-          <ChevronDown size={16} className={showFilters ? 'rotated' : ''} />
-        </button>
-
-        {showFilters && (
-          <div className="filters-panel">
-            <div className="filter-group">
-              <label>Date Range</label>
-              <div className="date-range">
-                <input
-                  type="date"
-                  value={dateRange.start}
-                  onChange={(e) => setDateRange({...dateRange, start: e.target.value})}
-                  className="date-input"
-                />
-                <span>to</span>
-                <input
-                  type="date"
-                  value={dateRange.end}
-                  onChange={(e) => setDateRange({...dateRange, end: e.target.value})}
-                  className="date-input"
-                />
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <label>Format</label>
-              <select 
-                value={selectedFormat}
-                onChange={(e) => setSelectedFormat(e.target.value)}
-                className="format-select"
-              >
-                <option value="pdf">PDF Document</option>
-                <option value="excel">Excel Spreadsheet</option>
-                <option value="csv">CSV File</option>
-                <option value="json">JSON Data</option>
-              </select>
-            </div>
-
-            <button 
-              className="generate-btn"
-              onClick={handleGenerateReport}
-              disabled={generatingReport}
-            >
-              {generatingReport ? (
-                <>
-                  <div className="spinner-small"></div>
-                  Generating...
-                </>
-              ) : (
-                <>
-                  <FileText size={18} />
-                  Generate Report
-                </>
-              )}
-            </button>
-          </div>
-        )}
       </div>
 
       {/* Stats Overview */}
@@ -391,7 +326,7 @@ setDepartmentSummary] =
 </div>
 
       {/* Main Content */}
-      <div className="reports-content">
+      <div className="reports-content print-report">
         {/* Report Summary */}
         <div className="report-summary">
           {loading && (
@@ -459,29 +394,6 @@ setDepartmentSummary] =
   )))}
 </tbody>
           </table>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="quick-actions">
-          <h3>Quick Actions</h3>
-          <div className="actions-grid">
-            <button className="action-card" onClick={() => setSelectedReport("student")}>
-              <Users size={24} />
-              <span>Student Report</span>
-            </button>
-            <button className="action-card" onClick={() => setSelectedReport("department")}>
-              <Building2 size={24} />
-              <span>Department Report</span>
-            </button>
-            <button className="action-card" onClick={() => setSelectedReport("staff")}>
-              <UserCheck size={24} />
-              <span>Staff Report</span>
-            </button>
-            <button className="action-card" onClick={handleGenerateReport}>
-              <Download size={24} />
-              <span>Export All</span>
-            </button>
-          </div>
         </div>
       </div>
     </div>

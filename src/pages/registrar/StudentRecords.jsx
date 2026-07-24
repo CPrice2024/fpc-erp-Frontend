@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import Button from "../../components/ui/Button";
 import {
   Search,
   Eye,
   Edit2,
-  Trash2,
   RefreshCw,
   UserPlus,
   Users,
-  FileText,
-  Printer,
-  Download,
   MoreVertical,
 } from "lucide-react";
 import "./StudentRecords.css";
@@ -29,7 +26,7 @@ export default function StudentRecords() {
   const [showFilters, setShowFilters] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
 
-  const levels = ["Level I", "Level II", "Level III", "Level IV", "Level V"];
+  const levels = ["Short Term", "Level I", "Level II", "Level III", "Level IV", "Level V"];
 
   useEffect(() => {
     fetchStudents();
@@ -54,7 +51,7 @@ export default function StudentRecords() {
   const fetchStudents = async () => {
     try {
       setLoading(true);
-      const res = await api.get("/registrars/students");
+      const res = await api.get("/registrars/students/active");
       setStudents(res.data);
     } catch (error) {
       console.error(error);
@@ -95,38 +92,28 @@ export default function StudentRecords() {
     setFilteredStudents(data);
   };
 
-  const deleteStudent = async (id) => {
-    if (!window.confirm("Delete this student?")) return;
-    try {
-      await api.delete(`/students/${id}`);
-      fetchStudents();
-      setActiveMenu(null);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
 
   const toggleMenu = (studentId, e) => {
     e.stopPropagation();
     setActiveMenu(activeMenu === studentId ? null : studentId);
   };
 
-  const getStatusBadge = (status) => {
-    if (status === "active") {
-      return (
-        <span className="status-badge active">
-          <span className="status-dot"></span>
-          Active
-        </span>
-      );
-    }
+ const getStatusBadge = (status) => {
+  if (status === "Enrolled") {
     return (
-      <span className="status-badge inactive">
-        <span className="status-dot"></span>
-        Inactive
+      <span className="status-badge active">
+        Enrolled
       </span>
     );
-  };
+  }
+
+  return (
+    <span className="status-badge inactive">
+      {status}
+    </span>
+  );
+};
 
   const exportExcel = () => {
     const headers = ["ID", "Name", "Gender", "Department", "Level", "Academic Year", "Batch", "Phone", "Status"];
@@ -163,29 +150,21 @@ export default function StudentRecords() {
         </div>
 
         <div className="header-actions">
-          <button className="refresh-btn" onClick={fetchStudents}>
-            <RefreshCw size={18} className={loading ? "spinning" : ""} />
-            Refresh
-          </button>
-          <button onClick={exportExcel}>
-            <Download size={18} />
-            Export Excel
-          </button>
-          <button onClick={() => window.print()}>
-            <Printer size={18} />
-            Print
-          </button>
+          <button 
+          className="btn-print"
+    startIcon={<RefreshCw size={18} />}
+    loading={loading}
+    onClick={fetchStudents}
+>
+    Refresh
+</button>
           <button
-            className="add-btn"
-            onClick={() => navigate("/registrar/Enrollment")}
-          >
-            <UserPlus size={18} />
-            Add Student
-          </button>
-          <button>
-            <FileText size={18} />
-            ID Card
-          </button>
+          className="btn-print"
+    startIcon={<UserPlus size={18} />}
+    onClick={() => navigate("/registrar/enrollment")}
+>
+    + Add
+</button>
         </div>
       </div>
 
@@ -317,7 +296,7 @@ export default function StudentRecords() {
                   <td data-label="Registered">
                     {new Date(student.createdAt).toLocaleDateString()}
                   </td>
-                  <td data-label="Status">{getStatusBadge(student.status)}</td>
+                  <td data-label="Status">{getStatusBadge(student.enrollmentStatus)}</td>
                   <td data-label="Actions">
                     <div className="action-menu-container">
                       <button
@@ -351,13 +330,7 @@ export default function StudentRecords() {
                             <Edit2 size={16} />
                             <span>Edit</span>
                           </button>
-                          <button
-                            className="popup-action delete"
-                            onClick={() => deleteStudent(student._id)}
-                          >
-                            <Trash2 size={16} />
-                            <span>Delete</span>
-                          </button>
+                          
                         </div>
                       )}
                     </div>

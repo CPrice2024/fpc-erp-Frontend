@@ -143,24 +143,7 @@
   border-color: #d1d5db;
 }
 
-.btn-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.2s;
-}
 
-.btn-icon:hover {
-  background: #f9fafb;
-  color: #111827;
-}
 
 .btn-text {
   display: inline-flex;

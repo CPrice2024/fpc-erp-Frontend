@@ -1,4 +1,4 @@
-// src/pages/teacher/StudentsByDepartment.jsx
+
 import { useState } from "react";
 import Sidebar from "../../components/common/Sidebar";
 import Topbar from "../../components/common/Topbar";

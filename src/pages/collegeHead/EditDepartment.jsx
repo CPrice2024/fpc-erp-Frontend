@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Button from "../../components/ui/Button";
 import { getDepartments, updateDepartment } from "../../api/collegeHeadApi";
 import {
   Building2,
@@ -182,10 +183,14 @@ const EditDepartment = () => {
             </div>
 
             <div className="form-actions">
-              <button type="button" className="btn-secondary" onClick={() => navigate("/college-head/departments")}>
+              <button 
+              className="upload-btnn"
+                 onClick={() => navigate("/college-head/departments")}>
                 <ArrowLeft size={16} /> Cancel
               </button>
-              <button type="submit" className={`btn-primary ${saving ? "loading" : ""}`} disabled={saving || !hasChanges()}>
+              <button 
+              className="upload-btnn"
+                size="md" disabled={saving || !hasChanges()}>
                 {saving ? <><div className="spinner"></div>Saving...</> : <><Save size={16} />Save Changes</>}
               </button>
             </div>

@@ -13,6 +13,7 @@ import {
   ChevronRight,
   ChevronLeft
 } from "lucide-react";
+import Button from "../../components/ui/Button";
 
 import api from "../../api/axios";
 import "./Enrollment.css";
@@ -165,6 +166,11 @@ officerPhone: "",
     institutionName: "",
 educationType: "",
 educationLanguage: "",
+statusIssueDate: "",
+
+statusRemark: "",
+
+statusInstituteName: "",
 
 registrationDate: "",
 educationStartDate: "",
@@ -176,27 +182,41 @@ previousInstitution: "",
 previousEducation: "",
 
 program: "",
-major: "",
+COC: "",
+COCIssueDate: "",
 semester: "",
 
 studyMode: "",
-enrollmentStatus: "",
+enrollmentStatus: "Enrolled",
 educationSponsor: "",
     
     // Contact Information
     phone: "",
-    email: "",
-    region: "",
-    Woreda: "",
-    city: "",
-    SpecificPlace: "",
-    address: "",
+email: "",
+
+region: "",
+
+zone: "",
+
+city: "",
+
+Woreda: "",
+
+SpecificPlace: "",
+
+address: "",
     
     // Guardian Details
     guardianName: "",
     guardianPhone: "",
     relationship: "",
   });
+
+  const [showStatusModal, setShowStatusModal] =
+useState(false);
+
+const [pendingStatus, setPendingStatus] =
+useState("");
 
 const steps = [
   {
@@ -261,6 +281,69 @@ const steps = [
   }));
 };
 
+const handleEnrollmentStatus = (e) => {
+  const value = e.target.value;
+
+  if (value === "Enrolled") {
+    setFormData((prev) => ({
+      ...prev,
+      enrollmentStatus: "Enrolled",
+      statusIssueDate: "",
+      statusRemark: "",
+      statusInstituteName: "",
+    }));
+
+    return;
+  }
+
+  setPendingStatus(value);
+
+setFormData((prev) => ({
+  ...prev,
+  statusIssueDate: new Date().toISOString().split("T")[0],
+}));
+
+setShowStatusModal(true);
+};
+
+const saveStatusDetails = () => {
+
+  if (!formData.statusIssueDate) {
+    alert("Issue Date is required.");
+    return;
+  }
+
+  if (!formData.statusRemark.trim()) {
+    alert("Remark is required.");
+    return;
+  }
+
+  if (
+    pendingStatus === "Withdrawn" &&
+    !formData.statusInstituteName.trim()
+  ) {
+    alert("Institute Name is required.");
+    return;
+  }
+
+  setFormData((prev) => ({
+    ...prev,
+    enrollmentStatus: pendingStatus,
+  }));
+
+  setShowStatusModal(false);
+};
+const closeStatusModal = () => {
+  setShowStatusModal(false);
+  setPendingStatus("");
+
+  setFormData((prev) => ({
+    ...prev,
+    statusIssueDate: "",
+    statusRemark: "",
+    statusInstituteName: "",
+  }));
+};
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep(activeStep + 1);
@@ -300,6 +383,10 @@ const fetchStudent = async () => {
   educationStartDate:
     data.educationStartDate?.split("T")[0] || "",
 
+    
+  COCIssueDate:
+  data.COCIssueDate?.split("T")[0] || "",
+
   educationEndDate:
     data.educationEndDate?.split("T")[0] || "",
 
@@ -335,12 +422,26 @@ const handleSubmit = async () => {
     const submitData =
       new FormData();
 
-      Object.entries(formData).forEach(([key, value]) => {
-  submitData.append(
-    key,
-    value ?? ""
-  );
+     Object.entries(formData).forEach(([key, value]) => {
+  // Skip fields that should not be updated here
+  if (
+    [
+      "_id",
+      "__v",
+      "createdAt",
+      "updatedAt",
+      "createdBy",
+      "courses",
+    ].includes(key)
+  ) {
+    return;
+  }
+
+  if (value !== "" && value !== null && value !== undefined) {
+    submitData.append(key, value);
+  }
 });
+
 
 
     if (photoFile) {
@@ -408,12 +509,13 @@ useEffect(() => {
 
   if (id) {
     fetchStudent();
+    
   }
 
 }, [id]);
 
   const renderPersonalInfo = () => (
-    <div className="step-content">
+    <div className="step-contentt">
       <div className="form-row">
         <div className="form-group">
           <label>First Name *</label>
@@ -485,8 +587,10 @@ useEffect(() => {
       <div className="form-row">
 
   <label className="checkbox-label">
+     <h3>Inmate Student</h3>
 
     <input
+    
       type="checkbox"
       name="isInmate"
       checked={formData.isInmate}
@@ -494,7 +598,7 @@ useEffect(() => {
       disabled={isView}
       
     />
-     <h3>Inmate Student</h3>
+    
 
   </label>
  
@@ -578,7 +682,7 @@ useEffect(() => {
       </div>
 
       <div className="form-group">
-        <label>Cell Number</label>
+        <label>Bed Number</label>
 
         <input
           name="cellNumber"
@@ -700,23 +804,6 @@ useEffect(() => {
   />
 </div>
 
-<div className="form-group">
-  <label>Education Type</label>
-  <select
-    name="educationType"
-    value={formData.educationType}
-    onChange={handleChange}
-    disabled={isView}
-  >
-    <option value="">Select</option>
-    <option>Primary</option>
-    <option>Secondary</option>
-    <option>TVET</option>
-    <option>Diploma</option>
-    <option>Bachelor</option>
-    <option>Master</option>
-  </select>
-</div>
 
 <div className="form-group">
   <label>Highest Qualification</label>
@@ -785,14 +872,26 @@ useEffect(() => {
 </div>
 
 <div className="form-group">
-  <label>Major / Specialization</label>
+  <label>COC ID</label>
 
   <input
     type="text"
-    name="major"
-    value={formData.major}
+    name="COC"
+    value={formData.COC}
     onChange={handleChange}
   />
+</div>
+
+<div className="form-group">
+  <label>COC Issue Date</label>
+
+  <input
+  type="date"
+  name="COCIssueDate"
+  value={formData.COCIssueDate}
+  onChange={handleChange}
+  disabled={isView}
+/>
 </div>
 
 <div className="form-group">
@@ -806,7 +905,6 @@ useEffect(() => {
     <option value="">Select</option>
     <option>Semester I</option>
     <option>Semester II</option>
-    <option>Semester III</option>
   </select>
 </div>
 <div className="form-group">
@@ -828,19 +926,22 @@ useEffect(() => {
 <div className="form-group">
   <label>Enrollment Status</label>
 
-  <select
-    name="enrollmentStatus"
-    value={formData.enrollmentStatus}
-    onChange={handleChange}
-  >
-    <option value="">Select</option>
-    <option>Enrolled</option>
-    <option>Deferred</option>
-    <option>Graduated</option>
-    <option>Suspended</option>
-    <option>Withdrawn</option>
-  </select>
+ <select
+  name="enrollmentStatus"
+  value={formData.enrollmentStatus}
+  onChange={handleEnrollmentStatus}
+  
+>
+  
+  <option value="Enrolled">Enrolled</option>
+  <option value="Deferred">Deferred</option>
+  <option value="Suspended">Suspended</option>
+  <option value="Withdrawn">Withdrawn</option>
+  <option value="Graduated">Graduated</option>
+  <option value="Transfer">Transfer</option>
+</select>
 </div>
+
 
 <div className="form-group">
   <label>Education Sponsor</label>
@@ -859,13 +960,17 @@ useEffect(() => {
             value={formData.level}
             onChange={handleChange}
             disabled={isView}
-          >
+          > 
+            
             <option value="">Select Level</option>
+            <option value="Short Term">Short Term</option>
             <option value="Level I">Level I</option>
             <option value="Level II">Level II</option>
             <option value="Level III">Level III</option>
             <option value="Level IV">Level IV</option>
             <option value="Level V">Level V</option>
+            <option value="Degree">Degree</option>
+            <option value="Masters">Masters</option>
           </select>
         </div>
         <div className="form-group">
@@ -939,7 +1044,7 @@ useEffect(() => {
           />
         </div>
         <div className="form-group">
-          <label>Student ID (Optional)</label>
+          <label>Student ID</label>
           <input
             name="studentId"
             placeholder="Enter student ID"
@@ -989,6 +1094,16 @@ useEffect(() => {
             disabled={isView}
           />
         </div>
+        <div className="form-group">
+  <label>Zone *</label>
+  <input
+    name="zone"
+    placeholder="Enter Zone"
+    value={formData.zone}
+    onChange={handleChange}
+    disabled={isView}
+  />
+</div>
         <div className="form-group">
           <label>Woreda *</label>
           <input
@@ -1114,7 +1229,7 @@ const renderStepContent = () => {
 };
 
   return (
-          <div className="enrollment-container">
+      <>
             {/* Header */}
             <div className="enrollment-container">
               <div>
@@ -1123,7 +1238,6 @@ const renderStepContent = () => {
     ? "Edit Student"
     : "Student Enrollment"}
 </h1>
-              </div>
             </div>
 
             {/* Progress Steps */}
@@ -1251,7 +1365,7 @@ const renderStepContent = () => {
 
           <button
             type="button"
-            className="add-btn"
+            className="upload-btnn"
             onClick={capturePhoto}
           >
             <Camera size={18} />
@@ -1260,7 +1374,7 @@ const renderStepContent = () => {
 
           <button
             type="button"
-            className="refresh-btn"
+            className="upload-btnn"
             onClick={stopCamera}
           >
             <X size={18} />
@@ -1286,8 +1400,7 @@ const renderStepContent = () => {
               <div className="form-navigation">
                 {activeStep > 0 && (
                   <button
-                    type="button"
-                    className="refresh-btn"
+                  className="upload-btnn"
                     onClick={handlePrevious}
                   >
                     <ChevronLeft size={18} />
@@ -1297,8 +1410,7 @@ const renderStepContent = () => {
                 
                 {activeStep < steps.length - 1 ? (
                   <button
-                    type="button"
-                    className="refresh-btn"
+                  className="upload-btnn"
                     onClick={handleNext}
                   >
                     Next
@@ -1306,8 +1418,7 @@ const renderStepContent = () => {
                   </button>
                 ) : (
                   <button
-                    type="button"
-                    className="add-btn"
+                  className="upload-btnn"
                     onClick={handleSubmit}
                     disabled={loading}
                   >
@@ -1316,9 +1427,8 @@ const renderStepContent = () => {
                   </button>
                 )}
                 
-                <button
-                  type="button"
-                  className="refresh-btn"
+                 <button
+                  className="upload-btnn"
                   onClick={() => navigate("/registrar/records")}
                 >
                   <X size={18} />
@@ -1327,5 +1437,140 @@ const renderStepContent = () => {
               </div>
             </div>
           </div>
+          {showStatusModal && (
+
+<div
+  className="status-modal"
+  onClick={closeStatusModal}
+>
+
+<div
+  className="status-card"
+  onClick={(e) => e.stopPropagation()}
+>
+
+
+<h2>
+  {pendingStatus === "Withdrawn"
+    ? "Withdrawal Information"
+    : pendingStatus === "Graduated"
+    ? "Graduation Information"
+    : pendingStatus === "Deferred"
+    ? "Deferral Information"
+    : "Suspension Information"}
+</h2>
+
+<div className="form-group">
+
+<label>
+
+Issue Date *
+
+</label>
+
+<input
+type="date"
+name="statusIssueDate"
+value={formData.statusIssueDate}
+onChange={(e)=>
+
+setFormData({
+
+...formData,
+
+statusIssueDate:e.target.value
+
+})
+
+}
+/>
+
+</div>
+
+{pendingStatus==="Withdrawn" && (
+
+<div className="form-group">
+
+<label>
+
+Institute Name *
+
+</label>
+
+<input
+
+type="text"
+
+value={formData.statusInstituteName}
+
+onChange={(e)=>
+
+setFormData({
+
+...formData,
+
+statusInstituteName:e.target.value
+
+})
+
+}
+
+/>
+
+</div>
+
+)}
+
+<div className="form-group">
+
+<label>
+
+Remark *
+
+</label>
+
+<textarea
+  rows="5"
+  name="statusRemark"
+  placeholder="Describe the reason for this status..."
+  value={formData.statusRemark}
+  onChange={(e) => {
+    setFormData({
+      ...formData,
+      statusRemark: e.target.value,
+    });
+  }}
+/>
+
+</div>
+
+<div className="status-actions">
+
+<button
+  className="upload-btnn"
+onClick={closeStatusModal}
+>
+
+Cancel
+
+</button>
+
+<button
+    className="upload-btnn"
+onClick={saveStatusDetails}
+>
+
+Save
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+)}
+ </>
   );
 }

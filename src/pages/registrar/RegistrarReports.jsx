@@ -5,31 +5,18 @@ import {
   ArrowLeft,
   Download,
   Printer,
-  FileText,
   Users,
   UserPlus,
   UserCheck,
   UserX,
   DollarSign,
-  CreditCard,
   TrendingUp,
-  TrendingDown,
   Calendar,
-  Filter,
-  Search,
   Eye,
-  ChevronDown,
-  ChevronUp,
-  PieChart,
-  BarChart3,
   Award,
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle,
-  Building,
-  GraduationCap,
-  BookOpen,
   ExternalLink,
 } from "lucide-react";
 import "./Reports.css";
@@ -701,7 +688,7 @@ export default function RegistrarReports() {
               </div>
             </div>
             <div className="stat-card stat-payments">
-              <div className="stat-icon"><CreditCard size={24} /></div>
+              <div className="stat-icon"></div>
               <div className="stat-info">
                 <span className="stat-label">Total Payments</span>
                 <h3>{financeStats.totalPayments}</h3>
@@ -979,7 +966,6 @@ export default function RegistrarReports() {
           <div className="modal-content detail-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>
-                <CreditCard size={20} />
                 Payment Details
               </h2>
               <button className="modal-close" onClick={() => setShowPaymentDetail(false)}>

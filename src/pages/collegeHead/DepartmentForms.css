@@ -11,11 +11,23 @@
   margin-bottom: 20px;
   border-bottom: 1px solid #eef2f6;
 }
-
+.form-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #0f172a;
+    font-size: 10px;
+}
+element.style {
+    margin: 0px 0px 8px;
+    font-size: 24px;
+    color: rgb(26, 31, 46);
+}
 .form-header-section h1 {
-font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
-    color: #4775ff;
+    color: #565656;
     margin: 0 0 8px 0;
     display: flex;
     align-items: center;
@@ -23,7 +35,15 @@ font-size: 20px;
 }
 
 .form-header-section h1 svg {
-  color: #3b82f6;
+  color: #434343;
+}
+.form-card h2{
+      display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    color: #0f172a;
+    font-size: 20px;
 }
 
 .form-subtitle {
@@ -193,43 +213,9 @@ textarea.form-control {
    BUTTONS
    ============================================ */
 
-.btn-primary,
-.btn-secondary,
-.btn-danger {
-display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: none;
-    font-family: inherit;
-}
 
-.btn-primary {
-  background: #3b82f6;
-  color: white;
-  flex: 1;
-  justify-content: center;
-}
 
-.btn-primary:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
-}
 
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-primary:disabled {
-  background: #cbd5e1;
-  cursor: not-allowed;
-  transform: none;
-}
 
 .btn-secondary {
     background: #ffffff;
@@ -411,7 +397,7 @@ display: inline-flex;
 
 /* HOD Card for View Mode */
 .hod-card {
-  background: #f8fafc;
+  background: #f3f3f3;
   border-radius: 16px;
   padding: 20px;
   display: flex;
@@ -435,8 +421,8 @@ display: inline-flex;
 }
 
 .hod-name {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   color: #1a1f2e;
   margin: 0 0 4px 0;
 }
@@ -457,36 +443,6 @@ display: inline-flex;
   margin-bottom: 32px;
 }
 
-.stat-card {
-  background: #f8fafc;
-  border-radius: 16px;
-  padding: 16px;
-  text-align: center;
-}
-
-.stat-icon {
-  width: 40px;
-  height: 40px;
-  background: #ffffff;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
-  color: #3b82f6;
-}
-
-.stat-value {
-font-size: 22px;
-  font-weight: 600;
-  color: #3a63eb;
-  line-height: 1.2;
-  margin-bottom: 4px;}
-
-.stat-label {
-  font-size: 12px;
-  color: #6b7280;
-}
 
 /* Contact Items for View Mode */
 .contact-items {
@@ -500,7 +456,7 @@ font-size: 22px;
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: #f8fafc;
+  background: #f6f6f6;
   border-radius: 12px;
 }
 

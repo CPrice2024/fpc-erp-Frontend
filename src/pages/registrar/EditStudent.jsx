@@ -351,6 +351,10 @@ export default function EditStudent() {
             Graduated
           </option>
 
+          <option value="transfer">
+            Transfer
+          </option>
+
           <option value="suspended">
             Suspended
           </option>

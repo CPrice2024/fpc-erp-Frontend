@@ -46,50 +46,8 @@
   gap: 0.75rem;
 }
 
-/* Buttons */
-.btn-primary, .btn-secondary {
-display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 20px;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: none;
-    font-family: inherit;
-}
 
-.btn-primary {
-    background: #fdfdfd;
-    color: #004bf5;
-    width: auto;
-    border-style: solid;
-    border-width: thin;
-    border-color: #3155f7;
-}
 
-.btn-primary:hover {
-  background: #2967f7;
-  color: white;
-}
-
-.btn-secondary {
-    background: white;
-    border: 1px solid #0a64db;
-    color: #326ff9;
-}
-
-.dark-mode .btn-secondary {
-  background: #1a202c;
-  border-color: #2d3748;
-  color: #cbd5e0;
-}
-
-.btn-secondary:hover {
-  background: #f7fafc;
-}
 
 /* Search and Filters */
 .search-filters-section {
@@ -224,9 +182,9 @@ background: #fdfdfd;
 }
 
 .stat-value {
-font-size: 22px;
-  font-weight: 600;
-  color: #3a63eb;
+font-size: 18px;
+  font-weight: 500;
+  color: #565657;
   line-height: 1.2;
   margin-bottom: 4px;
 }
@@ -329,8 +287,8 @@ font-size: 22px;
 }
 
 .dept-name {
-  font-weight: 600;
-  color: #1a202c;
+     font-weight: 400;
+    color: #242424;
 }
 
 .dark-mode .dept-name {

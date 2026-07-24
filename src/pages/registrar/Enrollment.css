@@ -16,14 +16,14 @@
   gap: 16px;
 }
 h1 {
-  font-size: 20px;
-  font-weight: 700;
-      display: flex;
+      font-size: 18px;
+    font-weight: 600;
+    display: flex;
     gap: 16px;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
     flex-wrap: wrap;
     align-items: center;
-color: #375581;
+    color: #375581;
 }
 
 h3{
@@ -188,17 +188,17 @@ color: #267dff;
 }
 
 .upload-btnn {
-     display: flex;
+display: flex;
     align-items: center;
     gap: 8px;
     margin-bottom: 0px;
     padding: 8px 14px;
     background: #ffffff;
-    border: 1px solid #308aff;
+    border: 1px solid #2483ff;
     border-radius: 5px;
     font-size: 12px;
     font-weight: 500;
-    color: #5099ff;
+    color: #0057d1;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -433,3 +433,36 @@ color: #267dff;
   justify-content: center;
   margin-top: 15px;
 }
+
+.status-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+
+.status-card{
+    width:520px;
+    background:#fff;
+    border-radius:12px;
+    padding:24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.status-card h2 {
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-family: monospace;
+    color: #454545;
+}
+
+.status-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:20px;
+}
+

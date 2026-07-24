@@ -92,8 +92,9 @@
 }
 
 .summary-card span {
-  color: #64748b;
-  font-size: 14px;
+      color: #585858;
+    font-size: 12px;
+    font-family: monospace;
 }
 
 /* ========================================

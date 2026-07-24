@@ -1,29 +1,26 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/ui/Button";
 import api from "../../api/axios";
+import Card from "../../components/ui/Card";
 import {
   Users,
   UserPlus,
   UserCheck,
   UserX,
   DollarSign,
-  CreditCard,
   TrendingUp,
-  Calendar,
   Clock,
   ChevronRight,
   ArrowRight,
   AlertCircle,
   CheckCircle,
   XCircle,
-  BarChart3,
   Activity,
-  Bell,
   FileText,
   Search,
   RefreshCw,
   UserCircle,
-  LayoutDashboard,
   Settings as SettingsIcon,
 } from "lucide-react";
 import "./RegistrarDashboard.css";
@@ -347,10 +344,14 @@ export default function RDashboard() {
           </div>
         </div>
         <div className="header-right">
-          <button className="btn-refresh" onClick={handleRefresh} disabled={refreshing}>
-            <RefreshCw size={18} className={refreshing ? "spinning" : ""} />
-            {refreshing ? "Refreshing..." : "Refresh"}
-          </button>
+          <Button
+  variant="primary"
+  icon={<RefreshCw size={18} />}
+  loading={refreshing}
+  onClick={handleRefresh}
+>
+  Refresh
+</Button>
         </div>
       </header>
 
@@ -418,7 +419,6 @@ export default function RDashboard() {
 
         <div className="stat-card stat-payments" onClick={() => navigate("/registrar/finance")}>
           <div className="stat-icon">
-            <CreditCard size={24} />
           </div>
           <div className="stat-info">
             <span className="stat-label">Total Payments</span>
@@ -463,57 +463,81 @@ export default function RDashboard() {
         {/* ===== LEFT COLUMN ===== */}
         <div className="dashboard-left">
           {/* Recent Students */}
-          <div className="dashboard-card">
-            <div className="card-header">
-              <h3>
-                Recent Registrations
-              </h3>
-              <button className="card-action" onClick={() => navigate("/registrar/student-records")}>
-                View All <ArrowRight size={16} />
-              </button>
+          <Card
+  title="Recent Registrations"
+  headerAction={
+    <Button
+      variant="ghost"
+      size="sm"
+      endIcon={<ArrowRight size={16} />}
+      onClick={() => navigate("/registrar/student-records")}
+    >
+      View All
+    </Button>
+  }
+>
+  <div className="recent-list">
+    {recentStudents.length === 0 ? (
+      <div className="empty-state-mini">
+        <Users size={24} />
+        <p>No recent students</p>
+      </div>
+    ) : (
+      recentStudents.map((student) => {
+        const status = getStatusBadge(student.status);
+        const StatusIcon = status.icon;
+
+        return (
+          <div
+            key={student._id}
+            className="recent-item"
+            onClick={() =>
+              navigate(`/registrar/students/view/${student._id}`)
+            }
+          >
+            <div className="recent-avatar">
+              <UserCircle size={24} />
             </div>
-            <div className="recent-list">
-              {recentStudents.length === 0 ? (
-                <div className="empty-state-mini">
-                  <Users size={24} />
-                  <p>No recent students</p>
-                </div>
-              ) : (
-                recentStudents.map(student => {
-                  const status = getStatusBadge(student.status);
-                  const StatusIcon = status.icon;
-                  return (
-                    <div key={student._id} className="recent-item" onClick={() => navigate(`/registrar/students/view/${student._id}`)}>
-                      <div className="recent-avatar">
-                        <UserCircle size={24} />
-                      </div>
-                      <div className="recent-info">
-                        <span className="recent-name">{student.firstName} {student.fatherName}</span>
-                        <span className="recent-detail">{student.studentId} • {student.department?.name || "N/A"}</span>
-                      </div>
-                      <span className={`status-badge ${status.class}`}>
-                        <StatusIcon size={12} />
-                        {status.label}
-                      </span>
-                      <span className="recent-time">{getTimeAgo(student.createdAt)}</span>
-                    </div>
-                  );
-                })
-              )}
+
+            <div className="recent-info">
+              <span className="recent-name">
+                {student.firstName} {student.fatherName}
+              </span>
+
+              <span className="recent-detail">
+                {student.studentId} • {student.department?.name || "N/A"}
+              </span>
             </div>
+
+            <span className={`status-badge ${status.class}`}>
+              <StatusIcon size={12} />
+              {status.label}
+            </span>
+
+            <span className="recent-time">
+              {getTimeAgo(student.createdAt)}
+            </span>
           </div>
+        );
+      })
+    )}
+  </div>
+</Card>
 
           {/* Recent Payments */}
-          <div className="dashboard-card">
-            <div className="card-header">
-              <h3>
-                <CreditCard size={18} />
-                Recent Payments
-              </h3>
-              <button className="card-action" onClick={() => navigate("/registrar/finance")}>
-                View All <ArrowRight size={16} />
-              </button>
-            </div>
+          <Card
+    title="Recent Payments"
+    headerAction={
+        <Button
+            variant="ghost"
+            size="sm"
+            endIcon={<ArrowRight size={16} />}
+            onClick={() => navigate("/registrar/finance")}
+        >
+            View All
+        </Button>
+    }
+>
             <div className="recent-list">
               {recentPayments.length === 0 ? (
                 <div className="empty-state-mini">
@@ -545,20 +569,17 @@ export default function RDashboard() {
                 })
               )}
             </div>
-          </div>
+          </Card>
         </div>
 
         {/* ===== RIGHT COLUMN ===== */}
         <div className="dashboard-right">
           {/* Quick Actions */}
-          <div className="dashboard-card">
-            <div className="card-header">
-              <h3>
-                <Activity size={18} />
-                Quick Actions
-              </h3>
-            </div>
-            <div className="quick-actions">
+          <Card
+    title="Quick Actions"
+>
+
+    <div className="quick-actions">
               <button className="quick-action" onClick={() => navigate("/registrar/enrollment")}>
                 <UserPlus size={20} />
                 <span>New Enrollment</span>
@@ -576,16 +597,10 @@ export default function RDashboard() {
                 <span>Generate Report</span>
               </button>
             </div>
-          </div>
+          </Card>
 
           {/* Upcoming Deadlines */}
-          <div className="dashboard-card">
-            <div className="card-header">
-              <h3>
-                <Calendar size={18} />
-                Upcoming Deadlines
-              </h3>
-            </div>
+          <Card title="Upcoming Deadlines">
             <div className="deadlines-list">
               {dashboardData.upcomingDeadlines.map(deadline => {
                 const priority = getPriorityBadge(deadline.priority);
@@ -605,19 +620,26 @@ export default function RDashboard() {
                 );
               })}
             </div>
-          </div>
+          </Card>
 
           {/* Recent Activity */}
-          <div className="dashboard-card">
-            <div className="card-header">
-              <h3>
-                <Clock size={18} />
-                Recent Activity
-              </h3>
-              <button className="card-action" onClick={() => setShowAllActivities(!showAllActivities)}>
-                {showAllActivities ? "Show Less" : "Show All"}
-              </button>
-            </div>
+         <Card
+    title="Recent Activity"
+
+    headerAction={
+        <Button
+            variant="ghost"
+            size="sm"
+            onClick={() =>
+                setShowAllActivities(!showAllActivities)
+            }
+        >
+            {showAllActivities
+                ? "Show Less"
+                : "Show All"}
+        </Button>
+    }
+>
             <div className="activity-list">
               {(showAllActivities ? dashboardData.recentActivities : dashboardData.recentActivities.slice(0, 5)).map(activity => {
                 const Icon = activity.icon;
@@ -640,127 +662,45 @@ export default function RDashboard() {
                 </div>
               )}
             </div>
-          </div>
+          </Card>
         </div>
       </div>
 
       {/* ===== STATISTICS SECTION ===== */}
-      <section className="statistics-section">
-        <div className="statistics-header">
-          <h3>
-            <BarChart3 size={18} />
-            Statistics Overview
-          </h3>
-          <div className="stat-tabs">
-            <button
-              className={`stat-tab ${selectedChart === "students" ? "active" : ""}`}
-              onClick={() => setSelectedChart("students")}
-            >
-              Students
-            </button>
-            <button
-              className={`stat-tab ${selectedChart === "finance" ? "active" : ""}`}
-              onClick={() => setSelectedChart("finance")}
-            >
-              Finance
-            </button>
-          </div>
-        </div>
+      <Card
+  title="Statistics Overview"
+  headerAction={
+    <div className="stat-tabs">
+      <button
+        className={`stat-tab ${selectedChart === "students" ? "active" : ""}`}
+        onClick={() => setSelectedChart("students")}
+      >
+        Students
+      </button>
 
-        <div className="statistics-content">
-          {selectedChart === "students" && (
-            <div className="chart-grid">
-              <div className="chart-card">
-                <h4>Students by Department</h4>
-                <div className="chart-bars">
-                  {Object.entries(dashboardData.students.byDepartment).map(([name, count]) => (
-                    <div key={name} className="chart-bar-item">
-                      <span className="chart-label">{name}</span>
-                      <div className="chart-bar-wrapper">
-                        <div 
-                          className="chart-bar" 
-                          style={{ 
-                            width: `${(count / dashboardData.students.total) * 100}%`,
-                            background: `hsl(${Math.random() * 360}, 70%, 50%)`
-                          }}
-                        ></div>
-                      </div>
-                      <span className="chart-count">{count}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="chart-card">
-                <h4>Students by Level</h4>
-                <div className="chart-bars">
-                  {Object.entries(dashboardData.students.byLevel).map(([level, count]) => (
-                    <div key={level} className="chart-bar-item">
-                      <span className="chart-label">Level {level}</span>
-                      <div className="chart-bar-wrapper">
-                        <div 
-                          className="chart-bar" 
-                          style={{ 
-                            width: `${(count / dashboardData.students.total) * 100}%`,
-                            background: `hsl(${parseInt(level) * 60 + 200}, 70%, 50%)`
-                          }}
-                        ></div>
-                      </div>
-                      <span className="chart-count">{count}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+      <button
+        className={`stat-tab ${selectedChart === "finance" ? "active" : ""}`}
+        onClick={() => setSelectedChart("finance")}
+      >
+        Finance
+      </button>
+    </div>
+  }
+>
+  <div className="statistics-content">
+    {selectedChart === "students" && (
+      <div className="chart-grid">
+        {/* your Students chart JSX here */}
+      </div>
+    )}
 
-          {selectedChart === "finance" && (
-            <div className="chart-grid">
-              <div className="chart-card">
-                <h4>Payment Distribution</h4>
-                <div className="pie-chart-simple">
-                  <div className="pie-segments">
-                    <div className="pie-segment paid">
-                      <span className="segment-label">Paid</span>
-                      <span className="segment-value">{dashboardData.finance.paidStudents}</span>
-                      <span className="segment-percent">
-                        {((dashboardData.finance.paidStudents / (dashboardData.finance.paidStudents + dashboardData.finance.fundedStudents || 1)) * 100 || 0).toFixed(1)}%
-                      </span>
-                    </div>
-                    <div className="pie-segment funded">
-                      <span className="segment-label">Funded</span>
-                      <span className="segment-value">{dashboardData.finance.fundedStudents}</span>
-                      <span className="segment-percent">
-                        {((dashboardData.finance.fundedStudents / (dashboardData.finance.paidStudents + dashboardData.finance.fundedStudents || 1)) * 100 || 0).toFixed(1)}%
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="chart-card">
-                <h4>Revenue Overview</h4>
-                <div className="revenue-stats">
-                  <div className="revenue-stat-item">
-                    <span className="revenue-label">Total</span>
-                    <span className="revenue-value">{formatCurrency(dashboardData.finance.totalRevenue)}</span>
-                  </div>
-                  <div className="revenue-stat-item">
-                    <span className="revenue-label">This Month</span>
-                    <span className="revenue-value">{formatCurrency(dashboardData.finance.thisMonthRevenue)}</span>
-                  </div>
-                  <div className="revenue-stat-item">
-                    <span className="revenue-label">Today</span>
-                    <span className="revenue-value">{formatCurrency(dashboardData.finance.todayRevenue)}</span>
-                  </div>
-                  <div className="revenue-stat-item">
-                    <span className="revenue-label">Pending</span>
-                    <span className="revenue-value">{dashboardData.finance.pendingPayments}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+    {selectedChart === "finance" && (
+      <div className="chart-grid">
+        {/* your Finance chart JSX here */}
+      </div>
+    )}
+  </div>
+</Card>
     </div>
   );
 }

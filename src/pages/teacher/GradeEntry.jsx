@@ -185,19 +185,15 @@ const GradeEntry = () => {
           </p>
         </div>
         <div className="header-actions">
-          <button className="action-btn print-btn" onClick={handleRefresh}>
+          <button className="upload-btnn" onClick={handleRefresh}>
             <RefreshCw size={16} />
             Refresh
           </button>
-          <button className="action-btn print-btn" onClick={handlePrint}>
+          <button className="upload-btnn" onClick={handlePrint}>
             <Printer size={16} />
             Print
           </button>
-          <button className="action-btn print-btn" onClick={handleExport}>
-            <Download size={16} />
-            Export
-          </button>
-          <button className="action-btn print-btn" onClick={handleSave} disabled={saving}>
+          <button className="upload-btnn" onClick={handleSave} disabled={saving}>
             <Save size={16} />
             {saving ? 'Saving...' : 'Save Grades'}
           </button>

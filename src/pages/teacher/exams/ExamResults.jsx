@@ -76,13 +76,6 @@ export default function ExamResults() {
 
         </div>
 
-        <button
-          className="refresh-btn"
-          onClick={loadResults}
-        >
-          <RefreshCw size={18} />
-          Refresh
-        </button>
 
       </div>
 
@@ -255,7 +248,7 @@ export default function ExamResults() {
                     <td>
 
                       <button
-                        className="view-btn"
+                        className="upload-btnn"
                         onClick={() =>
                           navigate(
                             `/teacher/exams/results/${item._id}`

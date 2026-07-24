@@ -55,55 +55,9 @@
   align-items: center;
 }
 
-.btn-primary {
-       display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #1e4a6e;
-    cursor: pointer;
-    transition: all 0.2s;
-}
 
-.btn-primary:hover {
-   display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #4b91f6;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
 
-.btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: #ffffff;
-    border: 1px solid #004197;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #1e4a6e;
-    cursor: pointer;
-    transition: all 0.2s;
-}
 
-.btn-outline:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-}
 
 /* ===== STATS GRID ===== */
 .stats-grid {
@@ -113,31 +67,6 @@
   margin-bottom: 32px;
 }
 
-.stat-card {
-  background: white;
-  padding: 22px 24px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.3s ease;
-  cursor: default;
-}
-
-.stat-card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
-}
-
-.stat-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
 
 .stat-revenue .stat-icon {
   background: #eff6ff;
@@ -318,7 +247,7 @@
   background: #fafbfc00;
   transition: all 0.2s ease;
   color: #0f172a;
-  width: 100%;
+  width: auto;
 }
 
 .form-group select:focus,

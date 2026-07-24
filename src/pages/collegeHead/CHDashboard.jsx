@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getDashboard } from "../../api/collegeHeadApi";
 import { useNavigate } from "react-router-dom";
-
+import Button from "../../components/ui/Button";
 import "./CHDashboard.css";
 import {
   BookOpen,
@@ -195,13 +195,14 @@ const navigate = useNavigate();
         <div className="section-header">
           <h2>Departments Overview</h2>
           <div className="header-actions">
-            <button className="action-btn" onClick={handleExport}>
-              <Download size={18} />
-              Export
-            </button>
-            <button className="action-btn" onClick={fetchDashboardData}>
-              <RefreshCw size={18} className={loading ? "spinning" : ""} />
-              Refresh
+            <button
+                
+className="upload-btnn"
+                startIcon={<RefreshCw size={18} />}
+                loading={loading}
+                onClick={fetchDashboardData}
+            >
+                Refresh
             </button>
           </div>
         </div>
@@ -298,7 +299,8 @@ const navigate = useNavigate();
           <h2>Departments</h2>
           <p className="section-subtitle">Manage college departments and their information</p>
           <div className="table-actions">
-            <button className="filter-btn" onClick={() => setShowFilters(!showFilters)}>
+            <button 
+className="upload-btnn" onClick={() => setShowFilters(!showFilters)}>
               <Filter size={16} />
               Filters
             </button>
@@ -322,7 +324,8 @@ const navigate = useNavigate();
               </select>
             </div>
             <button 
-              className="clear-filters"
+              
+className="upload-btnn"
               onClick={() => {
                 setSelectedDepartment("all");
                 setSearchTerm("");
@@ -350,7 +353,6 @@ const navigate = useNavigate();
                     <th>Contact</th>
                     <th>Established</th>
                     <th>Students</th>
-                    <th>Faculty</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -374,8 +376,7 @@ const navigate = useNavigate();
                         </div>
                       </td>
                       <td className="code-cell">{dept.code}</td>
-                        <td></td>
-                      <td></td>
+                       
                       <td className="student-count">{dept.students.toLocaleString()}</td>
                       <td>{dept.teachers}</td>
                       <td className="actions-cell">

@@ -48,6 +48,7 @@ import ViewTeacher from "../pages/departmentHead/ViewTeacher";
 import RDashboard from "../pages/registrar/RDashboard";
 import Enrollment from "../pages/registrar/Enrollment";
 import StudentRecords from "../pages/registrar/StudentRecords";
+import InactiveStudents from "../pages/registrar/InactiveStudents";
 import GradeReport from "../pages/registrar/GradeReport";
 import ViewStudentPage from "../pages/registrar/ViewStudentPage";
 import Finance from "../pages/registrar/Finance";
@@ -216,6 +217,7 @@ export default function AppRoutes() {
           <Route path="studentRecords" element={<StudentRecords />} />
           <Route path="student-records" element={<StudentRecords />} />
           <Route path="records" element={<StudentRecords />} />
+          <Route path="inactive-students" element={<InactiveStudents />}/>
           <Route path="students/edit/:id" element={<EditStudent />} />
           <Route path="students/view/:id" element={<ViewStudentPage />} />
           <Route path="grade-report" element={<GradeReport />} />

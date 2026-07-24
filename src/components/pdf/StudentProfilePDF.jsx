@@ -1,5 +1,6 @@
 import "./PDFStyles.css";
 import logo from "../../assets/FPClogo.png";
+import stamp from "../../assets/stamp_fpc.png";
 
 export default function StudentProfilePDF({
   student,
@@ -11,8 +12,7 @@ export default function StudentProfilePDF({
     <div className="pdf-preview-wrapper">
       <div className="pdf-page">
         <div className="pdf-watermark">
-  Federal Prison College
-</div>
+  Tesfa technical and vocational training college</div>
 
       {/* Header */}
 
@@ -27,8 +27,7 @@ export default function StudentProfilePDF({
   <div className="header">
 
     <h1>
-      FEDERAL PRISON COLLEGE
-    </h1>
+      Tesfa technical and vocational training college    </h1>
 
     <h2>
       STUDENT profile
@@ -168,6 +167,62 @@ export default function StudentProfilePDF({
   </div>
 
 </div>
+
+{/* ================= INMATE INFORMATION ================= */}
+
+{student.isInmate && (
+  <div className="pdf-section">
+
+    <div className="section-title">
+      INMATE INFORMATION
+    </div>
+
+    <div className="section-grid">
+
+      <div className="section-item">
+        <strong>Prison ID</strong>
+        <span>
+          {student.prisonId || "N/A"}
+        </span>
+      </div>
+
+      <div className="section-item">
+        <strong>Imprisonment Start Date</strong>
+        <span>
+          {student.imprisonmentStartDate
+            ? new Date(
+                student.imprisonmentStartDate
+              ).toLocaleDateString()
+            : "N/A"}
+        </span>
+      </div>
+
+      <div className="section-item">
+        <strong>Expected Release Date</strong>
+        <span>
+          {student.expectedReleaseDate
+            ? new Date(
+                student.expectedReleaseDate
+              ).toLocaleDateString()
+            : "N/A"}
+        </span>
+      </div>
+
+      <div className="section-item">
+        <strong>Parole Date</strong>
+        <span>
+          {student.paroleDate
+            ? new Date(
+                student.paroleDate
+              ).toLocaleDateString()
+            : "N/A"}
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+)}
 {/* ================= CONTACT INFORMATION ================= */}
 
 <div className="pdf-section">
@@ -225,7 +280,7 @@ export default function StudentProfilePDF({
 
         <h4>Registrar</h4>
 
-        <p>Federal Prison College</p>
+        <p>Tesfa technical and vocational training college</p>
 
     </div>
 
@@ -235,33 +290,25 @@ export default function StudentProfilePDF({
 
         <h4>College Head</h4>
 
-        <p>Federal Prison College</p>
+        <p>Tesfa technical and vocational training college</p>
 
     </div>
 
 </div>
 
-    <div className="seal-circle">
-
-        <div className="seal-inner">
-            VIRTUAL
-            <br />
-            COLLEGE
-            <br />
-            SEAL
-        </div>
-
-    </div>
+   <div className="logo-area">
+    <img src={stamp} alt="College Stamp" className="college-stamp" />
+  </div>
 
 </div>
 
 <div className="pdf-footer">
 
-    This document is computer generated and does not require a physical stamp.
+    This document is auto generated and does not require a physical stamp.
 
     <br />
 
-    Federal Prison College • Registrar Office
+    Tesfa technical and vocational training college • Registrar Office
 
 </div>
 

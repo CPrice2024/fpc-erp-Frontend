@@ -79,23 +79,6 @@
   margin-bottom: 20px;
 }
 
-.stat-card {
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.06);
-}
-
-.stat-card h2 {
-  margin: 0;
-  font-size: 30px;
-}
-
-.stat-card p {
-  color: #64748b;
-  margin-top: 5px;
-}
 
 .credential-box {
   background: #ecfdf5;
@@ -269,7 +252,7 @@ th{
 }
 
 .action-menu{
-    position:absolute;
+    position:static;
     right:15px;
     top:60px;
     width:170px;

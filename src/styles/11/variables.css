@@ -1,0 +1,42 @@
+:root{
+
+  /* Colors */
+
+  --primary:
+  --primary-hover:
+
+  --success:
+  --danger:
+  --warning:
+  --info:
+
+  --background:
+  --surface:
+  --border:
+
+  --text:
+  --text-secondary:
+
+  /* Radius */
+
+  --radius-sm:
+  --radius-md:
+  --radius-lg:
+
+  /* Shadow */
+
+  --shadow-sm:
+  --shadow-md:
+  --shadow-lg;
+
+  /* Spacing */
+
+  --space-1:
+  --space-2:
+  --space-3:
+
+  /* Transition */
+
+  --transition:
+
+}
